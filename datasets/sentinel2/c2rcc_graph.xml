@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graph id="C2RCC_Processing">
+  <version>1.0</version>
+  
+  <!-- Read Sentinel-2 L1C product -->
+  <node id="Read">
+    <operator>Read</operator>
+    <sources/>
+    <parameters>
+      <file>${{input_file}}</file>
+    </parameters>
+  </node>
+  
+  <!-- S2 Resampling to 10m - Best Resolution -->
+  <node id="Resample">
+    <operator>S2Resampling</operator>
+    <sources>
+      <sourceProduct refid="Read"/>
+    </sources>
+    <parameters>
+      <targetResolution>10</targetResolution>
+      <upsampling>Bilinear</upsampling>
+      <downsampling>Mean</downsampling>
+    </parameters>
+  </node>
+  
+  <!-- C2RCC Atmospheric Correction -->
+  <node id="C2RCC">
+    <operator>C2RCC.MSI</operator>
+    <sources>
+      <sourceProduct refid="Resample"/>
+    </sources>
+    <parameters>
+      <salinity>{salinity}</salinity>
+      <temperature>{temperature}</temperature>
+      <ozone>330.0</ozone>
+      <press>1000.0</press>
+      <outputAsRrs>true</outputAsRrs>
+    </parameters>
+  </node>
+  
+  <!-- Write output -->
+  <node id="Write">
+    <operator>Write</operator>
+    <sources>
+      <sourceProduct refid="C2RCC"/>
+    </sources>
+    <parameters>
+      <file>${{output_file}}</file>
+      <formatName>BEAM-DIMAP</formatName>
+    </parameters>
+  </node>
+  
+</graph>
