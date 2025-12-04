@@ -12,12 +12,13 @@ from pathlib import Path
 from datetime import datetime
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
 import matplotlib.pyplot as plt
 import seaborn as sns
-from tqdm import tqdm
 from multiprocessing import Pool, cpu_count
 from functools import partial
+from tqdm import tqdm
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -30,15 +31,14 @@ sns.set_style('whitegrid')
 plt.rcParams['figure.dpi'] = 100
 
 # Configuration
-# Configuration
 MOSAIC_DIR = Path('sentinel2/sentinel2_data/mosaics_14day')
 STATIONS_FILE = 'chile/stations.csv'
 ABUNDANCE_FILE = 'chile/rel_abundance.csv'
-BUFFER_RADIUS_M = 200
-MAX_TIME_DIFF_DAYS = 7
+BUFFER_RADIUS_M = 1000
+MAX_TIME_DIFF_DAYS = 10
 OUTPUT_DIR = Path('regr_outputs')
 OUTPUT_DIR.mkdir(exist_ok=True)
-N_JOBS = 8  # Number of parallel workers
+N_JOBS = 32  # Number of parallel workers
 
 
 # Band names in the netCDF files
@@ -285,21 +285,13 @@ def extract_features_for_all_stations():
     print(f"Total features: {len([c for c in df_features.columns if 'rrs_' in c])}")
     
     return df_features
-    print(f"Abundance range: [{df_features['rel_abundance'].min():.0f}, {df_features['rel_abundance'].max():.0f}]")
-    print(f"Zero abundance samples: {(df_features['rel_abundance'] == 0).sum()}")
-    print(f"Non-zero abundance samples: {(df_features['rel_abundance'] > 0).sum()}")
-    print(f"Time difference filter: {df_features['time_diff_days'].max():.1f} days max")
-    print(f"Features per band: median and maximum")
-    print(f"Total features: {len([c for c in df_features.columns if 'rrs_' in c])}")
-    
-    return df_features
 
 
-def prepare_regression_data(df, stat_type='median'):
+def prepare_regression_data(df, stat_type='median', use_log_transform=True):
     """
     Prepare feature matrix and target for regression.
     stat_type: 'median' or 'max' (for band features only)
-    Target: observed rel_abundance
+    Target: observed rel_abundance (with optional log transform)
     """
     # Select feature columns based on stat_type
     feature_cols = [c for c in df.columns if f'rrs_B' in c and stat_type in c]
@@ -313,19 +305,36 @@ def prepare_regression_data(df, stat_type='median'):
     X = df_clean[feature_cols].values
     y = df_clean[target_col].values
     
-    print(f"\n{stat_type.upper()} band features → Observed rel_abundance:")
+    # Apply log transform to target (log(y + 1) to handle zeros)
+    y_original = y.copy()
+    if use_log_transform:
+        y = np.log1p(y)  # log(1 + y) to handle zeros
+        print(f"\n{stat_type.upper()} band features → Log-transformed rel_abundance:")
+    else:
+        print(f"\n{stat_type.upper()} band features → Observed rel_abundance:")
+    
+    # Standardize features
+    scaler = StandardScaler()
+    X_scaled = scaler.fit_transform(X)
+    
     print(f"Features: {len(feature_cols)}")
     print(f"Samples: {len(X)}")
-    print(f"Target range: [{y.min():.2f}, {y.max():.2f}]")
-    print(f"Target mean: {y.mean():.2f}, median: {np.median(y):.2f}")
+    if use_log_transform:
+        print(f"Original target range: [{y_original.min():.2f}, {y_original.max():.2f}]")
+        print(f"Log-transformed range: [{y.min():.4f}, {y.max():.4f}]")
+    else:
+        print(f"Target range: [{y.min():.2f}, {y.max():.2f}]")
+    print(f"Target mean: {y.mean():.4f}, median: {np.median(y):.4f}")
+    print(f"Features standardized: mean=0, std=1")
     
-    return X, y, feature_cols, df_clean
+    return X_scaled, y, feature_cols, scaler, df_clean
 
 
-def evaluate_linear_regression(X, y, feature_names, stat_type):
+def evaluate_linear_regression(X, y, feature_names, stat_type, use_log_transform=True):
     """
     Train and evaluate linear regression model with plots.
     stat_type: 'median' or 'max' (refers to band features)
+    use_log_transform: whether y is log-transformed
     """
     # Split data
     X_train, X_test, y_train, y_test = train_test_split(
@@ -336,22 +345,44 @@ def evaluate_linear_regression(X, y, feature_names, stat_type):
     model = LinearRegression()
     model.fit(X_train, y_train)
     
-    # Predictions
+    # Predictions (in log space if transformed)
     y_pred_train = model.predict(X_train)
     y_pred_test = model.predict(X_test)
     
-    # Metrics
+    # Metrics in log space
     train_r2 = r2_score(y_train, y_pred_train)
     test_r2 = r2_score(y_test, y_pred_test)
     test_rmse = np.sqrt(mean_squared_error(y_test, y_pred_test))
     test_mae = mean_absolute_error(y_test, y_pred_test)
     
+    # If log-transformed, also compute metrics in original space
+    if use_log_transform:
+        y_train_orig = np.expm1(y_train)  # inverse of log1p
+        y_test_orig = np.expm1(y_test)
+        y_pred_train_orig = np.expm1(y_pred_train)
+        y_pred_test_orig = np.expm1(y_pred_test)
+        
+        test_r2_orig = r2_score(y_test_orig, y_pred_test_orig)
+        test_rmse_orig = np.sqrt(mean_squared_error(y_test_orig, y_pred_test_orig))
+        test_mae_orig = mean_absolute_error(y_test_orig, y_pred_test_orig)
+    
     print("\nLinear Regression Results:")
     print("-" * 60)
-    print(f"Train R²: {train_r2:.4f}")
-    print(f"Test R²:  {test_r2:.4f}")
-    print(f"Test RMSE: {test_rmse:.4f}")
-    print(f"Test MAE:  {test_mae:.4f}")
+    if use_log_transform:
+        print("Log-transformed space:")
+        print(f"  Train R²: {train_r2:.4f}")
+        print(f"  Test R²:  {test_r2:.4f}")
+        print(f"  Test RMSE: {test_rmse:.4f}")
+        print(f"  Test MAE:  {test_mae:.4f}")
+        print("\nOriginal space (back-transformed):")
+        print(f"  Test R²:  {test_r2_orig:.4f}")
+        print(f"  Test RMSE: {test_rmse_orig:.4f}")
+        print(f"  Test MAE:  {test_mae_orig:.4f}")
+    else:
+        print(f"Train R²: {train_r2:.4f}")
+        print(f"Test R²:  {test_r2:.4f}")
+        print(f"Test RMSE: {test_rmse:.4f}")
+        print(f"Test MAE:  {test_mae:.4f}")
     
     # Feature coefficients
     coef_df = pd.DataFrame({
@@ -363,37 +394,52 @@ def evaluate_linear_regression(X, y, feature_names, stat_type):
     for _, row in coef_df.head(5).iterrows():
         print(f"  {row['feature']:20s}: {row['coefficient']:+.6f}")
     
-    # Create plots
+    # Create plots - use original space if log-transformed
+    if use_log_transform:
+        y_train_plot = y_train_orig
+        y_test_plot = y_test_orig
+        y_pred_train_plot = y_pred_train_orig
+        y_pred_test_plot = y_pred_test_orig
+        ylabel = 'Abundance (Original Scale)'
+        r2_plot = test_r2_orig
+    else:
+        y_train_plot = y_train
+        y_test_plot = y_test
+        y_pred_train_plot = y_pred_train
+        y_pred_test_plot = y_pred_test
+        ylabel = 'Abundance'
+        r2_plot = test_r2
+    
     fig, axes = plt.subplots(2, 2, figsize=(14, 12))
     
     # Plot 1: Predicted vs Actual (Train)
     ax1 = axes[0, 0]
-    ax1.scatter(y_train, y_pred_train, alpha=0.5, s=30, edgecolors='k', linewidth=0.5)
-    lim = [min(y_train.min(), y_pred_train.min()), max(y_train.max(), y_pred_train.max())]
+    ax1.scatter(y_train_plot, y_pred_train_plot, alpha=0.5, s=30, edgecolors='k', linewidth=0.5)
+    lim = [min(y_train_plot.min(), y_pred_train_plot.min()), max(y_train_plot.max(), y_pred_train_plot.max())]
     ax1.plot(lim, lim, 'r--', lw=2, label='Perfect Prediction')
-    ax1.set_xlabel('Actual Abundance', fontsize=11)
-    ax1.set_ylabel('Predicted Abundance', fontsize=11)
+    ax1.set_xlabel(f'Actual {ylabel}', fontsize=11)
+    ax1.set_ylabel(f'Predicted {ylabel}', fontsize=11)
     ax1.set_title(f'Training Set (R² = {train_r2:.4f})', fontsize=12, fontweight='bold')
     ax1.legend()
     ax1.grid(True, alpha=0.3)
     
     # Plot 2: Predicted vs Actual (Test)
     ax2 = axes[0, 1]
-    ax2.scatter(y_test, y_pred_test, alpha=0.5, s=30, edgecolors='k', linewidth=0.5, color='orange')
-    lim = [min(y_test.min(), y_pred_test.min()), max(y_test.max(), y_pred_test.max())]
+    ax2.scatter(y_test_plot, y_pred_test_plot, alpha=0.5, s=30, edgecolors='k', linewidth=0.5, color='orange')
+    lim = [min(y_test_plot.min(), y_pred_test_plot.min()), max(y_test_plot.max(), y_pred_test_plot.max())]
     ax2.plot(lim, lim, 'r--', lw=2, label='Perfect Prediction')
-    ax2.set_xlabel('Actual Abundance', fontsize=11)
-    ax2.set_ylabel('Predicted Abundance', fontsize=11)
-    ax2.set_title(f'Test Set (R² = {test_r2:.4f})', fontsize=12, fontweight='bold')
+    ax2.set_xlabel(f'Actual {ylabel}', fontsize=11)
+    ax2.set_ylabel(f'Predicted {ylabel}', fontsize=11)
+    ax2.set_title(f'Test Set (R² = {r2_plot:.4f})', fontsize=12, fontweight='bold')
     ax2.legend()
     ax2.grid(True, alpha=0.3)
     
     # Plot 3: Residuals
     ax3 = axes[1, 0]
-    residuals_test = y_test - y_pred_test
-    ax3.scatter(y_pred_test, residuals_test, alpha=0.5, s=30, edgecolors='k', linewidth=0.5, color='green')
+    residuals_test = y_test_plot - y_pred_test_plot
+    ax3.scatter(y_pred_test_plot, residuals_test, alpha=0.5, s=30, edgecolors='k', linewidth=0.5, color='green')
     ax3.axhline(y=0, color='r', linestyle='--', lw=2)
-    ax3.set_xlabel('Predicted Abundance', fontsize=11)
+    ax3.set_xlabel(f'Predicted {ylabel}', fontsize=11)
     ax3.set_ylabel('Residuals', fontsize=11)
     ax3.set_title('Residual Plot (Test Set)', fontsize=12, fontweight='bold')
     ax3.grid(True, alpha=0.3)
@@ -406,12 +452,13 @@ def evaluate_linear_regression(X, y, feature_names, stat_type):
     ax4.barh(range(top_n), top_coefs['coefficient'], color=colors, alpha=0.7, edgecolor='black')
     ax4.set_yticks(range(top_n))
     ax4.set_yticklabels(top_coefs['feature'], fontsize=9)
-    ax4.set_xlabel('Coefficient Value', fontsize=11)
+    ax4.set_xlabel('Coefficient Value (Standardized)', fontsize=11)
     ax4.set_title(f'Top {top_n} Feature Coefficients', fontsize=12, fontweight='bold')
     ax4.axvline(x=0, color='black', linestyle='-', lw=1)
     ax4.grid(True, alpha=0.3, axis='x')
     
-    plt.suptitle(f'Linear Regression: {stat_type.upper()} Band Features → Observed Abundance',
+    title_suffix = "Log-Transformed" if use_log_transform else "Original Scale"
+    plt.suptitle(f'Linear Regression: {stat_type.upper()} Band Features ({title_suffix})',
                  fontsize=14, fontweight='bold', y=0.995)
     plt.tight_layout()
     
@@ -421,15 +468,16 @@ def evaluate_linear_regression(X, y, feature_names, stat_type):
     print(f"\nPlot saved to: {plot_file}")
     plt.close()
     
-    # Return results
+    # Return results (use original space metrics if log-transformed)
     results = {
         'stat_type': stat_type,
         'train_r2': train_r2,
-        'test_r2': test_r2,
-        'test_rmse': test_rmse,
-        'test_mae': test_mae,
+        'test_r2': test_r2_orig if use_log_transform else test_r2,
+        'test_rmse': test_rmse_orig if use_log_transform else test_rmse,
+        'test_mae': test_mae_orig if use_log_transform else test_mae,
         'n_samples': len(X),
-        'n_features': len(feature_names)
+        'n_features': len(feature_names),
+        'log_transformed': use_log_transform
     }
     
     return results, model, coef_df
@@ -459,75 +507,75 @@ def main():
     df_features.to_csv(feature_file, index=False)
     print(f"\nFeatures saved to: {feature_file}")
     
-    # Model 1: MEDIAN band features → Observed abundance
-    print("\n" + "="*80)
-    print("2. LINEAR REGRESSION - MEDIAN BAND FEATURES")
-    print("="*80)
-    X_med, y_med, features_med, df_med = prepare_regression_data(
-        df_features, stat_type='median'
-    )
-    results_med, model_med, coef_med = evaluate_linear_regression(
-        X_med, y_med, features_med, 'median'
-    )
+    # # Model 1: MEDIAN band features → Observed abundance
+    # print("\n" + "="*80)
+    # print("2. LINEAR REGRESSION - MEDIAN BAND FEATURES")
+    # print("="*80)
+    # X_med, y_med, features_med, scaler_med, df_med = prepare_regression_data(
+    #     df_features, stat_type='median', use_log_transform=True
+    # )
+    # results_med, model_med, coef_med = evaluate_linear_regression(
+    #     X_med, y_med, features_med, 'median', use_log_transform=True
+    # )
     
-    # Save median results
-    results_med_df = pd.DataFrame([results_med])
-    results_med_file = OUTPUT_DIR / 'model_results_median.csv'
-    results_med_df.to_csv(results_med_file, index=False)
+    # # Save median results
+    # results_med_df = pd.DataFrame([results_med])
+    # results_med_file = OUTPUT_DIR / 'model_results_median.csv'
+    # results_med_df.to_csv(results_med_file, index=False)
     
-    coef_med_file = OUTPUT_DIR / 'coefficients_median.csv'
-    coef_med.to_csv(coef_med_file, index=False)
+    # coef_med_file = OUTPUT_DIR / 'coefficients_median.csv'
+    # coef_med.to_csv(coef_med_file, index=False)
     
-    # Model 2: MAXIMUM band features → Observed abundance
-    print("\n" + "="*80)
-    print("3. LINEAR REGRESSION - MAXIMUM BAND FEATURES")
-    print("="*80)
-    X_max, y_max, features_max, df_max = prepare_regression_data(
-        df_features, stat_type='max'
-    )
-    results_max, model_max, coef_max = evaluate_linear_regression(
-        X_max, y_max, features_max, 'max'
-    )
+    # # Model 2: MAXIMUM band features → Observed abundance
+    # print("\n" + "="*80)
+    # print("3. LINEAR REGRESSION - MAXIMUM BAND FEATURES")
+    # print("="*80)
+    # X_max, y_max, features_max, scaler_max, df_max = prepare_regression_data(
+    #     df_features, stat_type='max', use_log_transform=True
+    # )
+    # results_max, model_max, coef_max = evaluate_linear_regression(
+    #     X_max, y_max, features_max, 'max', use_log_transform=True
+    # )
     
-    # Save maximum results
-    results_max_df = pd.DataFrame([results_max])
-    results_max_file = OUTPUT_DIR / 'model_results_max.csv'
-    results_max_df.to_csv(results_max_file, index=False)
+    # # Save maximum results
+    # results_max_df = pd.DataFrame([results_max])
+    # results_max_file = OUTPUT_DIR / 'model_results_max.csv'
+    # results_max_df.to_csv(results_max_file, index=False)
     
-    coef_max_file = OUTPUT_DIR / 'coefficients_max.csv'
-    coef_max.to_csv(coef_max_file, index=False)
+    # coef_max_file = OUTPUT_DIR / 'coefficients_max.csv'
+    # coef_max.to_csv(coef_max_file, index=False)
     
-    print("\n" + "="*80)
-    print("4. SUMMARY")
-    print("="*80)
-    print(f"\nMedian Band Features Model:")
-    print(f"  Test R²:  {results_med['test_r2']:.4f}")
-    print(f"  Test RMSE: {results_med['test_rmse']:.4f}")
-    print(f"  Samples:   {results_med['n_samples']}")
+    # print("\n" + "="*80)
+    # print("4. SUMMARY")
+    # print("="*80)
+    # print(f"\nMedian Band Features Model:")
+    # print(f"  Test R²:  {results_med['test_r2']:.4f}")
+    # print(f"  Test RMSE: {results_med['test_rmse']:.4f}")
+    # print(f"  Samples:   {results_med['n_samples']}")
     
-    print(f"\nMaximum Band Features Model:")
-    print(f"  Test R²:  {results_max['test_r2']:.4f}")
-    print(f"  Test RMSE: {results_max['test_rmse']:.4f}")
-    print(f"  Samples:   {results_max['n_samples']}")
+    # print(f"\nMaximum Band Features Model:")
+    # print(f"  Test R²:  {results_max['test_r2']:.4f}")
+    # print(f"  Test RMSE: {results_max['test_rmse']:.4f}")
+    # print(f"  Samples:   {results_max['n_samples']}")
     
-    # Determine better model
-    if results_med['test_r2'] > results_max['test_r2']:
-        print(f"\n→ MEDIAN band features perform better (R² = {results_med['test_r2']:.4f})")
-    else:
-        print(f"\n→ MAXIMUM band features perform better (R² = {results_max['test_r2']:.4f})")
+    # # Determine better model
+    # if results_med['test_r2'] > results_max['test_r2']:
+    #     print(f"\n→ MEDIAN band features perform better (R² = {results_med['test_r2']:.4f})")
+    # else:
+    #     print(f"\n→ MAXIMUM band features perform better (R² = {results_max['test_r2']:.4f})")
     
-    print("\n" + "="*80)
-    print("OUTPUT FILES")
-    print("="*80)
-    print(f"Features:              {feature_file}")
-    print(f"\nMedian Band Model:")
-    print(f"  Results:             {results_med_file}")
-    print(f"  Coefficients:        {coef_med_file}")
-    print(f"  Plot:                {OUTPUT_DIR}/regression_plot_median.png")
-    print(f"\nMaximum Band Model:")
-    print(f"  Results:             {results_max_file}")
-    print(f"  Coefficients:        {coef_max_file}")
-    print(f"  Plot:                {OUTPUT_DIR}/regression_plot_max.png")
+    # print("\n" + "="*80)
+    # print("OUTPUT FILES")
+    # print("="*80)
+    # print(f"Features:              {feature_file}")
+    # print(f"\nMedian Band Model:")
+    # print(f"  Results:             {results_med_file}")
+    # print(f"  Coefficients:        {coef_med_file}")
+    # print(f"  Plot:                {OUTPUT_DIR}/regression_plot_median.png")
+    # print(f"\nMaximum Band Model:")
+    # print(f"  Results:             {results_max_file}")
+    # print(f"  Coefficients:        {coef_max_file}")
+    # print(f"  Plot:                {OUTPUT_DIR}/regression_plot_max.png")
     
     print("\n" + "="*80)
     print("COMPLETE")
