@@ -1,6 +1,6 @@
 # HybridHAB Detection
 
-Satellite and ocean-model pipeline for multi-species harmful algal bloom (HAB) detection in the Gulf of Maine, developed for a HAB insurance/risk assessment application.
+Satellite and ocean-model pipeline for multi-species harmful algal bloom (HAB) detection in the Gulf of Maine, developed for a HAB risk assessment application.
 
 The core question this codebase answers: **does combining ocean-colour remote sensing with a regional ocean model (ROMS) improve HAB detection over ocean colour alone?** Sentinel-3 OLCI reflectance is matched against IFCB (Imaging FlowCytobot) observations from the HABHub network (2017–2025) across three atmospheric correction pipelines, and machine learning models are trained on ocean-colour-only versus hybrid (ocean colour + ROMS) feature sets. The hybrid model outperforms the ocean-colour-only model across all three atmospheric correction pipelines and across all spatial cross-validation schemes tested.
 
