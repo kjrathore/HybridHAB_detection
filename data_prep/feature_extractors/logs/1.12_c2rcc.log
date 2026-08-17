@@ -1,0 +1,85 @@
+nohup: ignoring input
+05:50:13 [INFO] ======================================================================
+05:50:13 [INFO] C2RCC MOSAIC FEATURE EXTRACTION  [Pixel-Level MVC]
+05:50:13 [INFO] ======================================================================
+05:50:13 [INFO] Input file       : datasets/GULF_OF_MAINE/raw_data/IFCB/habhub_IFCB_GOM.parquet
+05:50:13 [INFO] Mosaic dir       : /data3/GULF_OF_MAINE/processed_data/sentinel_3_c2rcc_mosaics/sentinel_3_c2rcc_mosaics
+05:50:13 [INFO] Output dir       : datasets/GULF_OF_MAINE/processed_data/sentinel_3_L2_past3days/c2rcc_features
+05:50:13 [INFO] Temporal window  : -3 day(s)
+05:50:13 [INFO] Spatial buffer   : 0.0200 deg (~2.2 km)
+05:50:13 [INFO] Min valid px     : 3  (all bands finite in MVC)
+05:50:13 [INFO] MVC operator     : nanmax across mosaics per pixel per band
+05:50:13 [INFO] Spatial summary  : nanmedian over valid MVC pixels
+05:50:13 [INFO] Workers          : 6 processes (spawn)
+05:50:13 [INFO] ----------------------------------------------------------------------
+05:51:41 [INFO] IFCB loaded: 15651 rows | 10591 locations | 2397 dates | 20180101 → 20251128
+05:51:41 [INFO] Stations: ['NESLTER_broadscale', 'azmp', 'ecoa', 'fiddlers', 'gom', 'gsodock', 'mvco', 'oceanalliance', 'radbot_ios', 'radbot_jeffreys_basin', 'radbot_mvco']
+05:51:42 [INFO] ----------------------------------------------------------------------
+05:51:42 [INFO] Mosaic files found : 3254
+05:51:42 [INFO]   Date range       : 20170101 to 20251231
+05:51:42 [INFO]   Exact-date overlap with IFCB: 2379 / 2397 observation dates
+05:51:46 [INFO]   Dates with >=1 mosaic in window : 2397
+05:51:46 [INFO]   Dates with no mosaic (skipped)  : 0
+05:51:46 [INFO] ----------------------------------------------------------------------
+05:51:46 [INFO] Submitting 2397 tasks to 6 worker process(es)...
+05:52:12 [INFO]   Progress: 119 / 2397 dates (5%) | 206 records so far | 1.0 dates/s | ETA ~2277s
+05:52:25 [INFO]   Progress: 238 / 2397 dates (10%) | 976 records so far | 1.8 dates/s | ETA ~1196s
+05:52:31 [INFO]   Progress: 357 / 2397 dates (15%) | 1349 records so far | 2.6 dates/s | ETA ~788s
+05:52:46 [INFO]   Progress: 476 / 2397 dates (20%) | 1797 records so far | 3.1 dates/s | ETA ~617s
+05:53:13 [INFO]   Progress: 595 / 2397 dates (25%) | 2945 records so far | 3.3 dates/s | ETA ~546s
+05:53:31 [INFO]   Progress: 714 / 2397 dates (30%) | 3163 records so far | 3.6 dates/s | ETA ~466s
+05:53:49 [INFO]   Progress: 833 / 2397 dates (35%) | 3410 records so far | 3.9 dates/s | ETA ~405s
+05:54:08 [INFO]   Progress: 952 / 2397 dates (40%) | 3684 records so far | 4.1 dates/s | ETA ~356s
+05:54:22 [INFO]   Progress: 1071 / 2397 dates (45%) | 3902 records so far | 4.3 dates/s | ETA ~309s
+05:54:47 [INFO]   Progress: 1190 / 2397 dates (50%) | 4901 records so far | 4.3 dates/s | ETA ~278s
+05:55:10 [INFO]   Progress: 1309 / 2397 dates (55%) | 5843 records so far | 4.4 dates/s | ETA ~247s
+05:55:29 [INFO]   Progress: 1428 / 2397 dates (60%) | 6225 records so far | 4.5 dates/s | ETA ~215s
+05:55:58 [INFO]   Progress: 1547 / 2397 dates (65%) | 7134 records so far | 4.5 dates/s | ETA ~189s
+05:56:18 [INFO]   Progress: 1666 / 2397 dates (70%) | 7816 records so far | 4.6 dates/s | ETA ~160s
+05:56:35 [INFO]   Progress: 1785 / 2397 dates (74%) | 8072 records so far | 4.7 dates/s | ETA ~131s
+05:56:55 [INFO]   Progress: 1904 / 2397 dates (79%) | 8990 records so far | 4.7 dates/s | ETA ~104s
+05:57:14 [INFO]   Progress: 2023 / 2397 dates (84%) | 9272 records so far | 4.8 dates/s | ETA ~78s
+05:57:39 [INFO]   Progress: 2142 / 2397 dates (89%) | 10770 records so far | 4.8 dates/s | ETA ~53s
+05:57:57 [INFO]   Progress: 2261 / 2397 dates (94%) | 11000 records so far | 4.9 dates/s | ETA ~28s
+05:58:27 [INFO]   Progress: 2380 / 2397 dates (99%) | 13150 records so far | 4.8 dates/s | ETA ~4s
+05:58:30 [INFO]   Progress: 2397 / 2397 dates (100%) | 13220 records so far | 4.8 dates/s | ETA ~0s
+05:58:31 [INFO] ----------------------------------------------------------------------
+05:58:31 [INFO] Extraction complete. Total feature records: 13220
+05:58:32 [INFO] ======================================================================
+05:58:32 [INFO] MATCHUP SUMMARY
+05:58:32 [INFO] ======================================================================
+05:58:32 [INFO]   Total IFCB rows          : 15651
+05:58:32 [INFO]   Rows with satellite data : 13220 (84.5%)
+05:58:32 [INFO]   Rows without             : 2431
+05:58:32 [INFO]   n_mosaics_used : mean=4.0  min=2  max=4
+05:58:32 [INFO]   Valid px : mean=175.6  median=175.0  min=13  max=196
+05:58:32 [INFO]   Band medians (MVC spatial nanmedian):
+05:58:32 [INFO]     rrs_2  (412.50 nm): median=+0.00594  range=[0.00034, 0.06719]
+05:58:32 [INFO]     rrs_4  (490.00 nm): median=+0.00657  range=[0.00064, 0.05655]
+05:58:32 [INFO]     rrs_6  (560.00 nm): median=+0.00481  range=[0.00098, 0.02915]
+05:58:32 [INFO]     rrs_8  (665.00 nm): median=+0.00189  range=[0.00015, 0.03241]
+05:58:32 [INFO]     rrs_9  (673.75 nm): median=+0.00182  range=[0.00015, 0.03064]
+05:58:32 [INFO]     rrs_10 (681.25 nm): median=+0.00187  range=[0.00014, 0.03084]
+05:58:32 [INFO]     rrs_11 (708.75 nm): median=+0.00182  range=[0.00007, 0.03312]
+05:58:32 [INFO]     rrs_12 (753.75 nm): median=+0.00103  range=[0.00002, 0.02132]
+05:58:32 [INFO]     rrs_17 (865.00 nm): median=+0.00064  range=[0.00001, 0.01473]
+05:58:32 [INFO]   Key index medians:
+05:58:32 [INFO]     FLH_681              median = +0.00002
+05:58:32 [INFO]     FLHmax               median = -0.00004
+05:58:32 [INFO]     MCI                  median = +0.00035
+05:58:32 [INFO]     NDCI                 median = +0.04210
+05:58:32 [INFO]     KBBI                 median = +0.00173
+05:58:32 [INFO]     DINI                 median = +1.12548
+05:58:32 [INFO]     GLH                  median = +0.00004
+05:58:32 [INFO]   IOP medians:
+05:58:32 [INFO]     kd489                median = +5.98055
+05:58:32 [INFO]     kdmin                median = +2.95651
+05:58:32 [INFO]     iop_adet             median = +6.40858
+05:58:32 [INFO]     iop_agelb            median = +1.28626
+05:58:32 [INFO]     iop_apig             median = +1.00666
+05:58:32 [INFO]     iop_bpart            median = +4.90442
+05:58:32 [INFO]     iop_bwit             median = +6.52292
+05:58:32 [INFO] ----------------------------------------------------------------------
+05:58:32 [INFO] Saved --> datasets/GULF_OF_MAINE/processed_data/sentinel_3_L2_past3days/c2rcc_features/c2rcc_features_mvc.parquet
+05:58:32 [INFO] Total runtime: 499.2 s
+05:58:32 [INFO] ======================================================================

@@ -1,0 +1,92 @@
+nohup: ignoring input
+================================================================================
+HAB MULTI-LABEL CLF — BINARY RELEVANCE RF (CV-ONLY)
+================================================================================
+
+Loading: /home/server/pi/homes/rathorek/projects/HHAB_ROMS/datasets/GULF_OF_MAINE/processed_data/sentinel_3_L2_past3days/composite_features/composite_features.parquet
+  Raw shape: 15,601 × 174
+  After delta_days==0: 15,601 rows
+
+============================================================
+COMMON OBSERVATIONS
+============================================================
+  C2RCC     : 12,565 rows
+  ACOLITE   : 9,701 rows
+  Baseline  : 13,437 rows
+  Common rows (all ACs): 9,283
+  Common rows with ROMS: 9,283
+
+  Applying median imputation...
+    roms_wind_dir                            filled 774 NaNs
+    roms_Uwind                               filled 774 NaNs
+    roms_salt_sur                            filled 774 NaNs
+    roms_current_dir                         filled 774 NaNs
+    A_FLH_681                                filled 1,479 NaNs
+    A_EBI                                    filled 1,479 NaNs
+    A_GBI                                    filled 1,479 NaNs
+    roms_u_sur                               filled 774 NaNs
+    roms_current_speed                       filled 774 NaNs
+    A_DINI                                   filled 1,479 NaNs
+    roms_Pair                                filled 774 NaNs
+    roms_wind_speed                          filled 774 NaNs
+    roms_v_sur                               filled 774 NaNs
+    A_rrs_682                                filled 1,479 NaNs
+    roms_temp_sur                            filled 774 NaNs
+    A_KBBI                                   filled 1,479 NaNs
+    A_RBD                                    filled 1,479 NaNs
+    A_Fluorescence_Peak                      filled 1,479 NaNs
+    roms_Vwind                               filled 774 NaNs
+    A_FLHmax                                 filled 1,479 NaNs
+  Imputation complete.
+
+  Building feature audit CSV...
+  feature_audit.csv saved
+
+══════════════════════════════════════════════════════════════════════
+  AC: C2RCC  |  spectral: 32  |  ROMS: 12
+══════════════════════════════════════════════════════════════════════
+
+  ── Track: C2RCC_only  |  n=9,283  |  features=32
+
+    Tier: WARNING
+    Label statistics at 'warning' threshold:
+      Alexandrium_catenella          bloom: 1,706 / 9,283  (18.4%)
+      Dinophysis_acuminata           bloom: 3,897 / 9,283  (42.0%)
+      Dinophysis_norvegica           bloom: 1,276 / 9,283  (13.7%)
+      Karenia                        bloom: 2,518 / 9,283  (27.1%)
+      Pseudo-nitzschia               bloom: 2,132 / 9,283  (23.0%)
+      Rows ≥1 label: 6,631 (71.4%)  ≥2 labels: 3,077 (33.1%)
+    Running 50-fold CV...
+    Macro F1    : 0.672 ± 0.009  (median=0.672)
+    Macro PR-AUC: 0.755 ± 0.007  (median=0.756)
+    Hamming: 0.1326  Jaccard: 0.521  (folds: 50)
+      Alexandrium_catenella          F1=0.615±0.019  AP=0.708±0.019
+      Dinophysis_acuminata           F1=0.744±0.009  AP=0.837±0.009
+      Dinophysis_norvegica           F1=0.453±0.026  AP=0.509±0.020
+      Karenia                        F1=0.853±0.010  AP=0.941±0.006
+      Pseudo-nitzschia               F1=0.693±0.019  AP=0.778±0.016
+    ✓ Importance saved
+    ✓ PR curves saved
+
+    Tier: CLOSURE
+    Label statistics at 'closure' threshold:
+      Alexandrium_catenella          bloom: 1,310 / 9,283  (14.1%)
+      Dinophysis_acuminata           bloom: 2,095 / 9,283  (22.6%)
+      Dinophysis_norvegica           bloom:   255 / 9,283  (2.7%)
+      Karenia                        bloom: 1,212 / 9,283  (13.1%)
+      Pseudo-nitzschia               bloom:   381 / 9,283  (4.1%)
+      Rows ≥1 label: 4,118 (44.4%)  ≥2 labels: 939 (10.1%)
+    Running 50-fold CV...
+Traceback (most recent call last):
+  File "/home/server/pi/homes/rathorek/projects/HHAB_ROMS/datasets/GULF_OF_MAINE/scripts/hybrid_ml/C1.0-ac_hybrid_multispecies_classify.py", line 470, in <module>
+    cv_out, last_fold = run_cv(X_all, Y_df, df_in["dashboardIdName"].loc[X_all.index])
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/server/pi/homes/rathorek/projects/HHAB_ROMS/datasets/GULF_OF_MAINE/scripts/hybrid_ml/C1.0-ac_hybrid_multispecies_classify.py", line 232, in run_cv
+    for train_idx, test_idx in ss.split(X, Y):
+                               ^^^^^^^^^^^^^^
+  File "/home/server/pi/homes/rathorek/.conda/envs/openeo312/lib/python3.12/site-packages/sklearn/model_selection/_split.py", line 1928, in split
+    for train, test in self._iter_indices(X, y, groups):
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/server/pi/homes/rathorek/.conda/envs/openeo312/lib/python3.12/site-packages/sklearn/model_selection/_split.py", line 2346, in _iter_indices
+    raise ValueError(
+ValueError: The least populated classes in y have only 1 member, which is too few. The minimum number of groups for any class cannot be less than 2. Classes with too few members are: ['0 0 1 0 1', '0 1 1 1 1', '1 0 1 0 1', '1 0 1 1 0', '1 1 0 1 1']

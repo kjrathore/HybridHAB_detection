@@ -1,0 +1,77 @@
+nohup: ignoring input
+05:52:35 [INFO] ======================================================================
+05:52:35 [INFO] ACOLITE FEATURE EXTRACTION  [Pixel-Level MVC via pyresample]
+05:52:35 [INFO] ======================================================================
+05:52:35 [INFO] ACOLITE dir      : /home/server/pi/homes/rathorek/projects/HHAB_ROMS/datasets/GULF_OF_MAINE/processed_data/sentinel_3_acolite
+05:52:35 [INFO] Temporal window  : +/-3 day(s)
+05:52:35 [INFO] Spatial buffer   : 0.0200 deg (~2.2 km)
+05:52:35 [INFO] Grid resolution  : 0.0030 deg (~333 m)
+05:52:35 [INFO] Resample radius  : 400 m
+05:52:35 [INFO] Min valid pixels : 3  (all bands finite in MVC)
+05:52:35 [INFO] MVC operator     : nanmax across scenes per pixel per band
+05:52:35 [INFO] Spatial summary  : nanmedian over valid MVC pixels
+05:52:35 [INFO] Workers          : 8  (spawn)
+05:52:35 [INFO] ----------------------------------------------------------------------
+05:54:06 [INFO] IFCB loaded: 15651 rows | 10591 locations | 2397 dates | 20180101 → 20251128
+05:54:06 [INFO] Stations: ['NESLTER_broadscale', 'azmp', 'ecoa', 'fiddlers', 'gom', 'gsodock', 'mvco', 'oceanalliance', 'radbot_ios', 'radbot_jeffreys_basin', 'radbot_mvco']
+05:54:13 [INFO] ----------------------------------------------------------------------
+05:54:13 [INFO] ACOLITE scenes : 10615 files across 3285 dates  (20170101 to 20251231)
+05:54:13 [INFO] Exact-date overlap with IFCB: 2397 / 2397 obs dates
+05:54:17 [INFO] Tasks: 2397 dates with scenes  |  0 dates skipped (no scene in window)
+05:54:17 [INFO] ----------------------------------------------------------------------
+05:57:21 [INFO]   119 / 2397 (5%) | 83 records | 0.4 dates/s | ETA ~5478s
+06:07:27 [INFO]   238 / 2397 (10%) | 490 records | 0.3 dates/s | ETA ~8100s
+06:11:20 [INFO]   357 / 2397 (15%) | 631 records | 0.3 dates/s | ETA ~6430s
+06:18:31 [INFO]   476 / 2397 (20%) | 871 records | 0.3 dates/s | ETA ~6281s
+06:29:27 [INFO]   595 / 2397 (25%) | 1696 records | 0.3 dates/s | ETA ~6702s
+06:33:05 [INFO]   714 / 2397 (30%) | 1975 records | 0.3 dates/s | ETA ~5729s
+06:36:59 [INFO]   833 / 2397 (35%) | 2182 records | 0.3 dates/s | ETA ~5003s
+06:41:05 [INFO]   952 / 2397 (40%) | 2424 records | 0.3 dates/s | ETA ~4418s
+06:44:33 [INFO]   1071 / 2397 (45%) | 2606 records | 0.3 dates/s | ETA ~3862s
+06:53:16 [INFO]   1190 / 2397 (50%) | 3186 records | 0.3 dates/s | ETA ~3694s
+07:02:03 [INFO]   1309 / 2397 (55%) | 3577 records | 0.3 dates/s | ETA ~3465s
+07:09:23 [INFO]   1428 / 2397 (60%) | 4130 records | 0.3 dates/s | ETA ~3127s
+07:28:27 [INFO]   1547 / 2397 (65%) | 4775 records | 0.3 dates/s | ETA ~3161s
+07:41:41 [INFO]   1666 / 2397 (70%) | 5457 records | 0.3 dates/s | ETA ~2873s
+07:48:54 [INFO]   1785 / 2397 (74%) | 5691 records | 0.3 dates/s | ETA ~2393s
+08:05:21 [INFO]   1904 / 2397 (79%) | 6554 records | 0.2 dates/s | ETA ~2063s
+08:13:18 [INFO]   2023 / 2397 (84%) | 6805 records | 0.2 dates/s | ETA ~1561s
+08:33:04 [INFO]   2142 / 2397 (89%) | 7909 records | 0.2 dates/s | ETA ~1146s
+08:40:35 [INFO]   2261 / 2397 (94%) | 8096 records | 0.2 dates/s | ETA ~606s
+09:01:29 [INFO]   2380 / 2397 (99%) | 10129 records | 0.2 dates/s | ETA ~81s
+09:02:18 [INFO]   2397 / 2397 (100%) | 10190 records | 0.2 dates/s | ETA ~0s
+09:02:28 [INFO] ----------------------------------------------------------------------
+09:02:28 [INFO] Extraction complete: 10190 records
+09:02:31 [INFO] ======================================================================
+09:02:31 [INFO] MATCHUP SUMMARY
+09:02:31 [INFO]   Total IFCB rows          : 15651
+09:02:31 [INFO]   Rows with satellite data : 10190 (65.1%)
+09:02:31 [INFO]   Rows without             : 5461
+09:02:31 [INFO]   Valid pixel stats (spatial MVC coverage):
+09:02:31 [INFO]     n_valid_pixels : mean=196.1  median=225.0  min=3  max=225
+09:02:31 [INFO]     n_scenes used  : mean=6.1  min=1  max=11
+09:02:31 [INFO]   Band medians (spatial nanmedian of MVC pixels):
+09:02:31 [INFO]     rrs_412    (411.50 nm): median=+0.01534  [-0.00515, 0.07404]
+09:02:31 [INFO]     rrs_443    (442.50 nm): median=+0.01547  [0.00029, 0.06291]
+09:02:31 [INFO]     rrs_490    (490.00 nm): median=+0.01494  [0.00119, 0.05143]
+09:02:31 [INFO]     rrs_510    (510.00 nm): median=+0.01410  [0.00203, 0.04717]
+09:02:31 [INFO]     rrs_560    (559.00 nm): median=+0.01321  [0.00215, 0.04624]
+09:02:31 [INFO]     rrs_620    (620.00 nm): median=+0.00743  [0.00010, 0.03655]
+09:02:31 [INFO]     rrs_665    (664.60 nm): median=+0.00615  [0.00006, 0.03371]
+09:02:31 [INFO]     rrs_674    (673.75 nm): median=+0.00617  [0.00013, 0.03359]
+09:02:31 [INFO]     rrs_682    (681.25 nm): median=+0.00510  [0.00015, 0.03559]
+09:02:31 [INFO]     rrs_709    (708.75 nm): median=+0.00508  [0.00001, 0.03028]
+09:02:31 [INFO]     rrs_754    (753.75 nm): median=+0.00474  [-0.00289, 0.03066]
+09:02:31 [INFO]     rrs_865    (864.90 nm): median=+0.00350  [-0.00336, 0.02355]
+09:02:31 [INFO]   Key index medians:
+09:02:31 [INFO]     FLH_681              median = +0.00014
+09:02:31 [INFO]     FLHmax               median = +0.00028
+09:02:31 [INFO]     MCI                  median = -0.00029
+09:02:31 [INFO]     NDCI                 median = -0.07591
+09:02:31 [INFO]     KBBI                 median = -0.00464
+09:02:31 [INFO]     DINI                 median = +4.52644
+09:02:31 [INFO]     GLH                  median = +0.00104
+09:02:33 [INFO] ----------------------------------------------------------------------
+09:02:33 [INFO] Saved --> /home/server/pi/homes/rathorek/projects/HHAB_ROMS/datasets/GULF_OF_MAINE/processed_data/sentinel_3_L2_past3days/acolite_features/acolite_features_mvc.parquet
+09:02:33 [INFO] Total runtime: 11398.2 s
+09:02:33 [INFO] ======================================================================

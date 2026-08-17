@@ -1,0 +1,188 @@
+Loaded 3,000 rows | columns: ['ac', 'track', 'tier', 'species', 'fold', 'f1', 'prauc', 'recall', 'precision']
+
+Saved 60 comparisons → datasets/GULF_OF_MAINE/ml_outputs/rf_multispecies_clf/csv_results/mann_whitney_only_vs_roms.csv
+
+================================================================================
+ROMS vs ONLY — SIGNIFICANT DIFFERENCES  (p < 0.05)
+================================================================================
+  ACOLITE    | closure    | Alexandrium_catenella          | f1     | Δ=+0.0257  p=0.0000  rbc=+0.598 (large)  [roms_better]
+  ACOLITE    | warning    | Alexandrium_catenella          | f1     | Δ=+0.0267  p=0.0000  rbc=+0.691 (large)  [roms_better]
+  ACOLITE    | closure    | Dinophysis_acuminata           | f1     | Δ=+0.0112  p=0.0003  rbc=+0.420 (medium)  [roms_better]
+  ACOLITE    | warning    | Dinophysis_acuminata           | f1     | Δ=+0.0067  p=0.0027  rbc=+0.348 (medium)  [roms_better]
+  ACOLITE    | closure    | Dinophysis_norvegica           | f1     | Δ=-0.0919  p=0.0000  rbc=-0.756 (large)  [only_better]
+  ACOLITE    | closure    | Karenia                        | f1     | Δ=+0.0214  p=0.0000  rbc=+0.662 (large)  [roms_better]
+  ACOLITE    | warning    | Karenia                        | f1     | Δ=+0.0118  p=0.0000  rbc=+0.605 (large)  [roms_better]
+  ACOLITE    | warning    | Pseudo-nitzschia               | f1     | Δ=+0.0261  p=0.0000  rbc=+0.854 (large)  [roms_better]
+  ACOLITE    | closure    | Alexandrium_catenella          | prauc  | Δ=+0.0150  p=0.0034  rbc=+0.341 (medium)  [roms_better]
+  ACOLITE    | warning    | Alexandrium_catenella          | prauc  | Δ=+0.0124  p=0.0018  rbc=+0.363 (medium)  [roms_better]
+  ACOLITE    | closure    | Karenia                        | prauc  | Δ=+0.0075  p=0.0427  rbc=+0.236 (small)  [roms_better]
+  ACOLITE    | warning    | Karenia                        | prauc  | Δ=+0.0089  p=0.0000  rbc=+0.825 (large)  [roms_better]
+  ACOLITE    | closure    | Pseudo-nitzschia               | prauc  | Δ=+0.0543  p=0.0000  rbc=+0.640 (large)  [roms_better]
+  ACOLITE    | warning    | Pseudo-nitzschia               | prauc  | Δ=+0.0183  p=0.0000  rbc=+0.624 (large)  [roms_better]
+  Baseline   | closure    | Alexandrium_catenella          | f1     | Δ=+0.0301  p=0.0000  rbc=+0.626 (large)  [roms_better]
+  Baseline   | warning    | Alexandrium_catenella          | f1     | Δ=+0.0380  p=0.0000  rbc=+0.858 (large)  [roms_better]
+  Baseline   | closure    | Dinophysis_acuminata           | f1     | Δ=+0.0121  p=0.0007  rbc=+0.394 (medium)  [roms_better]
+  Baseline   | warning    | Dinophysis_acuminata           | f1     | Δ=+0.0106  p=0.0001  rbc=+0.455 (medium)  [roms_better]
+  Baseline   | closure    | Dinophysis_norvegica           | f1     | Δ=-0.0880  p=0.0000  rbc=-0.644 (large)  [only_better]
+  Baseline   | closure    | Karenia                        | f1     | Δ=+0.0262  p=0.0000  rbc=+0.766 (large)  [roms_better]
+  Baseline   | warning    | Karenia                        | f1     | Δ=+0.0155  p=0.0000  rbc=+0.732 (large)  [roms_better]
+  Baseline   | closure    | Pseudo-nitzschia               | f1     | Δ=+0.0340  p=0.0025  rbc=+0.351 (medium)  [roms_better]
+  Baseline   | warning    | Pseudo-nitzschia               | f1     | Δ=+0.0481  p=0.0000  rbc=+0.990 (large)  [roms_better]
+  Baseline   | closure    | Alexandrium_catenella          | prauc  | Δ=+0.0289  p=0.0000  rbc=+0.653 (large)  [roms_better]
+  Baseline   | warning    | Alexandrium_catenella          | prauc  | Δ=+0.0223  p=0.0000  rbc=+0.654 (large)  [roms_better]
+  Baseline   | closure    | Dinophysis_acuminata           | prauc  | Δ=+0.0083  p=0.0041  rbc=+0.333 (medium)  [roms_better]
+  Baseline   | warning    | Dinophysis_acuminata           | prauc  | Δ=+0.0056  p=0.0141  rbc=+0.285 (small)  [roms_better]
+  Baseline   | closure    | Karenia                        | prauc  | Δ=+0.0123  p=0.0034  rbc=+0.340 (medium)  [roms_better]
+  Baseline   | warning    | Karenia                        | prauc  | Δ=+0.0103  p=0.0000  rbc=+0.831 (large)  [roms_better]
+  Baseline   | closure    | Pseudo-nitzschia               | prauc  | Δ=+0.0630  p=0.0000  rbc=+0.650 (large)  [roms_better]
+  Baseline   | warning    | Pseudo-nitzschia               | prauc  | Δ=+0.0288  p=0.0000  rbc=+0.740 (large)  [roms_better]
+  C2RCC      | closure    | Alexandrium_catenella          | f1     | Δ=+0.0680  p=0.0000  rbc=+0.936 (large)  [roms_better]
+  C2RCC      | warning    | Alexandrium_catenella          | f1     | Δ=+0.0632  p=0.0000  rbc=+0.959 (large)  [roms_better]
+  C2RCC      | closure    | Dinophysis_acuminata           | f1     | Δ=+0.0476  p=0.0000  rbc=+0.981 (large)  [roms_better]
+  C2RCC      | warning    | Dinophysis_acuminata           | f1     | Δ=+0.0260  p=0.0000  rbc=+0.912 (large)  [roms_better]
+  C2RCC      | closure    | Dinophysis_norvegica           | f1     | Δ=-0.0460  p=0.0003  rbc=-0.420 (medium)  [only_better]
+  C2RCC      | warning    | Dinophysis_norvegica           | f1     | Δ=+0.0517  p=0.0000  rbc=+0.804 (large)  [roms_better]
+  C2RCC      | closure    | Karenia                        | f1     | Δ=+0.0240  p=0.0000  rbc=+0.706 (large)  [roms_better]
+  C2RCC      | warning    | Karenia                        | f1     | Δ=+0.0254  p=0.0000  rbc=+0.870 (large)  [roms_better]
+  C2RCC      | closure    | Pseudo-nitzschia               | f1     | Δ=+0.0434  p=0.0002  rbc=+0.438 (medium)  [roms_better]
+  C2RCC      | warning    | Pseudo-nitzschia               | f1     | Δ=+0.0491  p=0.0000  rbc=+0.971 (large)  [roms_better]
+  C2RCC      | closure    | Alexandrium_catenella          | prauc  | Δ=+0.0593  p=0.0000  rbc=+0.902 (large)  [roms_better]
+  C2RCC      | warning    | Alexandrium_catenella          | prauc  | Δ=+0.0529  p=0.0000  rbc=+0.925 (large)  [roms_better]
+  C2RCC      | closure    | Dinophysis_acuminata           | prauc  | Δ=+0.0343  p=0.0000  rbc=+0.870 (large)  [roms_better]
+  C2RCC      | warning    | Dinophysis_acuminata           | prauc  | Δ=+0.0245  p=0.0000  rbc=+0.898 (large)  [roms_better]
+  C2RCC      | closure    | Dinophysis_norvegica           | prauc  | Δ=+0.0345  p=0.0186  rbc=+0.274 (small)  [roms_better]
+  C2RCC      | warning    | Dinophysis_norvegica           | prauc  | Δ=+0.0451  p=0.0000  rbc=+0.643 (large)  [roms_better]
+  C2RCC      | closure    | Karenia                        | prauc  | Δ=+0.0117  p=0.0025  rbc=+0.351 (medium)  [roms_better]
+  C2RCC      | warning    | Karenia                        | prauc  | Δ=+0.0162  p=0.0000  rbc=+0.933 (large)  [roms_better]
+  C2RCC      | closure    | Pseudo-nitzschia               | prauc  | Δ=+0.0838  p=0.0000  rbc=+0.742 (large)  [roms_better]
+  C2RCC      | warning    | Pseudo-nitzschia               | prauc  | Δ=+0.0415  p=0.0000  rbc=+0.910 (large)  [roms_better]
+
+================================================================================
+ROMS vs ONLY — SUMMARY BY AC × METRIC
+================================================================================
+      ac metric  n_tests  n_sig  n_roms_better  n_only_better  mean_delta  mean_rbc
+ ACOLITE     f1       10      8              9              1    0.004573   0.35488
+ ACOLITE  prauc       10      6              8              2    0.010798   0.31036
+Baseline     f1       10      9              9              1    0.013772   0.47300
+Baseline  prauc       10      8              8              2    0.017721   0.44616
+   C2RCC     f1       10     10              9              1    0.035230   0.71560
+   C2RCC  prauc       10     10             10              0    0.040377   0.74484
+
+
+================================================================================
+ATMOSPHERIC CORRECTION PAIRWISE COMPARISON
+================================================================================
+Saved 120 comparisons → datasets/GULF_OF_MAINE/ml_outputs/rf_multispecies_clf/csv_results/mann_whitney_ac_comparison.csv
+
+Significant AC differences: 94 / 120
+  [only] closure    | Alexandrium_catenella          | f1     | ACOLITE vs Baseline  Δ=-0.0172  p=0.0011  rbc=-0.379 (medium)  [ACOLITE_better]
+  [only] warning    | Alexandrium_catenella          | f1     | ACOLITE vs Baseline  Δ=-0.0273  p=0.0000  rbc=-0.673 (large)  [ACOLITE_better]
+  [only] closure    | Alexandrium_catenella          | f1     | ACOLITE vs C2RCC  Δ=-0.0895  p=0.0000  rbc=-0.994 (large)  [ACOLITE_better]
+  [only] warning    | Alexandrium_catenella          | f1     | ACOLITE vs C2RCC  Δ=-0.0765  p=0.0000  rbc=-0.998 (large)  [ACOLITE_better]
+  [only] closure    | Alexandrium_catenella          | f1     | Baseline vs C2RCC  Δ=-0.0723  p=0.0000  rbc=-0.957 (large)  [Baseline_better]
+  [only] warning    | Alexandrium_catenella          | f1     | Baseline vs C2RCC  Δ=-0.0492  p=0.0000  rbc=-0.926 (large)  [Baseline_better]
+  [only] warning    | Dinophysis_acuminata           | f1     | ACOLITE vs Baseline  Δ=-0.0079  p=0.0006  rbc=-0.399 (medium)  [ACOLITE_better]
+  [only] closure    | Dinophysis_acuminata           | f1     | ACOLITE vs C2RCC  Δ=-0.0541  p=0.0000  rbc=-0.992 (large)  [ACOLITE_better]
+  [only] warning    | Dinophysis_acuminata           | f1     | ACOLITE vs C2RCC  Δ=-0.0221  p=0.0000  rbc=-0.849 (large)  [ACOLITE_better]
+  [only] closure    | Dinophysis_acuminata           | f1     | Baseline vs C2RCC  Δ=-0.0524  p=0.0000  rbc=-0.979 (large)  [Baseline_better]
+  [only] warning    | Dinophysis_acuminata           | f1     | Baseline vs C2RCC  Δ=-0.0143  p=0.0000  rbc=-0.651 (large)  [Baseline_better]
+  [only] warning    | Dinophysis_norvegica           | f1     | ACOLITE vs Baseline  Δ=-0.0200  p=0.0015  rbc=-0.368 (medium)  [ACOLITE_better]
+  [only] closure    | Dinophysis_norvegica           | f1     | ACOLITE vs C2RCC  Δ=-0.1058  p=0.0000  rbc=-0.780 (large)  [ACOLITE_better]
+  [only] warning    | Dinophysis_norvegica           | f1     | ACOLITE vs C2RCC  Δ=-0.1199  p=0.0000  rbc=-1.000 (large)  [ACOLITE_better]
+  [only] closure    | Dinophysis_norvegica           | f1     | Baseline vs C2RCC  Δ=-0.1071  p=0.0000  rbc=-0.759 (large)  [Baseline_better]
+  [only] warning    | Dinophysis_norvegica           | f1     | Baseline vs C2RCC  Δ=-0.0999  p=0.0000  rbc=-0.974 (large)  [Baseline_better]
+  [only] closure    | Karenia                        | f1     | ACOLITE vs Baseline  Δ=-0.0201  p=0.0000  rbc=-0.578 (large)  [ACOLITE_better]
+  [only] warning    | Karenia                        | f1     | ACOLITE vs Baseline  Δ=-0.0064  p=0.0046  rbc=-0.329 (medium)  [ACOLITE_better]
+  [only] closure    | Karenia                        | f1     | ACOLITE vs C2RCC  Δ=-0.0210  p=0.0000  rbc=-0.618 (large)  [ACOLITE_better]
+  [only] warning    | Karenia                        | f1     | ACOLITE vs C2RCC  Δ=-0.0278  p=0.0000  rbc=-0.907 (large)  [ACOLITE_better]
+  [only] warning    | Karenia                        | f1     | Baseline vs C2RCC  Δ=-0.0214  p=0.0000  rbc=-0.802 (large)  [Baseline_better]
+  [only] closure    | Pseudo-nitzschia               | f1     | ACOLITE vs Baseline  Δ=-0.0219  p=0.0284  rbc=-0.255 (small)  [ACOLITE_better]
+  [only] warning    | Pseudo-nitzschia               | f1     | ACOLITE vs Baseline  Δ=-0.0355  p=0.0000  rbc=-0.912 (large)  [ACOLITE_better]
+  [only] closure    | Pseudo-nitzschia               | f1     | ACOLITE vs C2RCC  Δ=-0.0622  p=0.0000  rbc=-0.590 (large)  [ACOLITE_better]
+  [only] warning    | Pseudo-nitzschia               | f1     | ACOLITE vs C2RCC  Δ=-0.0560  p=0.0000  rbc=-0.999 (large)  [ACOLITE_better]
+  [only] closure    | Pseudo-nitzschia               | f1     | Baseline vs C2RCC  Δ=-0.0403  p=0.0003  rbc=-0.417 (medium)  [Baseline_better]
+  [only] warning    | Pseudo-nitzschia               | f1     | Baseline vs C2RCC  Δ=-0.0205  p=0.0000  rbc=-0.621 (large)  [Baseline_better]
+  [only] warning    | Alexandrium_catenella          | prauc  | ACOLITE vs Baseline  Δ=-0.0097  p=0.0064  rbc=-0.317 (medium)  [ACOLITE_better]
+  [only] closure    | Alexandrium_catenella          | prauc  | ACOLITE vs C2RCC  Δ=-0.0755  p=0.0000  rbc=-0.973 (large)  [ACOLITE_better]
+  [only] warning    | Alexandrium_catenella          | prauc  | ACOLITE vs C2RCC  Δ=-0.0693  p=0.0000  rbc=-0.971 (large)  [ACOLITE_better]
+  [only] closure    | Alexandrium_catenella          | prauc  | Baseline vs C2RCC  Δ=-0.0670  p=0.0000  rbc=-0.967 (large)  [Baseline_better]
+  [only] warning    | Alexandrium_catenella          | prauc  | Baseline vs C2RCC  Δ=-0.0597  p=0.0000  rbc=-0.970 (large)  [Baseline_better]
+  [only] warning    | Dinophysis_acuminata           | prauc  | ACOLITE vs Baseline  Δ=-0.0086  p=0.0002  rbc=-0.439 (medium)  [ACOLITE_better]
+  [only] closure    | Dinophysis_acuminata           | prauc  | ACOLITE vs C2RCC  Δ=-0.0550  p=0.0000  rbc=-0.983 (large)  [ACOLITE_better]
+  [only] warning    | Dinophysis_acuminata           | prauc  | ACOLITE vs C2RCC  Δ=-0.0299  p=0.0000  rbc=-0.955 (large)  [ACOLITE_better]
+  [only] closure    | Dinophysis_acuminata           | prauc  | Baseline vs C2RCC  Δ=-0.0515  p=0.0000  rbc=-0.992 (large)  [Baseline_better]
+  [only] warning    | Dinophysis_acuminata           | prauc  | Baseline vs C2RCC  Δ=-0.0213  p=0.0000  rbc=-0.842 (large)  [Baseline_better]
+  [only] closure    | Dinophysis_norvegica           | prauc  | ACOLITE vs C2RCC  Δ=-0.0866  p=0.0000  rbc=-0.682 (large)  [ACOLITE_better]
+  [only] warning    | Dinophysis_norvegica           | prauc  | ACOLITE vs C2RCC  Δ=-0.1078  p=0.0000  rbc=-0.991 (large)  [ACOLITE_better]
+  [only] closure    | Dinophysis_norvegica           | prauc  | Baseline vs C2RCC  Δ=-0.0821  p=0.0000  rbc=-0.635 (large)  [Baseline_better]
+  [only] warning    | Dinophysis_norvegica           | prauc  | Baseline vs C2RCC  Δ=-0.1029  p=0.0000  rbc=-0.983 (large)  [Baseline_better]
+  [only] closure    | Karenia                        | prauc  | ACOLITE vs Baseline  Δ=-0.0086  p=0.0452  rbc=-0.233 (small)  [ACOLITE_better]
+  [only] warning    | Karenia                        | prauc  | ACOLITE vs Baseline  Δ=-0.0029  p=0.0059  rbc=-0.320 (medium)  [ACOLITE_better]
+  [only] closure    | Karenia                        | prauc  | ACOLITE vs C2RCC  Δ=-0.0144  p=0.0003  rbc=-0.417 (medium)  [ACOLITE_better]
+  [only] warning    | Karenia                        | prauc  | ACOLITE vs C2RCC  Δ=-0.0138  p=0.0000  rbc=-0.909 (large)  [ACOLITE_better]
+  [only] warning    | Karenia                        | prauc  | Baseline vs C2RCC  Δ=-0.0109  p=0.0000  rbc=-0.782 (large)  [Baseline_better]
+  [only] closure    | Pseudo-nitzschia               | prauc  | ACOLITE vs Baseline  Δ=-0.0166  p=0.0452  rbc=-0.233 (small)  [ACOLITE_better]
+  [only] warning    | Pseudo-nitzschia               | prauc  | ACOLITE vs Baseline  Δ=-0.0286  p=0.0000  rbc=-0.814 (large)  [ACOLITE_better]
+  [only] closure    | Pseudo-nitzschia               | prauc  | ACOLITE vs C2RCC  Δ=-0.0746  p=0.0000  rbc=-0.751 (large)  [ACOLITE_better]
+  [only] warning    | Pseudo-nitzschia               | prauc  | ACOLITE vs C2RCC  Δ=-0.0507  p=0.0000  rbc=-0.978 (large)  [ACOLITE_better]
+  [only] closure    | Pseudo-nitzschia               | prauc  | Baseline vs C2RCC  Δ=-0.0580  p=0.0000  rbc=-0.607 (large)  [Baseline_better]
+  [only] warning    | Pseudo-nitzschia               | prauc  | Baseline vs C2RCC  Δ=-0.0221  p=0.0000  rbc=-0.631 (large)  [Baseline_better]
+  [roms] closure    | Alexandrium_catenella          | f1     | ACOLITE vs Baseline  Δ=-0.0129  p=0.0103  rbc=-0.298 (small)  [ACOLITE_better]
+  [roms] warning    | Alexandrium_catenella          | f1     | ACOLITE vs Baseline  Δ=-0.0160  p=0.0001  rbc=-0.463 (medium)  [ACOLITE_better]
+  [roms] closure    | Alexandrium_catenella          | f1     | ACOLITE vs C2RCC  Δ=-0.0473  p=0.0000  rbc=-0.818 (large)  [ACOLITE_better]
+  [roms] warning    | Alexandrium_catenella          | f1     | ACOLITE vs C2RCC  Δ=-0.0400  p=0.0000  rbc=-0.859 (large)  [ACOLITE_better]
+  [roms] closure    | Alexandrium_catenella          | f1     | Baseline vs C2RCC  Δ=-0.0344  p=0.0000  rbc=-0.674 (large)  [Baseline_better]
+  [roms] warning    | Alexandrium_catenella          | f1     | Baseline vs C2RCC  Δ=-0.0240  p=0.0000  rbc=-0.563 (large)  [Baseline_better]
+  [roms] closure    | Dinophysis_acuminata           | f1     | ACOLITE vs C2RCC  Δ=-0.0177  p=0.0000  rbc=-0.599 (large)  [ACOLITE_better]
+  [roms] closure    | Dinophysis_acuminata           | f1     | Baseline vs C2RCC  Δ=-0.0168  p=0.0000  rbc=-0.578 (large)  [Baseline_better]
+  [roms] warning    | Dinophysis_norvegica           | f1     | ACOLITE vs Baseline  Δ=-0.0116  p=0.0264  rbc=-0.258 (small)  [ACOLITE_better]
+  [roms] closure    | Dinophysis_norvegica           | f1     | ACOLITE vs C2RCC  Δ=-0.0600  p=0.0000  rbc=-0.556 (large)  [ACOLITE_better]
+  [roms] warning    | Dinophysis_norvegica           | f1     | ACOLITE vs C2RCC  Δ=-0.0709  p=0.0000  rbc=-0.890 (large)  [ACOLITE_better]
+  [roms] closure    | Dinophysis_norvegica           | f1     | Baseline vs C2RCC  Δ=-0.0651  p=0.0000  rbc=-0.539 (large)  [Baseline_better]
+  [roms] warning    | Dinophysis_norvegica           | f1     | Baseline vs C2RCC  Δ=-0.0593  p=0.0000  rbc=-0.839 (large)  [Baseline_better]
+  [roms] closure    | Karenia                        | f1     | ACOLITE vs Baseline  Δ=-0.0153  p=0.0000  rbc=-0.520 (large)  [ACOLITE_better]
+  [roms] closure    | Karenia                        | f1     | ACOLITE vs C2RCC  Δ=-0.0183  p=0.0000  rbc=-0.596 (large)  [ACOLITE_better]
+  [roms] warning    | Karenia                        | f1     | ACOLITE vs C2RCC  Δ=-0.0142  p=0.0000  rbc=-0.689 (large)  [ACOLITE_better]
+  [roms] warning    | Karenia                        | f1     | Baseline vs C2RCC  Δ=-0.0115  p=0.0000  rbc=-0.594 (large)  [Baseline_better]
+  [roms] warning    | Pseudo-nitzschia               | f1     | ACOLITE vs Baseline  Δ=-0.0135  p=0.0000  rbc=-0.539 (large)  [ACOLITE_better]
+  [roms] closure    | Pseudo-nitzschia               | f1     | ACOLITE vs C2RCC  Δ=-0.0241  p=0.0059  rbc=-0.320 (medium)  [ACOLITE_better]
+  [roms] warning    | Pseudo-nitzschia               | f1     | ACOLITE vs C2RCC  Δ=-0.0330  p=0.0000  rbc=-0.870 (large)  [ACOLITE_better]
+  [roms] closure    | Pseudo-nitzschia               | f1     | Baseline vs C2RCC  Δ=-0.0309  p=0.0056  rbc=-0.322 (medium)  [Baseline_better]
+  [roms] warning    | Pseudo-nitzschia               | f1     | Baseline vs C2RCC  Δ=-0.0195  p=0.0000  rbc=-0.649 (large)  [Baseline_better]
+  [roms] closure    | Alexandrium_catenella          | prauc  | ACOLITE vs C2RCC  Δ=-0.0311  p=0.0000  rbc=-0.623 (large)  [ACOLITE_better]
+  [roms] warning    | Alexandrium_catenella          | prauc  | ACOLITE vs C2RCC  Δ=-0.0289  p=0.0000  rbc=-0.740 (large)  [ACOLITE_better]
+  [roms] closure    | Alexandrium_catenella          | prauc  | Baseline vs C2RCC  Δ=-0.0365  p=0.0000  rbc=-0.730 (large)  [Baseline_better]
+  [roms] warning    | Alexandrium_catenella          | prauc  | Baseline vs C2RCC  Δ=-0.0291  p=0.0000  rbc=-0.768 (large)  [Baseline_better]
+  [roms] warning    | Dinophysis_acuminata           | prauc  | ACOLITE vs Baseline  Δ=-0.0053  p=0.0182  rbc=-0.274 (small)  [ACOLITE_better]
+  [roms] closure    | Dinophysis_acuminata           | prauc  | ACOLITE vs C2RCC  Δ=-0.0244  p=0.0000  rbc=-0.715 (large)  [ACOLITE_better]
+  [roms] warning    | Dinophysis_acuminata           | prauc  | ACOLITE vs C2RCC  Δ=-0.0076  p=0.0004  rbc=-0.414 (medium)  [ACOLITE_better]
+  [roms] closure    | Dinophysis_acuminata           | prauc  | Baseline vs C2RCC  Δ=-0.0254  p=0.0000  rbc=-0.750 (large)  [Baseline_better]
+  [roms] closure    | Dinophysis_norvegica           | prauc  | ACOLITE vs C2RCC  Δ=-0.0431  p=0.0012  rbc=-0.378 (medium)  [ACOLITE_better]
+  [roms] warning    | Dinophysis_norvegica           | prauc  | ACOLITE vs C2RCC  Δ=-0.0575  p=0.0000  rbc=-0.765 (large)  [ACOLITE_better]
+  [roms] closure    | Dinophysis_norvegica           | prauc  | Baseline vs C2RCC  Δ=-0.0474  p=0.0007  rbc=-0.392 (medium)  [Baseline_better]
+  [roms] warning    | Dinophysis_norvegica           | prauc  | Baseline vs C2RCC  Δ=-0.0558  p=0.0000  rbc=-0.740 (large)  [Baseline_better]
+  [roms] closure    | Karenia                        | prauc  | ACOLITE vs C2RCC  Δ=-0.0103  p=0.0054  rbc=-0.323 (medium)  [ACOLITE_better]
+  [roms] warning    | Karenia                        | prauc  | ACOLITE vs C2RCC  Δ=-0.0066  p=0.0000  rbc=-0.660 (large)  [ACOLITE_better]
+  [roms] warning    | Karenia                        | prauc  | Baseline vs C2RCC  Δ=-0.0050  p=0.0000  rbc=-0.507 (large)  [Baseline_better]
+  [roms] warning    | Pseudo-nitzschia               | prauc  | ACOLITE vs Baseline  Δ=-0.0180  p=0.0000  rbc=-0.568 (large)  [ACOLITE_better]
+  [roms] closure    | Pseudo-nitzschia               | prauc  | ACOLITE vs C2RCC  Δ=-0.0451  p=0.0000  rbc=-0.490 (medium)  [ACOLITE_better]
+  [roms] warning    | Pseudo-nitzschia               | prauc  | ACOLITE vs C2RCC  Δ=-0.0274  p=0.0000  rbc=-0.725 (large)  [ACOLITE_better]
+  [roms] closure    | Pseudo-nitzschia               | prauc  | Baseline vs C2RCC  Δ=-0.0372  p=0.0006  rbc=-0.397 (medium)  [Baseline_better]
+  [roms] warning    | Pseudo-nitzschia               | prauc  | Baseline vs C2RCC  Δ=-0.0094  p=0.0150  rbc=-0.283 (small)  [Baseline_better]
+
+================================================================================
+AC COMPARISON — SUMMARY BY TRACK TYPE × PAIR × METRIC
+================================================================================
+track_type     ac_a     ac_b metric  n_tests  n_sig  mean_delta  mean_rbc
+      only  ACOLITE Baseline     f1       10      8   -0.015684  -0.39596
+      only  ACOLITE Baseline  prauc       10      6   -0.009644  -0.28976
+      only  ACOLITE    C2RCC     f1       10     10   -0.063503  -0.87276
+      only  ACOLITE    C2RCC  prauc       10     10   -0.057774  -0.86104
+      only Baseline    C2RCC     f1       10      9   -0.047816  -0.71592
+      only Baseline    C2RCC  prauc       10      9   -0.048131  -0.75860
+      roms  ACOLITE Baseline     f1       10      5   -0.006486  -0.23888
+      roms  ACOLITE Baseline  prauc       10      2   -0.002722  -0.11856
+      roms  ACOLITE    C2RCC     f1       10      9   -0.032844  -0.63740
+      roms  ACOLITE    C2RCC  prauc       10     10   -0.028195  -0.58336
+      roms Baseline    C2RCC     f1       10      8   -0.026356  -0.47888
+      roms Baseline    C2RCC  prauc       10      8   -0.025472  -0.48768

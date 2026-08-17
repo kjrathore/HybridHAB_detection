@@ -1,0 +1,328 @@
+# Gulf of Maine Processing config file.
+# Configure region-specific parameters for data download and ACOLITE processing
+
+# =============================================================================
+# REGION DEFINITION
+# =============================================================================
+region:
+  name: "GULF_OF_MAINE"
+  description: "Gulf of Maine + northeastern US coastal waters"
+  
+  # Bounding box: [west, south, east, north] in decimal degrees (WGS84)
+  bbox:
+    west: -76.0   #was -76.0 earlier
+    south: 36.0   #was 36.0 earlier
+    east: -60.0    #was -66.0 earlier
+    north: 45.0
+  
+  # UTM zone for output projection
+  # Find your zone: https://mangomap.com/robertyoung/maps/69585/what-utm-zone-am-i-in-
+  # Common zones:
+  #   - UTM 19N (EPSG:32619): Eastern US/Canada coast, Gulf of Maine
+  #   - UTM 17N (EPSG:32617): Florida, Great Lakes
+  #   - UTM 10N (EPSG:32610): Western US coast
+  #   - WGS84 (EPSG:4326): Global lat/lon (no projection)
+  utm_zone: "EPSG:4326"  
+
+
+# =============================================================================
+# DATA DOWNLOAD PARAMETERS
+# =============================================================================
+download:
+  # Copernicus Data Space credentials
+  # Register at: https://dataspace.copernicus.eu/
+  credentials:
+    username: "rathorek@oregonstate.edu"
+    password: "Satellite@321"
+  
+  # Date range for data search
+  date_range:
+    start: "2017-01-01"
+    end: "2025-12-31"
+  
+  # Product filtering
+  max_cloud_cover: 50  # Maximum cloud cover % (if available)
+  max_products: 1500     # Maximum number of products to download
+  
+  # Output directory
+  output_dir: "GULF_OF_MAINE"
+
+
+# =============================================================================
+# ACOLITE PROCESSING PARAMETERS
+# =============================================================================
+acolite:
+  # ACOLITE installation directory
+  # Download from: https://github.com/acolite/acolite
+  installation_dir: "datasets/acolite"
+  
+  # Input/output directories
+  input_dir: "datasets/GULF_OF_MAINE/raw_data/sentinel_3"   # Where .SEN3 files are
+  output_dir: "datasets/GULF_OF_MAINE/processed_data/sentinel_3_acolite"
+  
+  # Processing mode
+  process_individually: true  # Process scenes separately (recommended)
+  
+  # Atmospheric correction settings
+  atmospheric_correction:
+    enabled: true
+    aerosol_correction: "fixed"      # ← Change this for winter
+    fixed_aot550: 0.06               # ← Low AOT for winter
+    dsf_wave_range: [1600, 2200]
+    dark_spectrum_option: "percentile"  # Ignored when using "fixed"
+    dsf_percentile: 1                   # Ignored when using "fixed"
+
+    # aerosol_correction: "dark_spectrum"     # Change from "fixed"
+    # fixed_aot550: 0.10                      # Keep same
+    # dark_spectrum_option: "percentile"      # Change from "fixed"
+    # dsf_wave_range: [1600, 2200]
+    # dsf_percentile: 5
+  
+  mosaic:
+    output_dir: "datasets/GULF_OF_MAINE/processed_data/mosaic"
+
+  # Water type and parameters
+  # For coastal/inland waters (Case-2): Use full parameter set
+  # For open ocean (Case-1): Use simpler set like ['Rrs_*', 'chl_oc3']
+  water_type: "coastal"  # Options: coastal, inland, open_ocean
+  
+  l2w_parameters:
+    # Reflectance products
+    - "rrs_*"          # Remote sensing reflectance (all bands)
+    - "rhow_*"         # Water-leaving reflectance
+    - "rhos_*"         # Surface reflectance
+    
+    # Chlorophyll algorithms (choose based on water type)
+    # - "chl_oc3"        # OC3 algorithm (open ocean)
+    # - "chl_re_gons"    # Red-edge algorithm (coastal/inland)
+    # - "chl_re_moses3b" # Alternative red-edge
+    # - "chl_re_gons740"
+    
+    # Turbidity and suspended matter (for coastal/inland)
+    # - "turbidity_nechad2016"
+    # - "turbidity_dogliotti2015"
+    # - "spm_nechad2010"
+  
+  # Quality control
+  quality_control:
+    l2w_mask: true
+    l2w_mask_threshold: 0.025               # Change from 0.0215 (stricter)
+    l2w_mask_water_parameters: ["Rrs_1020"]
+    l2w_mask_negative_rhow: true
+    l2w_mask_cirrus: true
+    l2w_mask_high_toa: true
+    adjacency_correction: true              # Keep true (essential!)
+  
+  # Output settings
+  output:
+    export_geotiff: true
+    export_netcdf: true
+    export_coordinates: true
+    resolution: null  # null = native resolution (~300m), or specify in meters
+    geolocation: true
+    xy_coordinates: true
+  
+  # Additional processing
+  additional:
+    dem_pressure: false
+    uoz_default: 0.3   # Default ozone concentration
+    uwh_default: 1.5   # Default water vapor
+    merge_tiles: false  # Disable - causes issues with different orbits
+    merge_zones: false  # Disable - causes issues with different orbits
+
+  download:
+    delete_zip_after_extract: true  # Enable automatic cleanup
+
+
+
+# =============================================================================
+# C2RCC PROCESSING PARAMETERS (for Sentinel-3 OLCI)
+# =============================================================================
+c2rcc:
+  # Input/Output directories
+  input_dir: "datasets/GULF_OF_MAINE/raw_data/sentinel_3"  # Where .SEN3.zip files are
+  output_dir: "datasets/GULF_OF_MAINE/processed_data/sentinel_3_c2rcc"
+  temp_extract_dir: "datasets/GULF_OF_MAINE/raw_data/sentinel_3/temp_extracted"  # Temporary extraction
+  
+  # Processing mode
+  batch_size: 10  # Extract and process N files at a time before cleanup
+  delete_extracted_after_processing: true  # Clean up to save disk space
+  
+  # Gulf of Maine oceanographic parameters
+  # Based on literature: mean salinity ~32.2 PSU, SST range 5-20°C
+  oceanographic:
+    # Seasonal temperature profiles (°C) - use appropriate for your data
+    temperature:
+      winter: 6.0    # Dec-Feb: coldest period
+      spring: 9.0    # Mar-May: warming
+      summer: 16.0   # Jun-Aug: warmest period  
+      fall: 12.0     # Sep-Nov: cooling
+      annual_mean: 12.0  # Use this if not doing seasonal
+    
+    # Salinity (PSU) - Gulf of Maine is influenced by freshwater mixing
+    salinity:
+      coastal: 31.0   # Near-shore (river influence)
+      offshore: 32.5  # Open gulf
+      mean: 32.0      # Annual/regional mean
+    
+    # Use seasonal processing?
+    use_seasonal_temp: false  # Set to true to use seasonal temps
+    default_temp: 12.0        # Used if use_seasonal_temp = false
+    default_salinity: 32.0    # Default salinity to use
+  
+  # Atmospheric parameters
+  atmospheric:
+    ozone: 330.0      # Dobson Units (DU) - typical for region
+    pressure: 1013.0  # hPa - standard sea level pressure
+  
+  # C2RCC algorithm settings
+  algorithm:
+    # Output format - all work well with QGIS multi-band:
+    # 'GeoTIFF-BigTIFF': Large files, best compatibility
+    # 'NetCDF4-CF': Excellent for time-series, smaller files
+    # 'BEAM-DIMAP': SNAP native, preserves all metadata
+    output_format: 'BEAM-DIMAP'
+    
+    output_uncertainties: false
+
+    # Output products
+    output_rrs: true           # Remote sensing reflectance (Rrs)
+    output_iops: true          # Inherent optical properties
+    output_rtoa: false         # Top-of-atmosphere reflectance (usually not needed)
+    output_uncertainties: true # Uncertainty estimates
+    
+    # Quality flags
+    valid_pixel_expression: "!quality_flags.invalid"  # Basic validity
+    
+    # Geometric correction
+    reproject_to_utm: 'after_c2rcc'     # Reproject to UTM (from config)
+    target_resolution: null     # meters (native OLCI resolution)
+
+    # Subsetting (optional - set to false if scenes don't overlap region)
+    enable_subsetting: false    # Disable for batch processing (some scenes may not overlap)
+                               # Enable only if all scenes are known to overlap Gulf of Maine
+    
+  # Performance settings
+  performance:
+    cache_size: '6G'   # Memory cache for SNAP processing
+    tile_size: 512      # Processing tile size (pixels)
+    threads: 6          # Number of parallel threads per product
+    
+  # Output products to generate
+  output_parameters:
+    # Remote sensing reflectances (Rrs)
+    - "Rrs_1"     # 400nm
+    - "Rrs_2"     # 412nm
+    - "Rrs_3"     # 443nm
+    - "Rrs_4"     # 490nm
+    - "Rrs_5"     # 510nm
+    - "Rrs_6"     # 560nm
+    - "Rrs_7"     # 620nm
+    - "Rrs_8"     # 665nm
+    - "Rrs_9"     # 674nm - fluorescence
+    - "Rrs_10"    # 681nm - fluorescence (KEY for HABs!)
+    - "Rrs_11"    # 709nm - fluorescence
+    - "Rrs_12"    # 754nm
+    - "Rrs_16"    # 779nm
+    - "Rrs_17"    # 865nm
+    - "Rrs_21"    # 1020nm
+    
+    # Water quality parameters
+    - "conc_chl"      # Chlorophyll-a concentration (mg/m³)
+    - "conc_tsm"      # Total suspended matter (g/m³)
+    - "kd489"         # Diffuse attenuation coefficient at 489nm
+    
+    # Inherent optical properties (IOPs)
+    - "iop_apig"      # Pigment absorption coefficient
+    - "iop_adet"      # Detritus absorption coefficient  
+    - "iop_agelb"     # CDOM (yellow substance) absorption coefficient
+    - "iop_bpart"     # Particle backscattering coefficient
+    - "iop_bwit"      # Particle scattering coefficient
+    - "iop_adg"       # Detritus + CDOM absorption
+    - "iop_atot"      # Total absorption
+    - "iop_btot"      # Total scattering
+    
+    # Uncertainties (if available)
+    - "unc_apig"
+    - "unc_adet"
+    - "unc_agelb"
+    - "unc_bpart"
+    - "unc_bwit"
+    
+    # Quality flags
+    - "quality_flags"  # Bit-coded quality information
+
+  mosaic:
+    output_dir: "datasets/GULF_OF_MAINE/processed_data/sentinel_3_c2rcc_mosaics"
+    temp_dir: "temp_mosaic"
+    pixel_size_meters: 300
+    crs: "EPSG:4326"
+
+# =============================================================================
+# ROMS data
+# =============================================================================
+gomofs:
+  output_dir: "datasets/GULF_OF_MAINE/raw_data/gomofs"
+  product_types:
+    - "2ds"        # 2D surface (faster, smaller files)
+    # - "fields"     # 3D volume (full water column)
+    # - "stations"   # Station time series
+  time_cycles:
+    - "t12z"          # Noon only (simplify)
+  forecast_hours:
+    - "n001"       # Analysis/nowcast
+    # - "n003"       # Nowcast hour 3
+    # - "f024"       # 24-hour forecast
+    # - "f048"       # 48-hour forecast
+  station_types:
+    - "nowcast"       # Current conditions
+    - "forecast"      # 72h forecast for bloom prediction
+
+# =============================================================================
+# EXAMPLE CONFIGURATIONS FOR OTHER REGIONS
+# =============================================================================
+
+# # Lake Okeechobee (Florida)
+# # Uncomment and modify main config above for this region
+# region:
+#   name: "lake_okeechobee"
+#   description: "Lake Okeechobee, Florida"
+#   bbox:
+#     west: -81.2
+#     south: 26.66
+#     east: -80.4
+#     north: 27.26
+#   utm_zone: "EPSG:32617"  # UTM Zone 17N
+
+# # Chesapeake Bay
+# region:
+#   name: "chesapeake_bay"
+#   description: "Chesapeake Bay estuary"
+#   bbox:
+#     west: -77.5
+#     south: 36.8
+#     east: -75.8
+#     north: 39.6
+#   utm_zone: "EPSG:32618"  # UTM Zone 18N
+
+# # San Francisco Bay
+# region:
+#   name: "san_francisco_bay"
+#   description: "San Francisco Bay Area"
+#   bbox:
+#     west: -123.0
+#     south: 37.4
+#     east: -121.8
+#     north: 38.2
+#   utm_zone: "EPSG:32610"  # UTM Zone 10N
+
+# # Great Lakes - Lake Erie
+# region:
+#   name: "lake_erie"
+#   description: "Lake Erie"
+#   bbox:
+#     west: -83.5
+#     south: 41.3
+#     east: -78.8
+#     north: 42.9
+#   utm_zone: "EPSG:32617"  # UTM Zone 17N

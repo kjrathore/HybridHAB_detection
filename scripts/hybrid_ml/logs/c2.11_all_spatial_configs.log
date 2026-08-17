@@ -1,0 +1,1449 @@
+nohup: ignoring input
+================================================================================
+HAB MULTI-LABEL CLF — BINARY RELEVANCE RF (MULTI-SCHEME SPATIAL CV)
+Blocking schemes: ['grid', 'quadtree_adaptive', 'quadtree_random', 'clustering']
+================================================================================
+
+Loading: /home/server/pi/homes/rathorek/projects/HHAB_ROMS/datasets/GULF_OF_MAINE/processed_data/sentinel_3_L2_past3days/composite_features/composite_features.parquet
+  Raw shape: 15,601 x 174
+  After delta_days==0: 15,601 rows
+
+============================================================
+COMMON OBSERVATIONS (blocking-independent)
+============================================================
+  C2RCC     : 12,565 rows
+  ACOLITE   : 9,701 rows
+  Baseline  : 13,437 rows
+  Common rows (all ACs): 9,283
+
+################################################################################
+# BLOCKING SCHEME: grid
+################################################################################
+  Running Moran's I sweep to calibrate block size...
+    radius   2,000 m  ->  Moran's I = 0.320  p = 0.0010
+    radius   5,000 m  ->  Moran's I = 0.051  p = 0.0140
+    radius  10,000 m  ->  Moran's I = 0.112  p = 0.0010
+    radius  20,000 m  ->  Moran's I = 0.129  p = 0.0010
+    radius  35,000 m  ->  Moran's I = 0.098  p = 0.0010
+    radius  50,000 m  ->  Moran's I = 0.086  p = 0.0010
+  -> correlation range ~= 5,000 m, block size set to 2x = 10,000 m
+  Final block size: 10,000 m
+  Merged 1,075 sparse blocks into their nearest neighbor (within 30,000 m). Dropped 244 obs in 134 isolated blocks with no eligible neighbor.
+  Spatial blocks (all rows, post-merge): 536
+  Common rows (all ACs): 9,188  |  blocks: 399
+  Common rows with ROMS: 9,188  |  blocks: 399
+
+  Generating spatial diagnostic plots...
+  ✓ Saved datasets/GULF_OF_MAINE/ml_outputs/rf_spatial_cv_rf_multiblocking/grid/diagnostics/spatial_blocks_map.png
+  ✓ all 399 blocks confined to a single fold
+  ✓ Saved datasets/GULF_OF_MAINE/ml_outputs/rf_spatial_cv_rf_multiblocking/grid/diagnostics/groupkfold_fold_assignment_map.png
+  ✓ Saved datasets/GULF_OF_MAINE/ml_outputs/rf_spatial_cv_rf_multiblocking/grid/diagnostics/alexandrium_warning_groups_labels.png
+
+  Applying median imputation...
+  Imputation complete.
+
+  Building feature audit CSV...
+  feature_audit.csv saved
+
+======================================================================
+  [grid] AC: C2RCC  |  spectral: 32  |  ROMS: 12
+======================================================================
+
+  -- Track: C2RCC_only  |  n=9,188  |  features=32
+
+    Tier: WARNING
+    Label statistics at 'warning' threshold:
+      Alexandrium_catenella          bloom: 1,694 / 9,188  (18.4%)
+      Dinophysis_acuminata           bloom: 3,881 / 9,188  (42.2%)
+      Dinophysis_norvegica           bloom: 1,271 / 9,188  (13.8%)
+      Karenia                        bloom: 2,481 / 9,188  (27.0%)
+      Pseudo-nitzschia               bloom: 2,121 / 9,188  (23.1%)
+      Rows >=1 label: 6,568 (71.5%)  >=2 labels: 3,061 (33.3%)
+    Spatial blocks available: 399
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.390 ± 0.097
+    Avg species/fold with zero test-set positives: 0.0 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.683 ± 0.009
+    Leakage ratio (spatial/random): 0.572  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.351±0.154  AP=0.446±0.127
+      Dinophysis_acuminata           F1=0.544±0.211  AP=0.549±0.236
+      Dinophysis_norvegica           F1=0.047±0.038  AP=0.152±0.114
+      Karenia                        F1=0.570±0.186  AP=0.687±0.166
+      Pseudo-nitzschia               F1=0.440±0.151  AP=0.523±0.156
+    Importance saved
+    PR curves saved
+
+    Tier: CLOSURE
+    Label statistics at 'closure' threshold:
+      Alexandrium_catenella          bloom: 1,303 / 9,188  (14.2%)
+      Dinophysis_acuminata           bloom: 2,091 / 9,188  (22.8%)
+      Dinophysis_norvegica           bloom:   255 / 9,188  (2.8%)
+      Karenia                        bloom: 1,212 / 9,188  (13.2%)
+      Pseudo-nitzschia               bloom:   378 / 9,188  (4.1%)
+      Rows >=1 label: 4,106 (44.7%)  >=2 labels: 937 (10.2%)
+    Spatial blocks available: 399
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.289 ± 0.051
+    Avg species/fold with zero test-set positives: 0.0 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.619 ± 0.029
+    Leakage ratio (spatial/random): 0.467  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.367±0.148  AP=0.468±0.126
+      Dinophysis_acuminata           F1=0.306±0.204  AP=0.345±0.275
+      Dinophysis_norvegica           F1=0.000±0.000  AP=0.034±0.038
+      Karenia                        F1=0.526±0.150  AP=0.604±0.122
+      Pseudo-nitzschia               F1=0.246±0.105  AP=0.418±0.219
+    Importance saved
+    PR curves saved
+
+  -- Track: C2RCC_roms  |  n=9,188  |  features=44
+
+    Tier: WARNING
+    Label statistics at 'warning' threshold:
+      Alexandrium_catenella          bloom: 1,694 / 9,188  (18.4%)
+      Dinophysis_acuminata           bloom: 3,881 / 9,188  (42.2%)
+      Dinophysis_norvegica           bloom: 1,271 / 9,188  (13.8%)
+      Karenia                        bloom: 2,481 / 9,188  (27.0%)
+      Pseudo-nitzschia               bloom: 2,121 / 9,188  (23.1%)
+      Rows >=1 label: 6,568 (71.5%)  >=2 labels: 3,061 (33.3%)
+    Spatial blocks available: 399
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.450 ± 0.095
+    Avg species/fold with zero test-set positives: 0.0 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.719 ± 0.011
+    Leakage ratio (spatial/random): 0.626  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.470±0.175  AP=0.577±0.119
+      Dinophysis_acuminata           F1=0.541±0.212  AP=0.596±0.217
+      Dinophysis_norvegica           F1=0.063±0.049  AP=0.177±0.121
+      Karenia                        F1=0.622±0.202  AP=0.751±0.162
+      Pseudo-nitzschia               F1=0.555±0.124  AP=0.654±0.132
+    Importance saved
+    PR curves saved
+
+    Tier: CLOSURE
+    Label statistics at 'closure' threshold:
+      Alexandrium_catenella          bloom: 1,303 / 9,188  (14.2%)
+      Dinophysis_acuminata           bloom: 2,091 / 9,188  (22.8%)
+      Dinophysis_norvegica           bloom:   255 / 9,188  (2.8%)
+      Karenia                        bloom: 1,212 / 9,188  (13.2%)
+      Pseudo-nitzschia               bloom:   378 / 9,188  (4.1%)
+      Rows >=1 label: 4,106 (44.7%)  >=2 labels: 937 (10.2%)
+    Spatial blocks available: 399
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.383 ± 0.080
+    Avg species/fold with zero test-set positives: 0.0 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.645 ± 0.020
+    Leakage ratio (spatial/random): 0.593  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.510±0.217  AP=0.600±0.171
+      Dinophysis_acuminata           F1=0.329±0.146  AP=0.441±0.245
+      Dinophysis_norvegica           F1=0.000±0.000  AP=0.031±0.039
+      Karenia                        F1=0.654±0.117  AP=0.694±0.113
+      Pseudo-nitzschia               F1=0.419±0.191  AP=0.545±0.249
+    Importance saved
+    PR curves saved
+
+  [grid] C2RCC complete
+
+======================================================================
+  [grid] AC: ACOLITE  |  spectral: 31  |  ROMS: 12
+======================================================================
+
+  -- Track: ACOLITE_only  |  n=9,188  |  features=31
+
+    Tier: WARNING
+    Label statistics at 'warning' threshold:
+      Alexandrium_catenella          bloom: 1,694 / 9,188  (18.4%)
+      Dinophysis_acuminata           bloom: 3,881 / 9,188  (42.2%)
+      Dinophysis_norvegica           bloom: 1,271 / 9,188  (13.8%)
+      Karenia                        bloom: 2,481 / 9,188  (27.0%)
+      Pseudo-nitzschia               bloom: 2,121 / 9,188  (23.1%)
+      Rows >=1 label: 6,568 (71.5%)  >=2 labels: 3,061 (33.3%)
+    Spatial blocks available: 399
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.436 ± 0.078
+    Avg species/fold with zero test-set positives: 0.0 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.742 ± 0.020
+    Leakage ratio (spatial/random): 0.588  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.449±0.166  AP=0.532±0.116
+      Dinophysis_acuminata           F1=0.563±0.233  AP=0.593±0.218
+      Dinophysis_norvegica           F1=0.060±0.046  AP=0.173±0.117
+      Karenia                        F1=0.594±0.193  AP=0.710±0.178
+      Pseudo-nitzschia               F1=0.515±0.139  AP=0.611±0.136
+    Importance saved
+    PR curves saved
+
+    Tier: CLOSURE
+    Label statistics at 'closure' threshold:
+      Alexandrium_catenella          bloom: 1,303 / 9,188  (14.2%)
+      Dinophysis_acuminata           bloom: 2,091 / 9,188  (22.8%)
+      Dinophysis_norvegica           bloom:   255 / 9,188  (2.8%)
+      Karenia                        bloom: 1,212 / 9,188  (13.2%)
+      Pseudo-nitzschia               bloom:   378 / 9,188  (4.1%)
+      Rows >=1 label: 4,106 (44.7%)  >=2 labels: 937 (10.2%)
+    Spatial blocks available: 399
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.353 ± 0.063
+    Avg species/fold with zero test-set positives: 0.0 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.685 ± 0.023
+    Leakage ratio (spatial/random): 0.515  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.459±0.190  AP=0.532±0.127
+      Dinophysis_acuminata           F1=0.362±0.265  AP=0.388±0.269
+      Dinophysis_norvegica           F1=0.000±0.000  AP=0.057±0.070
+      Karenia                        F1=0.594±0.134  AP=0.686±0.111
+      Pseudo-nitzschia               F1=0.349±0.188  AP=0.475±0.202
+    Importance saved
+    PR curves saved
+
+  -- Track: ACOLITE_roms  |  n=9,188  |  features=43
+
+    Tier: WARNING
+    Label statistics at 'warning' threshold:
+      Alexandrium_catenella          bloom: 1,694 / 9,188  (18.4%)
+      Dinophysis_acuminata           bloom: 3,881 / 9,188  (42.2%)
+      Dinophysis_norvegica           bloom: 1,271 / 9,188  (13.8%)
+      Karenia                        bloom: 2,481 / 9,188  (27.0%)
+      Pseudo-nitzschia               bloom: 2,121 / 9,188  (23.1%)
+      Rows >=1 label: 6,568 (71.5%)  >=2 labels: 3,061 (33.3%)
+    Spatial blocks available: 399
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.465 ± 0.090
+    Avg species/fold with zero test-set positives: 0.0 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.752 ± 0.018
+    Leakage ratio (spatial/random): 0.619  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.477±0.188  AP=0.609±0.136
+      Dinophysis_acuminata           F1=0.568±0.227  AP=0.613±0.206
+      Dinophysis_norvegica           F1=0.075±0.038  AP=0.178±0.118
+      Karenia                        F1=0.639±0.225  AP=0.762±0.167
+      Pseudo-nitzschia               F1=0.567±0.145  AP=0.673±0.135
+    Importance saved
+    PR curves saved
+
+    Tier: CLOSURE
+    Label statistics at 'closure' threshold:
+      Alexandrium_catenella          bloom: 1,303 / 9,188  (14.2%)
+      Dinophysis_acuminata           bloom: 2,091 / 9,188  (22.8%)
+      Dinophysis_norvegica           bloom:   255 / 9,188  (2.8%)
+      Karenia                        bloom: 1,212 / 9,188  (13.2%)
+      Pseudo-nitzschia               bloom:   378 / 9,188  (4.1%)
+      Rows >=1 label: 4,106 (44.7%)  >=2 labels: 937 (10.2%)
+    Spatial blocks available: 399
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.405 ± 0.081
+    Avg species/fold with zero test-set positives: 0.0 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.683 ± 0.031
+    Leakage ratio (spatial/random): 0.594  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.510±0.216  AP=0.604±0.174
+      Dinophysis_acuminata           F1=0.402±0.146  AP=0.475±0.234
+      Dinophysis_norvegica           F1=0.000±0.000  AP=0.055±0.041
+      Karenia                        F1=0.653±0.190  AP=0.718±0.123
+      Pseudo-nitzschia               F1=0.461±0.206  AP=0.549±0.230
+    Importance saved
+    PR curves saved
+
+  [grid] ACOLITE complete
+
+======================================================================
+  [grid] AC: Baseline  |  spectral: 32  |  ROMS: 12
+======================================================================
+
+  -- Track: Baseline_only  |  n=9,188  |  features=32
+
+    Tier: WARNING
+    Label statistics at 'warning' threshold:
+      Alexandrium_catenella          bloom: 1,694 / 9,188  (18.4%)
+      Dinophysis_acuminata           bloom: 3,881 / 9,188  (42.2%)
+      Dinophysis_norvegica           bloom: 1,271 / 9,188  (13.8%)
+      Karenia                        bloom: 2,481 / 9,188  (27.0%)
+      Pseudo-nitzschia               bloom: 2,121 / 9,188  (23.1%)
+      Rows >=1 label: 6,568 (71.5%)  >=2 labels: 3,061 (33.3%)
+    Spatial blocks available: 399
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.403 ± 0.061
+    Avg species/fold with zero test-set positives: 0.0 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.725 ± 0.013
+    Leakage ratio (spatial/random): 0.555  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.363±0.136  AP=0.483±0.115
+      Dinophysis_acuminata           F1=0.533±0.244  AP=0.573±0.243
+      Dinophysis_norvegica           F1=0.027±0.033  AP=0.165±0.119
+      Karenia                        F1=0.615±0.185  AP=0.704±0.182
+      Pseudo-nitzschia               F1=0.476±0.077  AP=0.543±0.126
+    Importance saved
+    PR curves saved
+
+    Tier: CLOSURE
+    Label statistics at 'closure' threshold:
+      Alexandrium_catenella          bloom: 1,303 / 9,188  (14.2%)
+      Dinophysis_acuminata           bloom: 2,091 / 9,188  (22.8%)
+      Dinophysis_norvegica           bloom:   255 / 9,188  (2.8%)
+      Karenia                        bloom: 1,212 / 9,188  (13.2%)
+      Pseudo-nitzschia               bloom:   378 / 9,188  (4.1%)
+      Rows >=1 label: 4,106 (44.7%)  >=2 labels: 937 (10.2%)
+    Spatial blocks available: 399
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.301 ± 0.073
+    Avg species/fold with zero test-set positives: 0.0 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.674 ± 0.026
+    Leakage ratio (spatial/random): 0.446  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.395±0.165  AP=0.515±0.123
+      Dinophysis_acuminata           F1=0.349±0.264  AP=0.387±0.274
+      Dinophysis_norvegica           F1=0.000±0.000  AP=0.055±0.055
+      Karenia                        F1=0.505±0.127  AP=0.620±0.123
+      Pseudo-nitzschia               F1=0.255±0.174  AP=0.438±0.217
+    Importance saved
+    PR curves saved
+
+  -- Track: Baseline_roms  |  n=9,188  |  features=44
+
+    Tier: WARNING
+    Label statistics at 'warning' threshold:
+      Alexandrium_catenella          bloom: 1,694 / 9,188  (18.4%)
+      Dinophysis_acuminata           bloom: 3,881 / 9,188  (42.2%)
+      Dinophysis_norvegica           bloom: 1,271 / 9,188  (13.8%)
+      Karenia                        bloom: 2,481 / 9,188  (27.0%)
+      Pseudo-nitzschia               bloom: 2,121 / 9,188  (23.1%)
+      Rows >=1 label: 6,568 (71.5%)  >=2 labels: 3,061 (33.3%)
+    Spatial blocks available: 399
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.447 ± 0.079
+    Avg species/fold with zero test-set positives: 0.0 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.743 ± 0.017
+    Leakage ratio (spatial/random): 0.602  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.439±0.172  AP=0.589±0.131
+      Dinophysis_acuminata           F1=0.542±0.236  AP=0.599±0.220
+      Dinophysis_norvegica           F1=0.051±0.042  AP=0.188±0.119
+      Karenia                        F1=0.647±0.197  AP=0.761±0.163
+      Pseudo-nitzschia               F1=0.558±0.111  AP=0.658±0.111
+    Importance saved
+    PR curves saved
+
+    Tier: CLOSURE
+    Label statistics at 'closure' threshold:
+      Alexandrium_catenella          bloom: 1,303 / 9,188  (14.2%)
+      Dinophysis_acuminata           bloom: 2,091 / 9,188  (22.8%)
+      Dinophysis_norvegica           bloom:   255 / 9,188  (2.8%)
+      Karenia                        bloom: 1,212 / 9,188  (13.2%)
+      Pseudo-nitzschia               bloom:   378 / 9,188  (4.1%)
+      Rows >=1 label: 4,106 (44.7%)  >=2 labels: 937 (10.2%)
+    Spatial blocks available: 399
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.370 ± 0.075
+    Avg species/fold with zero test-set positives: 0.0 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.678 ± 0.016
+    Leakage ratio (spatial/random): 0.547  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.499±0.220  AP=0.604±0.189
+      Dinophysis_acuminata           F1=0.338±0.145  AP=0.443±0.233
+      Dinophysis_norvegica           F1=0.000±0.000  AP=0.046±0.043
+      Karenia                        F1=0.608±0.143  AP=0.695±0.111
+      Pseudo-nitzschia               F1=0.407±0.212  AP=0.551±0.227
+    Importance saved
+    PR curves saved
+
+  [grid] Baseline complete
+
+[grid] complete
+
+################################################################################
+# BLOCKING SCHEME: quadtree_adaptive
+################################################################################
+  Quadtree blocks (adaptive): 672  |  diag(m) min/median/max = 4246 / 16982 / 135860  |  obs/block min/median/max = 1 / 11 / 1565
+  Merged 98 sparse blocks into their nearest neighbor (within 15,000 m). Dropped 85 obs in 28 isolated blocks with no eligible neighbor.
+  Spatial blocks (all rows, post-merge): 546
+  Common rows (all ACs): 9,249  |  blocks: 401
+  Common rows with ROMS: 9,249  |  blocks: 401
+
+  Generating spatial diagnostic plots...
+  ✓ Saved datasets/GULF_OF_MAINE/ml_outputs/rf_spatial_cv_rf_multiblocking/quadtree_adaptive/diagnostics/spatial_blocks_map.png
+  ✓ all 401 blocks confined to a single fold
+  ✓ Saved datasets/GULF_OF_MAINE/ml_outputs/rf_spatial_cv_rf_multiblocking/quadtree_adaptive/diagnostics/groupkfold_fold_assignment_map.png
+  ✓ Saved datasets/GULF_OF_MAINE/ml_outputs/rf_spatial_cv_rf_multiblocking/quadtree_adaptive/diagnostics/alexandrium_warning_groups_labels.png
+
+  Applying median imputation...
+  Imputation complete.
+
+  Building feature audit CSV...
+  feature_audit.csv saved
+
+======================================================================
+  [quadtree_adaptive] AC: C2RCC  |  spectral: 32  |  ROMS: 12
+======================================================================
+
+  -- Track: C2RCC_only  |  n=9,249  |  features=32
+
+    Tier: WARNING
+    Label statistics at 'warning' threshold:
+      Alexandrium_catenella          bloom: 1,696 / 9,249  (18.3%)
+      Dinophysis_acuminata           bloom: 3,887 / 9,249  (42.0%)
+      Dinophysis_norvegica           bloom: 1,275 / 9,249  (13.8%)
+      Karenia                        bloom: 2,512 / 9,249  (27.2%)
+      Pseudo-nitzschia               bloom: 2,120 / 9,249  (22.9%)
+      Rows >=1 label: 6,605 (71.4%)  >=2 labels: 3,064 (33.1%)
+    Spatial blocks available: 401
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.384 ± 0.075
+    Avg species/fold with zero test-set positives: 0.0 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.678 ± 0.016
+    Leakage ratio (spatial/random): 0.566  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.345±0.120  AP=0.435±0.096
+      Dinophysis_acuminata           F1=0.507±0.216  AP=0.535±0.233
+      Dinophysis_norvegica           F1=0.045±0.051  AP=0.141±0.116
+      Karenia                        F1=0.571±0.188  AP=0.687±0.194
+      Pseudo-nitzschia               F1=0.451±0.125  AP=0.516±0.129
+    Importance saved
+    PR curves saved
+
+    Tier: CLOSURE
+    Label statistics at 'closure' threshold:
+      Alexandrium_catenella          bloom: 1,301 / 9,249  (14.1%)
+      Dinophysis_acuminata           bloom: 2,093 / 9,249  (22.6%)
+      Dinophysis_norvegica           bloom:   255 / 9,249  (2.8%)
+      Karenia                        bloom: 1,210 / 9,249  (13.1%)
+      Pseudo-nitzschia               bloom:   381 / 9,249  (4.1%)
+      Rows >=1 label: 4,106 (44.4%)  >=2 labels: 938 (10.1%)
+    Spatial blocks available: 401
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.289 ± 0.065
+    Avg species/fold with zero test-set positives: 0.0 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.626 ± 0.034
+    Leakage ratio (spatial/random): 0.462  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.383±0.191  AP=0.470±0.171
+      Dinophysis_acuminata           F1=0.311±0.206  AP=0.344±0.265
+      Dinophysis_norvegica           F1=0.000±0.000  AP=0.022±0.036
+      Karenia                        F1=0.533±0.184  AP=0.618±0.173
+      Pseudo-nitzschia               F1=0.219±0.118  AP=0.449±0.181
+    Importance saved
+    PR curves saved
+
+  -- Track: C2RCC_roms  |  n=9,249  |  features=44
+
+    Tier: WARNING
+    Label statistics at 'warning' threshold:
+      Alexandrium_catenella          bloom: 1,696 / 9,249  (18.3%)
+      Dinophysis_acuminata           bloom: 3,887 / 9,249  (42.0%)
+      Dinophysis_norvegica           bloom: 1,275 / 9,249  (13.8%)
+      Karenia                        bloom: 2,512 / 9,249  (27.2%)
+      Pseudo-nitzschia               bloom: 2,120 / 9,249  (22.9%)
+      Rows >=1 label: 6,605 (71.4%)  >=2 labels: 3,064 (33.1%)
+    Spatial blocks available: 401
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.445 ± 0.080
+    Avg species/fold with zero test-set positives: 0.0 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.718 ± 0.015
+    Leakage ratio (spatial/random): 0.620  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.475±0.193  AP=0.581±0.132
+      Dinophysis_acuminata           F1=0.533±0.190  AP=0.582±0.198
+      Dinophysis_norvegica           F1=0.057±0.041  AP=0.179±0.117
+      Karenia                        F1=0.587±0.247  AP=0.732±0.194
+      Pseudo-nitzschia               F1=0.574±0.117  AP=0.657±0.110
+    Importance saved
+    PR curves saved
+
+    Tier: CLOSURE
+    Label statistics at 'closure' threshold:
+      Alexandrium_catenella          bloom: 1,301 / 9,249  (14.1%)
+      Dinophysis_acuminata           bloom: 2,093 / 9,249  (22.6%)
+      Dinophysis_norvegica           bloom:   255 / 9,249  (2.8%)
+      Karenia                        bloom: 1,210 / 9,249  (13.1%)
+      Pseudo-nitzschia               bloom:   381 / 9,249  (4.1%)
+      Rows >=1 label: 4,106 (44.4%)  >=2 labels: 938 (10.1%)
+    Spatial blocks available: 401
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.387 ± 0.090
+    Avg species/fold with zero test-set positives: 0.0 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.646 ± 0.027
+    Leakage ratio (spatial/random): 0.599  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.493±0.231  AP=0.595±0.194
+      Dinophysis_acuminata           F1=0.361±0.155  AP=0.461±0.219
+      Dinophysis_norvegica           F1=0.000±0.000  AP=0.032±0.048
+      Karenia                        F1=0.599±0.165  AP=0.697±0.161
+      Pseudo-nitzschia               F1=0.482±0.196  AP=0.588±0.241
+    Importance saved
+    PR curves saved
+
+  [quadtree_adaptive] C2RCC complete
+
+======================================================================
+  [quadtree_adaptive] AC: ACOLITE  |  spectral: 31  |  ROMS: 12
+======================================================================
+
+  -- Track: ACOLITE_only  |  n=9,249  |  features=31
+
+    Tier: WARNING
+    Label statistics at 'warning' threshold:
+      Alexandrium_catenella          bloom: 1,696 / 9,249  (18.3%)
+      Dinophysis_acuminata           bloom: 3,887 / 9,249  (42.0%)
+      Dinophysis_norvegica           bloom: 1,275 / 9,249  (13.8%)
+      Karenia                        bloom: 2,512 / 9,249  (27.2%)
+      Pseudo-nitzschia               bloom: 2,120 / 9,249  (22.9%)
+      Rows >=1 label: 6,605 (71.4%)  >=2 labels: 3,064 (33.1%)
+    Spatial blocks available: 401
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.428 ± 0.073
+    Avg species/fold with zero test-set positives: 0.0 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.739 ± 0.017
+    Leakage ratio (spatial/random): 0.579  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.439±0.172  AP=0.532±0.109
+      Dinophysis_acuminata           F1=0.559±0.224  AP=0.569±0.222
+      Dinophysis_norvegica           F1=0.038±0.043  AP=0.158±0.113
+      Karenia                        F1=0.604±0.205  AP=0.724±0.187
+      Pseudo-nitzschia               F1=0.500±0.123  AP=0.588±0.107
+    Importance saved
+    PR curves saved
+
+    Tier: CLOSURE
+    Label statistics at 'closure' threshold:
+      Alexandrium_catenella          bloom: 1,301 / 9,249  (14.1%)
+      Dinophysis_acuminata           bloom: 2,093 / 9,249  (22.6%)
+      Dinophysis_norvegica           bloom:   255 / 9,249  (2.8%)
+      Karenia                        bloom: 1,210 / 9,249  (13.1%)
+      Pseudo-nitzschia               bloom:   381 / 9,249  (4.1%)
+      Rows >=1 label: 4,106 (44.4%)  >=2 labels: 938 (10.1%)
+    Spatial blocks available: 401
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.346 ± 0.078
+    Avg species/fold with zero test-set positives: 0.0 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.681 ± 0.032
+    Leakage ratio (spatial/random): 0.508  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.438±0.215  AP=0.529±0.176
+      Dinophysis_acuminata           F1=0.384±0.243  AP=0.397±0.251
+      Dinophysis_norvegica           F1=0.000±0.000  AP=0.040±0.047
+      Karenia                        F1=0.583±0.132  AP=0.689±0.146
+      Pseudo-nitzschia               F1=0.324±0.200  AP=0.470±0.172
+    Importance saved
+    PR curves saved
+
+  -- Track: ACOLITE_roms  |  n=9,249  |  features=43
+
+    Tier: WARNING
+    Label statistics at 'warning' threshold:
+      Alexandrium_catenella          bloom: 1,696 / 9,249  (18.3%)
+      Dinophysis_acuminata           bloom: 3,887 / 9,249  (42.0%)
+      Dinophysis_norvegica           bloom: 1,275 / 9,249  (13.8%)
+      Karenia                        bloom: 2,512 / 9,249  (27.2%)
+      Pseudo-nitzschia               bloom: 2,120 / 9,249  (22.9%)
+      Rows >=1 label: 6,605 (71.4%)  >=2 labels: 3,064 (33.1%)
+    Spatial blocks available: 401
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.453 ± 0.090
+    Avg species/fold with zero test-set positives: 0.0 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.749 ± 0.016
+    Leakage ratio (spatial/random): 0.604  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.486±0.198  AP=0.617±0.145
+      Dinophysis_acuminata           F1=0.562±0.212  AP=0.604±0.189
+      Dinophysis_norvegica           F1=0.049±0.036  AP=0.177±0.118
+      Karenia                        F1=0.596±0.259  AP=0.744±0.193
+      Pseudo-nitzschia               F1=0.571±0.133  AP=0.667±0.113
+    Importance saved
+    PR curves saved
+
+    Tier: CLOSURE
+    Label statistics at 'closure' threshold:
+      Alexandrium_catenella          bloom: 1,301 / 9,249  (14.1%)
+      Dinophysis_acuminata           bloom: 2,093 / 9,249  (22.6%)
+      Dinophysis_norvegica           bloom:   255 / 9,249  (2.8%)
+      Karenia                        bloom: 1,210 / 9,249  (13.1%)
+      Pseudo-nitzschia               bloom:   381 / 9,249  (4.1%)
+      Rows >=1 label: 4,106 (44.4%)  >=2 labels: 938 (10.1%)
+    Spatial blocks available: 401
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.403 ± 0.094
+    Avg species/fold with zero test-set positives: 0.0 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.681 ± 0.027
+    Leakage ratio (spatial/random): 0.592  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.501±0.231  AP=0.598±0.193
+      Dinophysis_acuminata           F1=0.405±0.131  AP=0.515±0.213
+      Dinophysis_norvegica           F1=0.000±0.000  AP=0.053±0.048
+      Karenia                        F1=0.660±0.168  AP=0.735±0.134
+      Pseudo-nitzschia               F1=0.449±0.175  AP=0.584±0.207
+    Importance saved
+    PR curves saved
+
+  [quadtree_adaptive] ACOLITE complete
+
+======================================================================
+  [quadtree_adaptive] AC: Baseline  |  spectral: 32  |  ROMS: 12
+======================================================================
+
+  -- Track: Baseline_only  |  n=9,249  |  features=32
+
+    Tier: WARNING
+    Label statistics at 'warning' threshold:
+      Alexandrium_catenella          bloom: 1,696 / 9,249  (18.3%)
+      Dinophysis_acuminata           bloom: 3,887 / 9,249  (42.0%)
+      Dinophysis_norvegica           bloom: 1,275 / 9,249  (13.8%)
+      Karenia                        bloom: 2,512 / 9,249  (27.2%)
+      Pseudo-nitzschia               bloom: 2,120 / 9,249  (22.9%)
+      Rows >=1 label: 6,605 (71.4%)  >=2 labels: 3,064 (33.1%)
+    Spatial blocks available: 401
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.403 ± 0.056
+    Avg species/fold with zero test-set positives: 0.0 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.717 ± 0.019
+    Leakage ratio (spatial/random): 0.562  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.411±0.172  AP=0.527±0.110
+      Dinophysis_acuminata           F1=0.546±0.216  AP=0.558±0.235
+      Dinophysis_norvegica           F1=0.036±0.036  AP=0.162±0.115
+      Karenia                        F1=0.560±0.217  AP=0.671±0.229
+      Pseudo-nitzschia               F1=0.460±0.084  AP=0.546±0.114
+    Importance saved
+    PR curves saved
+
+    Tier: CLOSURE
+    Label statistics at 'closure' threshold:
+      Alexandrium_catenella          bloom: 1,301 / 9,249  (14.1%)
+      Dinophysis_acuminata           bloom: 2,093 / 9,249  (22.6%)
+      Dinophysis_norvegica           bloom:   255 / 9,249  (2.8%)
+      Karenia                        bloom: 1,210 / 9,249  (13.1%)
+      Pseudo-nitzschia               bloom:   381 / 9,249  (4.1%)
+      Rows >=1 label: 4,106 (44.4%)  >=2 labels: 938 (10.1%)
+    Spatial blocks available: 401
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.301 ± 0.067
+    Avg species/fold with zero test-set positives: 0.0 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.667 ± 0.030
+    Leakage ratio (spatial/random): 0.452  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.421±0.216  AP=0.514±0.172
+      Dinophysis_acuminata           F1=0.375±0.261  AP=0.410±0.264
+      Dinophysis_norvegica           F1=0.000±0.000  AP=0.047±0.064
+      Karenia                        F1=0.457±0.129  AP=0.635±0.164
+      Pseudo-nitzschia               F1=0.254±0.126  AP=0.430±0.195
+    Importance saved
+    PR curves saved
+
+  -- Track: Baseline_roms  |  n=9,249  |  features=44
+
+    Tier: WARNING
+    Label statistics at 'warning' threshold:
+      Alexandrium_catenella          bloom: 1,696 / 9,249  (18.3%)
+      Dinophysis_acuminata           bloom: 3,887 / 9,249  (42.0%)
+      Dinophysis_norvegica           bloom: 1,275 / 9,249  (13.8%)
+      Karenia                        bloom: 2,512 / 9,249  (27.2%)
+      Pseudo-nitzschia               bloom: 2,120 / 9,249  (22.9%)
+      Rows >=1 label: 6,605 (71.4%)  >=2 labels: 3,064 (33.1%)
+    Spatial blocks available: 401
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.449 ± 0.078
+    Avg species/fold with zero test-set positives: 0.0 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.744 ± 0.016
+    Leakage ratio (spatial/random): 0.603  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.471±0.195  AP=0.602±0.150
+      Dinophysis_acuminata           F1=0.549±0.211  AP=0.590±0.204
+      Dinophysis_norvegica           F1=0.056±0.064  AP=0.192±0.119
+      Karenia                        F1=0.595±0.269  AP=0.741±0.198
+      Pseudo-nitzschia               F1=0.573±0.105  AP=0.667±0.100
+    Importance saved
+    PR curves saved
+
+    Tier: CLOSURE
+    Label statistics at 'closure' threshold:
+      Alexandrium_catenella          bloom: 1,301 / 9,249  (14.1%)
+      Dinophysis_acuminata           bloom: 2,093 / 9,249  (22.6%)
+      Dinophysis_norvegica           bloom:   255 / 9,249  (2.8%)
+      Karenia                        bloom: 1,210 / 9,249  (13.1%)
+      Pseudo-nitzschia               bloom:   381 / 9,249  (4.1%)
+      Rows >=1 label: 4,106 (44.4%)  >=2 labels: 938 (10.1%)
+    Spatial blocks available: 401
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.377 ± 0.076
+    Avg species/fold with zero test-set positives: 0.0 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.673 ± 0.034
+    Leakage ratio (spatial/random): 0.560  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.481±0.231  AP=0.601±0.208
+      Dinophysis_acuminata           F1=0.413±0.156  AP=0.489±0.209
+      Dinophysis_norvegica           F1=0.000±0.000  AP=0.035±0.044
+      Karenia                        F1=0.541±0.159  AP=0.704±0.154
+      Pseudo-nitzschia               F1=0.451±0.190  AP=0.541±0.230
+    Importance saved
+    PR curves saved
+
+  [quadtree_adaptive] Baseline complete
+
+[quadtree_adaptive] complete
+
+################################################################################
+# BLOCKING SCHEME: quadtree_random
+################################################################################
+  Quadtree blocks (random): 466  |  diag(m) min/median/max = 4246 / 4246 / 271720  |  obs/block min/median/max = 1 / 1 / 4619
+  Merged 195 sparse blocks into their nearest neighbor (within 15,000 m). Dropped 274 obs in 188 isolated blocks with no eligible neighbor.
+  Spatial blocks (all rows, post-merge): 83
+  Common rows (all ACs): 9,114  |  blocks: 66
+  Common rows with ROMS: 9,114  |  blocks: 66
+
+  Generating spatial diagnostic plots...
+  ✓ Saved datasets/GULF_OF_MAINE/ml_outputs/rf_spatial_cv_rf_multiblocking/quadtree_random/diagnostics/spatial_blocks_map.png
+  ✓ all 66 blocks confined to a single fold
+  ✓ Saved datasets/GULF_OF_MAINE/ml_outputs/rf_spatial_cv_rf_multiblocking/quadtree_random/diagnostics/groupkfold_fold_assignment_map.png
+  ✓ Saved datasets/GULF_OF_MAINE/ml_outputs/rf_spatial_cv_rf_multiblocking/quadtree_random/diagnostics/alexandrium_warning_groups_labels.png
+
+  Applying median imputation...
+  Imputation complete.
+
+  Building feature audit CSV...
+  feature_audit.csv saved
+
+======================================================================
+  [quadtree_random] AC: C2RCC  |  spectral: 32  |  ROMS: 12
+======================================================================
+
+  -- Track: C2RCC_only  |  n=9,114  |  features=32
+
+    Tier: WARNING
+    Label statistics at 'warning' threshold:
+      Alexandrium_catenella          bloom: 1,682 / 9,114  (18.5%)
+      Dinophysis_acuminata           bloom: 3,867 / 9,114  (42.4%)
+      Dinophysis_norvegica           bloom: 1,262 / 9,114  (13.8%)
+      Karenia                        bloom: 2,486 / 9,114  (27.3%)
+      Pseudo-nitzschia               bloom: 2,106 / 9,114  (23.1%)
+      Rows >=1 label: 6,538 (71.7%)  >=2 labels: 3,049 (33.5%)
+    Spatial blocks available: 66
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.288 ± 0.098
+    Avg species/fold with zero test-set positives: 0.0 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.681 ± 0.021
+    Leakage ratio (spatial/random): 0.423  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.275±0.150  AP=0.360±0.140
+      Dinophysis_acuminata           F1=0.380±0.100  AP=0.417±0.169
+      Dinophysis_norvegica           F1=0.031±0.039  AP=0.138±0.079
+      Karenia                        F1=0.424±0.220  AP=0.608±0.213
+      Pseudo-nitzschia               F1=0.331±0.137  AP=0.445±0.111
+    Importance saved
+    PR curves saved
+
+    Tier: CLOSURE
+    Label statistics at 'closure' threshold:
+      Alexandrium_catenella          bloom: 1,294 / 9,114  (14.2%)
+      Dinophysis_acuminata           bloom: 2,094 / 9,114  (23.0%)
+      Dinophysis_norvegica           bloom:   254 / 9,114  (2.8%)
+      Karenia                        bloom: 1,208 / 9,114  (13.3%)
+      Pseudo-nitzschia               bloom:   379 / 9,114  (4.2%)
+      Rows >=1 label: 4,096 (44.9%)  >=2 labels: 937 (10.3%)
+    Spatial blocks available: 66
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.161 ± 0.098
+    Avg species/fold with zero test-set positives: 0.1 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.620 ± 0.046
+    Leakage ratio (spatial/random): 0.260  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.279±0.190  AP=0.434±0.137
+      Dinophysis_acuminata           F1=0.091±0.073  AP=0.177±0.146
+      Dinophysis_norvegica           F1=0.000±0.000  AP=0.041±0.058
+      Karenia                        F1=0.322±0.213  AP=0.518±0.234
+      Pseudo-nitzschia               F1=0.113±0.149  AP=0.283±0.216
+    Importance saved
+    PR curves saved
+
+  -- Track: C2RCC_roms  |  n=9,114  |  features=44
+
+    Tier: WARNING
+    Label statistics at 'warning' threshold:
+      Alexandrium_catenella          bloom: 1,682 / 9,114  (18.5%)
+      Dinophysis_acuminata           bloom: 3,867 / 9,114  (42.4%)
+      Dinophysis_norvegica           bloom: 1,262 / 9,114  (13.8%)
+      Karenia                        bloom: 2,486 / 9,114  (27.3%)
+      Pseudo-nitzschia               bloom: 2,106 / 9,114  (23.1%)
+      Rows >=1 label: 6,538 (71.7%)  >=2 labels: 3,049 (33.5%)
+    Spatial blocks available: 66
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.331 ± 0.122
+    Avg species/fold with zero test-set positives: 0.0 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.724 ± 0.015
+    Leakage ratio (spatial/random): 0.456  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.404±0.208  AP=0.488±0.175
+      Dinophysis_acuminata           F1=0.383±0.116  AP=0.482±0.166
+      Dinophysis_norvegica           F1=0.008±0.017  AP=0.146±0.087
+      Karenia                        F1=0.455±0.263  AP=0.656±0.241
+      Pseudo-nitzschia               F1=0.403±0.187  AP=0.572±0.136
+    Importance saved
+    PR curves saved
+
+    Tier: CLOSURE
+    Label statistics at 'closure' threshold:
+      Alexandrium_catenella          bloom: 1,294 / 9,114  (14.2%)
+      Dinophysis_acuminata           bloom: 2,094 / 9,114  (23.0%)
+      Dinophysis_norvegica           bloom:   254 / 9,114  (2.8%)
+      Karenia                        bloom: 1,208 / 9,114  (13.3%)
+      Pseudo-nitzschia               bloom:   379 / 9,114  (4.2%)
+      Rows >=1 label: 4,096 (44.9%)  >=2 labels: 937 (10.3%)
+    Spatial blocks available: 66
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.254 ± 0.110
+    Avg species/fold with zero test-set positives: 0.1 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.650 ± 0.027
+    Leakage ratio (spatial/random): 0.392  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.475±0.255  AP=0.613±0.226
+      Dinophysis_acuminata           F1=0.155±0.105  AP=0.309±0.161
+      Dinophysis_norvegica           F1=0.000±0.000  AP=0.028±0.021
+      Karenia                        F1=0.417±0.253  AP=0.589±0.244
+      Pseudo-nitzschia               F1=0.203±0.192  AP=0.411±0.273
+    Importance saved
+    PR curves saved
+
+  [quadtree_random] C2RCC complete
+
+======================================================================
+  [quadtree_random] AC: ACOLITE  |  spectral: 31  |  ROMS: 12
+======================================================================
+
+  -- Track: ACOLITE_only  |  n=9,114  |  features=31
+
+    Tier: WARNING
+    Label statistics at 'warning' threshold:
+      Alexandrium_catenella          bloom: 1,682 / 9,114  (18.5%)
+      Dinophysis_acuminata           bloom: 3,867 / 9,114  (42.4%)
+      Dinophysis_norvegica           bloom: 1,262 / 9,114  (13.8%)
+      Karenia                        bloom: 2,486 / 9,114  (27.3%)
+      Pseudo-nitzschia               bloom: 2,106 / 9,114  (23.1%)
+      Rows >=1 label: 6,538 (71.7%)  >=2 labels: 3,049 (33.5%)
+    Spatial blocks available: 66
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.319 ± 0.108
+    Avg species/fold with zero test-set positives: 0.0 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.742 ± 0.013
+    Leakage ratio (spatial/random): 0.429  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.349±0.197  AP=0.434±0.163
+      Dinophysis_acuminata           F1=0.381±0.094  AP=0.483±0.159
+      Dinophysis_norvegica           F1=0.036±0.042  AP=0.166±0.081
+      Karenia                        F1=0.434±0.233  AP=0.597±0.258
+      Pseudo-nitzschia               F1=0.393±0.223  AP=0.490±0.186
+    Importance saved
+    PR curves saved
+
+    Tier: CLOSURE
+    Label statistics at 'closure' threshold:
+      Alexandrium_catenella          bloom: 1,294 / 9,114  (14.2%)
+      Dinophysis_acuminata           bloom: 2,094 / 9,114  (23.0%)
+      Dinophysis_norvegica           bloom:   254 / 9,114  (2.8%)
+      Karenia                        bloom: 1,208 / 9,114  (13.3%)
+      Pseudo-nitzschia               bloom:   379 / 9,114  (4.2%)
+      Rows >=1 label: 4,096 (44.9%)  >=2 labels: 937 (10.3%)
+    Spatial blocks available: 66
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.229 ± 0.101
+    Avg species/fold with zero test-set positives: 0.1 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.684 ± 0.019
+    Leakage ratio (spatial/random): 0.335  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.385±0.218  AP=0.505±0.178
+      Dinophysis_acuminata           F1=0.163±0.182  AP=0.291±0.197
+      Dinophysis_norvegica           F1=0.000±0.000  AP=0.039±0.050
+      Karenia                        F1=0.402±0.274  AP=0.571±0.251
+      Pseudo-nitzschia               F1=0.176±0.214  AP=0.358±0.278
+    Importance saved
+    PR curves saved
+
+  -- Track: ACOLITE_roms  |  n=9,114  |  features=43
+
+    Tier: WARNING
+    Label statistics at 'warning' threshold:
+      Alexandrium_catenella          bloom: 1,682 / 9,114  (18.5%)
+      Dinophysis_acuminata           bloom: 3,867 / 9,114  (42.4%)
+      Dinophysis_norvegica           bloom: 1,262 / 9,114  (13.8%)
+      Karenia                        bloom: 2,486 / 9,114  (27.3%)
+      Pseudo-nitzschia               bloom: 2,106 / 9,114  (23.1%)
+      Rows >=1 label: 6,538 (71.7%)  >=2 labels: 3,049 (33.5%)
+    Spatial blocks available: 66
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.335 ± 0.124
+    Avg species/fold with zero test-set positives: 0.0 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.753 ± 0.013
+    Leakage ratio (spatial/random): 0.445  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.374±0.215  AP=0.500±0.195
+      Dinophysis_acuminata           F1=0.393±0.136  AP=0.522±0.161
+      Dinophysis_norvegica           F1=0.023±0.037  AP=0.167±0.072
+      Karenia                        F1=0.491±0.267  AP=0.678±0.253
+      Pseudo-nitzschia               F1=0.395±0.260  AP=0.541±0.189
+    Importance saved
+    PR curves saved
+
+    Tier: CLOSURE
+    Label statistics at 'closure' threshold:
+      Alexandrium_catenella          bloom: 1,294 / 9,114  (14.2%)
+      Dinophysis_acuminata           bloom: 2,094 / 9,114  (23.0%)
+      Dinophysis_norvegica           bloom:   254 / 9,114  (2.8%)
+      Karenia                        bloom: 1,208 / 9,114  (13.3%)
+      Pseudo-nitzschia               bloom:   379 / 9,114  (4.2%)
+      Rows >=1 label: 4,096 (44.9%)  >=2 labels: 937 (10.3%)
+    Spatial blocks available: 66
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.249 ± 0.103
+    Avg species/fold with zero test-set positives: 0.1 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.668 ± 0.026
+    Leakage ratio (spatial/random): 0.373  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.356±0.259  AP=0.608±0.221
+      Dinophysis_acuminata           F1=0.151±0.114  AP=0.309±0.169
+      Dinophysis_norvegica           F1=0.000±0.000  AP=0.063±0.089
+      Karenia                        F1=0.487±0.240  AP=0.657±0.240
+      Pseudo-nitzschia               F1=0.228±0.257  AP=0.411±0.286
+    Importance saved
+    PR curves saved
+
+  [quadtree_random] ACOLITE complete
+
+======================================================================
+  [quadtree_random] AC: Baseline  |  spectral: 32  |  ROMS: 12
+======================================================================
+
+  -- Track: Baseline_only  |  n=9,114  |  features=32
+
+    Tier: WARNING
+    Label statistics at 'warning' threshold:
+      Alexandrium_catenella          bloom: 1,682 / 9,114  (18.5%)
+      Dinophysis_acuminata           bloom: 3,867 / 9,114  (42.4%)
+      Dinophysis_norvegica           bloom: 1,262 / 9,114  (13.8%)
+      Karenia                        bloom: 2,486 / 9,114  (27.3%)
+      Pseudo-nitzschia               bloom: 2,106 / 9,114  (23.1%)
+      Rows >=1 label: 6,538 (71.7%)  >=2 labels: 3,049 (33.5%)
+    Spatial blocks available: 66
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.299 ± 0.093
+    Avg species/fold with zero test-set positives: 0.0 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.724 ± 0.016
+    Leakage ratio (spatial/random): 0.413  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.331±0.175  AP=0.423±0.188
+      Dinophysis_acuminata           F1=0.322±0.115  AP=0.447±0.166
+      Dinophysis_norvegica           F1=0.004±0.013  AP=0.136±0.062
+      Karenia                        F1=0.469±0.221  AP=0.614±0.264
+      Pseudo-nitzschia               F1=0.370±0.199  AP=0.483±0.148
+    Importance saved
+    PR curves saved
+
+    Tier: CLOSURE
+    Label statistics at 'closure' threshold:
+      Alexandrium_catenella          bloom: 1,294 / 9,114  (14.2%)
+      Dinophysis_acuminata           bloom: 2,094 / 9,114  (23.0%)
+      Dinophysis_norvegica           bloom:   254 / 9,114  (2.8%)
+      Karenia                        bloom: 1,208 / 9,114  (13.3%)
+      Pseudo-nitzschia               bloom:   379 / 9,114  (4.2%)
+      Rows >=1 label: 4,096 (44.9%)  >=2 labels: 937 (10.3%)
+    Spatial blocks available: 66
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.199 ± 0.106
+    Avg species/fold with zero test-set positives: 0.1 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.674 ± 0.016
+    Leakage ratio (spatial/random): 0.296  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.378±0.193  AP=0.512±0.169
+      Dinophysis_acuminata           F1=0.069±0.104  AP=0.244±0.183
+      Dinophysis_norvegica           F1=0.000±0.000  AP=0.033±0.030
+      Karenia                        F1=0.405±0.264  AP=0.565±0.279
+      Pseudo-nitzschia               F1=0.128±0.201  AP=0.321±0.261
+    Importance saved
+    PR curves saved
+
+  -- Track: Baseline_roms  |  n=9,114  |  features=44
+
+    Tier: WARNING
+    Label statistics at 'warning' threshold:
+      Alexandrium_catenella          bloom: 1,682 / 9,114  (18.5%)
+      Dinophysis_acuminata           bloom: 3,867 / 9,114  (42.4%)
+      Dinophysis_norvegica           bloom: 1,262 / 9,114  (13.8%)
+      Karenia                        bloom: 2,486 / 9,114  (27.3%)
+      Pseudo-nitzschia               bloom: 2,106 / 9,114  (23.1%)
+      Rows >=1 label: 6,538 (71.7%)  >=2 labels: 3,049 (33.5%)
+    Spatial blocks available: 66
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.335 ± 0.106
+    Avg species/fold with zero test-set positives: 0.0 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.744 ± 0.017
+    Leakage ratio (spatial/random): 0.451  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.347±0.192  AP=0.508±0.181
+      Dinophysis_acuminata           F1=0.337±0.146  AP=0.489±0.167
+      Dinophysis_norvegica           F1=0.001±0.002  AP=0.157±0.051
+      Karenia                        F1=0.529±0.244  AP=0.678±0.269
+      Pseudo-nitzschia               F1=0.463±0.193  AP=0.571±0.146
+    Importance saved
+    PR curves saved
+
+    Tier: CLOSURE
+    Label statistics at 'closure' threshold:
+      Alexandrium_catenella          bloom: 1,294 / 9,114  (14.2%)
+      Dinophysis_acuminata           bloom: 2,094 / 9,114  (23.0%)
+      Dinophysis_norvegica           bloom:   254 / 9,114  (2.8%)
+      Karenia                        bloom: 1,208 / 9,114  (13.3%)
+      Pseudo-nitzschia               bloom:   379 / 9,114  (4.2%)
+      Rows >=1 label: 4,096 (44.9%)  >=2 labels: 937 (10.3%)
+    Spatial blocks available: 66
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.251 ± 0.114
+    Avg species/fold with zero test-set positives: 0.1 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.679 ± 0.027
+    Leakage ratio (spatial/random): 0.369  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.386±0.231  AP=0.622±0.213
+      Dinophysis_acuminata           F1=0.156±0.118  AP=0.318±0.185
+      Dinophysis_norvegica           F1=0.000±0.000  AP=0.030±0.019
+      Karenia                        F1=0.444±0.231  AP=0.615±0.234
+      Pseudo-nitzschia               F1=0.248±0.286  AP=0.437±0.321
+    Importance saved
+    PR curves saved
+
+  [quadtree_random] Baseline complete
+
+[quadtree_random] complete
+
+################################################################################
+# BLOCKING SCHEME: clustering
+################################################################################
+  ⚠ k-means-constrained not installed — falling back to plain KMeans (cluster sizes NOT guaranteed balanced). Run `pip install k-means-constrained` for the size-balanced version.
+  Clustering blocks (clustering_unconstrained): 520 clusters  |  obs/cluster min/median/max = 2 / 13 / 1574  |  diag(m) min/median/max = 0 / 20928 / 49687
+  Merged 19 sparse blocks into their nearest neighbor (within 62,784 m). No observations dropped.
+  Spatial blocks (all rows, post-merge): 501
+  Common rows (all ACs): 9,283  |  blocks: 363
+  Common rows with ROMS: 9,283  |  blocks: 363
+
+  Generating spatial diagnostic plots...
+  ✓ Saved datasets/GULF_OF_MAINE/ml_outputs/rf_spatial_cv_rf_multiblocking/clustering/diagnostics/spatial_blocks_map.png
+  ✓ all 363 blocks confined to a single fold
+  ✓ Saved datasets/GULF_OF_MAINE/ml_outputs/rf_spatial_cv_rf_multiblocking/clustering/diagnostics/groupkfold_fold_assignment_map.png
+  ✓ Saved datasets/GULF_OF_MAINE/ml_outputs/rf_spatial_cv_rf_multiblocking/clustering/diagnostics/alexandrium_warning_groups_labels.png
+
+  Applying median imputation...
+  Imputation complete.
+
+  Building feature audit CSV...
+  feature_audit.csv saved
+
+======================================================================
+  [clustering] AC: C2RCC  |  spectral: 32  |  ROMS: 12
+======================================================================
+
+  -- Track: C2RCC_only  |  n=9,283  |  features=32
+
+    Tier: WARNING
+    Label statistics at 'warning' threshold:
+      Alexandrium_catenella          bloom: 1,706 / 9,283  (18.4%)
+      Dinophysis_acuminata           bloom: 3,897 / 9,283  (42.0%)
+      Dinophysis_norvegica           bloom: 1,276 / 9,283  (13.7%)
+      Karenia                        bloom: 2,518 / 9,283  (27.1%)
+      Pseudo-nitzschia               bloom: 2,132 / 9,283  (23.0%)
+      Rows >=1 label: 6,631 (71.4%)  >=2 labels: 3,077 (33.1%)
+    Spatial blocks available: 363
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.366 ± 0.086
+    Avg species/fold with zero test-set positives: 0.0 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.677 ± 0.018
+    Leakage ratio (spatial/random): 0.540  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.342±0.164  AP=0.408±0.169
+      Dinophysis_acuminata           F1=0.515±0.218  AP=0.532±0.245
+      Dinophysis_norvegica           F1=0.052±0.052  AP=0.131±0.113
+      Karenia                        F1=0.488±0.189  AP=0.636±0.161
+      Pseudo-nitzschia               F1=0.432±0.109  AP=0.489±0.135
+    Importance saved
+    PR curves saved
+
+    Tier: CLOSURE
+    Label statistics at 'closure' threshold:
+      Alexandrium_catenella          bloom: 1,310 / 9,283  (14.1%)
+      Dinophysis_acuminata           bloom: 2,095 / 9,283  (22.6%)
+      Dinophysis_norvegica           bloom:   255 / 9,283  (2.7%)
+      Karenia                        bloom: 1,212 / 9,283  (13.1%)
+      Pseudo-nitzschia               bloom:   381 / 9,283  (4.1%)
+      Rows >=1 label: 4,118 (44.4%)  >=2 labels: 939 (10.1%)
+    Spatial blocks available: 363
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.249 ± 0.071
+    Avg species/fold with zero test-set positives: 0.0 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.616 ± 0.026
+    Leakage ratio (spatial/random): 0.403  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.370±0.179  AP=0.437±0.176
+      Dinophysis_acuminata           F1=0.299±0.225  AP=0.324±0.277
+      Dinophysis_norvegica           F1=0.000±0.000  AP=0.025±0.034
+      Karenia                        F1=0.439±0.227  AP=0.576±0.178
+      Pseudo-nitzschia               F1=0.135±0.176  AP=0.325±0.225
+    Importance saved
+    PR curves saved
+
+  -- Track: C2RCC_roms  |  n=9,283  |  features=44
+
+    Tier: WARNING
+    Label statistics at 'warning' threshold:
+      Alexandrium_catenella          bloom: 1,706 / 9,283  (18.4%)
+      Dinophysis_acuminata           bloom: 3,897 / 9,283  (42.0%)
+      Dinophysis_norvegica           bloom: 1,276 / 9,283  (13.7%)
+      Karenia                        bloom: 2,518 / 9,283  (27.1%)
+      Pseudo-nitzschia               bloom: 2,132 / 9,283  (23.0%)
+      Rows >=1 label: 6,631 (71.4%)  >=2 labels: 3,077 (33.1%)
+    Spatial blocks available: 363
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.416 ± 0.098
+    Avg species/fold with zero test-set positives: 0.0 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.718 ± 0.017
+    Leakage ratio (spatial/random): 0.579  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.453±0.182  AP=0.569±0.132
+      Dinophysis_acuminata           F1=0.550±0.191  AP=0.586±0.199
+      Dinophysis_norvegica           F1=0.059±0.050  AP=0.168±0.118
+      Karenia                        F1=0.479±0.254  AP=0.710±0.177
+      Pseudo-nitzschia               F1=0.540±0.094  AP=0.623±0.095
+    Importance saved
+    PR curves saved
+
+    Tier: CLOSURE
+    Label statistics at 'closure' threshold:
+      Alexandrium_catenella          bloom: 1,310 / 9,283  (14.1%)
+      Dinophysis_acuminata           bloom: 2,095 / 9,283  (22.6%)
+      Dinophysis_norvegica           bloom:   255 / 9,283  (2.7%)
+      Karenia                        bloom: 1,212 / 9,283  (13.1%)
+      Pseudo-nitzschia               bloom:   381 / 9,283  (4.1%)
+      Rows >=1 label: 4,118 (44.4%)  >=2 labels: 939 (10.1%)
+    Spatial blocks available: 363
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.304 ± 0.107
+    Avg species/fold with zero test-set positives: 0.0 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.636 ± 0.035
+    Leakage ratio (spatial/random): 0.478  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.490±0.226  AP=0.591±0.182
+      Dinophysis_acuminata           F1=0.331±0.103  AP=0.409±0.230
+      Dinophysis_norvegica           F1=0.000±0.000  AP=0.036±0.043
+      Karenia                        F1=0.456±0.296  AP=0.627±0.234
+      Pseudo-nitzschia               F1=0.243±0.206  AP=0.454±0.233
+    Importance saved
+    PR curves saved
+
+  [clustering] C2RCC complete
+
+======================================================================
+  [clustering] AC: ACOLITE  |  spectral: 31  |  ROMS: 12
+======================================================================
+
+  -- Track: ACOLITE_only  |  n=9,283  |  features=31
+
+    Tier: WARNING
+    Label statistics at 'warning' threshold:
+      Alexandrium_catenella          bloom: 1,706 / 9,283  (18.4%)
+      Dinophysis_acuminata           bloom: 3,897 / 9,283  (42.0%)
+      Dinophysis_norvegica           bloom: 1,276 / 9,283  (13.7%)
+      Karenia                        bloom: 2,518 / 9,283  (27.1%)
+      Pseudo-nitzschia               bloom: 2,132 / 9,283  (23.0%)
+      Rows >=1 label: 6,631 (71.4%)  >=2 labels: 3,077 (33.1%)
+    Spatial blocks available: 363
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.405 ± 0.072
+    Avg species/fold with zero test-set positives: 0.0 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.738 ± 0.015
+    Leakage ratio (spatial/random): 0.550  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.437±0.173  AP=0.524±0.128
+      Dinophysis_acuminata           F1=0.558±0.234  AP=0.569±0.233
+      Dinophysis_norvegica           F1=0.032±0.029  AP=0.159±0.107
+      Karenia                        F1=0.519±0.209  AP=0.685±0.170
+      Pseudo-nitzschia               F1=0.481±0.086  AP=0.546±0.087
+    Importance saved
+    PR curves saved
+
+    Tier: CLOSURE
+    Label statistics at 'closure' threshold:
+      Alexandrium_catenella          bloom: 1,310 / 9,283  (14.1%)
+      Dinophysis_acuminata           bloom: 2,095 / 9,283  (22.6%)
+      Dinophysis_norvegica           bloom:   255 / 9,283  (2.7%)
+      Karenia                        bloom: 1,212 / 9,283  (13.1%)
+      Pseudo-nitzschia               bloom:   381 / 9,283  (4.1%)
+      Rows >=1 label: 4,118 (44.4%)  >=2 labels: 939 (10.1%)
+    Spatial blocks available: 363
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.328 ± 0.075
+    Avg species/fold with zero test-set positives: 0.0 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.686 ± 0.017
+    Leakage ratio (spatial/random): 0.478  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.435±0.191  AP=0.509±0.142
+      Dinophysis_acuminata           F1=0.396±0.247  AP=0.386±0.262
+      Dinophysis_norvegica           F1=0.000±0.000  AP=0.054±0.067
+      Karenia                        F1=0.510±0.192  AP=0.666±0.194
+      Pseudo-nitzschia               F1=0.300±0.198  AP=0.401±0.176
+    Importance saved
+    PR curves saved
+
+  -- Track: ACOLITE_roms  |  n=9,283  |  features=43
+
+    Tier: WARNING
+    Label statistics at 'warning' threshold:
+      Alexandrium_catenella          bloom: 1,706 / 9,283  (18.4%)
+      Dinophysis_acuminata           bloom: 3,897 / 9,283  (42.0%)
+      Dinophysis_norvegica           bloom: 1,276 / 9,283  (13.7%)
+      Karenia                        bloom: 2,518 / 9,283  (27.1%)
+      Pseudo-nitzschia               bloom: 2,132 / 9,283  (23.0%)
+      Rows >=1 label: 6,631 (71.4%)  >=2 labels: 3,077 (33.1%)
+    Spatial blocks available: 363
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.434 ± 0.087
+    Avg species/fold with zero test-set positives: 0.0 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.751 ± 0.016
+    Leakage ratio (spatial/random): 0.578  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.484±0.200  AP=0.600±0.147
+      Dinophysis_acuminata           F1=0.570±0.220  AP=0.602±0.210
+      Dinophysis_norvegica           F1=0.045±0.031  AP=0.174±0.110
+      Karenia                        F1=0.521±0.232  AP=0.732±0.163
+      Pseudo-nitzschia               F1=0.549±0.102  AP=0.638±0.088
+    Importance saved
+    PR curves saved
+
+    Tier: CLOSURE
+    Label statistics at 'closure' threshold:
+      Alexandrium_catenella          bloom: 1,310 / 9,283  (14.1%)
+      Dinophysis_acuminata           bloom: 2,095 / 9,283  (22.6%)
+      Dinophysis_norvegica           bloom:   255 / 9,283  (2.7%)
+      Karenia                        bloom: 1,212 / 9,283  (13.1%)
+      Pseudo-nitzschia               bloom:   381 / 9,283  (4.1%)
+      Rows >=1 label: 4,118 (44.4%)  >=2 labels: 939 (10.1%)
+    Spatial blocks available: 363
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.374 ± 0.114
+    Avg species/fold with zero test-set positives: 0.0 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.686 ± 0.026
+    Leakage ratio (spatial/random): 0.546  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.499±0.222  AP=0.601±0.182
+      Dinophysis_acuminata           F1=0.402±0.145  AP=0.468±0.240
+      Dinophysis_norvegica           F1=0.000±0.000  AP=0.050±0.047
+      Karenia                        F1=0.603±0.240  AP=0.708±0.155
+      Pseudo-nitzschia               F1=0.367±0.218  AP=0.517±0.220
+    Importance saved
+    PR curves saved
+
+  [clustering] ACOLITE complete
+
+======================================================================
+  [clustering] AC: Baseline  |  spectral: 32  |  ROMS: 12
+======================================================================
+
+  -- Track: Baseline_only  |  n=9,283  |  features=32
+
+    Tier: WARNING
+    Label statistics at 'warning' threshold:
+      Alexandrium_catenella          bloom: 1,706 / 9,283  (18.4%)
+      Dinophysis_acuminata           bloom: 3,897 / 9,283  (42.0%)
+      Dinophysis_norvegica           bloom: 1,276 / 9,283  (13.7%)
+      Karenia                        bloom: 2,518 / 9,283  (27.1%)
+      Pseudo-nitzschia               bloom: 2,132 / 9,283  (23.0%)
+      Rows >=1 label: 6,631 (71.4%)  >=2 labels: 3,077 (33.1%)
+    Spatial blocks available: 363
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.374 ± 0.065
+    Avg species/fold with zero test-set positives: 0.0 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.721 ± 0.018
+    Leakage ratio (spatial/random): 0.519  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.394±0.180  AP=0.508±0.138
+      Dinophysis_acuminata           F1=0.550±0.213  AP=0.577±0.233
+      Dinophysis_norvegica           F1=0.028±0.029  AP=0.163±0.123
+      Karenia                        F1=0.452±0.183  AP=0.642±0.171
+      Pseudo-nitzschia               F1=0.446±0.077  AP=0.489±0.076
+    Importance saved
+    PR curves saved
+
+    Tier: CLOSURE
+    Label statistics at 'closure' threshold:
+      Alexandrium_catenella          bloom: 1,310 / 9,283  (14.1%)
+      Dinophysis_acuminata           bloom: 2,095 / 9,283  (22.6%)
+      Dinophysis_norvegica           bloom:   255 / 9,283  (2.7%)
+      Karenia                        bloom: 1,212 / 9,283  (13.1%)
+      Pseudo-nitzschia               bloom:   381 / 9,283  (4.1%)
+      Rows >=1 label: 4,118 (44.4%)  >=2 labels: 939 (10.1%)
+    Spatial blocks available: 363
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.283 ± 0.068
+    Avg species/fold with zero test-set positives: 0.0 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.669 ± 0.027
+    Leakage ratio (spatial/random): 0.423  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.396±0.169  AP=0.499±0.146
+      Dinophysis_acuminata           F1=0.355±0.265  AP=0.393±0.266
+      Dinophysis_norvegica           F1=0.000±0.000  AP=0.081±0.081
+      Karenia                        F1=0.381±0.225  AP=0.550±0.244
+      Pseudo-nitzschia               F1=0.283±0.176  AP=0.343±0.163
+    Importance saved
+    PR curves saved
+
+  -- Track: Baseline_roms  |  n=9,283  |  features=44
+
+    Tier: WARNING
+    Label statistics at 'warning' threshold:
+      Alexandrium_catenella          bloom: 1,706 / 9,283  (18.4%)
+      Dinophysis_acuminata           bloom: 3,897 / 9,283  (42.0%)
+      Dinophysis_norvegica           bloom: 1,276 / 9,283  (13.7%)
+      Karenia                        bloom: 2,518 / 9,283  (27.1%)
+      Pseudo-nitzschia               bloom: 2,132 / 9,283  (23.0%)
+      Rows >=1 label: 6,631 (71.4%)  >=2 labels: 3,077 (33.1%)
+    Spatial blocks available: 363
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.413 ± 0.077
+    Avg species/fold with zero test-set positives: 0.0 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.743 ± 0.014
+    Leakage ratio (spatial/random): 0.556  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.453±0.187  AP=0.588±0.139
+      Dinophysis_acuminata           F1=0.557±0.225  AP=0.604±0.207
+      Dinophysis_norvegica           F1=0.027±0.037  AP=0.181±0.122
+      Karenia                        F1=0.486±0.230  AP=0.709±0.179
+      Pseudo-nitzschia               F1=0.543±0.094  AP=0.617±0.086
+    Importance saved
+    PR curves saved
+
+    Tier: CLOSURE
+    Label statistics at 'closure' threshold:
+      Alexandrium_catenella          bloom: 1,310 / 9,283  (14.1%)
+      Dinophysis_acuminata           bloom: 2,095 / 9,283  (22.6%)
+      Dinophysis_norvegica           bloom:   255 / 9,283  (2.7%)
+      Karenia                        bloom: 1,212 / 9,283  (13.1%)
+      Pseudo-nitzschia               bloom:   381 / 9,283  (4.1%)
+      Rows >=1 label: 4,118 (44.4%)  >=2 labels: 939 (10.1%)
+    Spatial blocks available: 363
+    Running 10-fold spatial (block) CV (RF)...
+    Running 10-fold random CV baseline (RF)...
+    Spatial  macro F1 : 0.315 ± 0.102
+    Avg species/fold with zero test-set positives: 0.0 / 5  (excluded from that fold's macro F1, not scored as 0)
+    Avg species/fold excluded from training (no class variance): 0.0 / 5
+    Random   macro F1 : 0.672 ± 0.039
+    Leakage ratio (spatial/random): 0.469  BELOW GATE (0.85)
+      Alexandrium_catenella          F1=0.472±0.214  AP=0.604±0.185
+      Dinophysis_acuminata           F1=0.343±0.167  AP=0.442±0.232
+      Dinophysis_norvegica           F1=0.000±0.000  AP=0.059±0.059
+      Karenia                        F1=0.417±0.273  AP=0.610±0.206
+      Pseudo-nitzschia               F1=0.343±0.191  AP=0.474±0.179
+    Importance saved
+    PR curves saved
+
+  [clustering] Baseline complete
+
+[clustering] complete
+
+================================================================================
+SAVING RESULTS
+================================================================================
+  blocking_scheme_summary.csv (4 rows)
+  global_comparison.csv  (48 rows)
+  species_comparison.csv (240 rows)
+  roms_delta_summary.csv
+  fold_level_results.csv (2400 rows)
+
+================================================================================
+MACRO CV F1 SUMMARY BY BLOCKING SCHEME
+================================================================================
+track                               ACOLITE_only  ACOLITE_roms  Baseline_only  Baseline_roms  C2RCC_only  C2RCC_roms
+blocking          ac       tier                                                                                     
+clustering        ACOLITE  closure         0.328         0.374            NaN            NaN         NaN         NaN
+                           warning         0.405         0.434            NaN            NaN         NaN         NaN
+                  Baseline closure           NaN           NaN          0.283          0.315         NaN         NaN
+                           warning           NaN           NaN          0.374          0.413         NaN         NaN
+                  C2RCC    closure           NaN           NaN            NaN            NaN       0.249       0.304
+                           warning           NaN           NaN            NaN            NaN       0.366       0.416
+grid              ACOLITE  closure         0.353         0.405            NaN            NaN         NaN         NaN
+                           warning         0.436         0.465            NaN            NaN         NaN         NaN
+                  Baseline closure           NaN           NaN          0.301          0.370         NaN         NaN
+                           warning           NaN           NaN          0.403          0.447         NaN         NaN
+                  C2RCC    closure           NaN           NaN            NaN            NaN       0.289       0.383
+                           warning           NaN           NaN            NaN            NaN       0.390       0.450
+quadtree_adaptive ACOLITE  closure         0.346         0.403            NaN            NaN         NaN         NaN
+                           warning         0.428         0.453            NaN            NaN         NaN         NaN
+                  Baseline closure           NaN           NaN          0.301          0.377         NaN         NaN
+                           warning           NaN           NaN          0.403          0.449         NaN         NaN
+                  C2RCC    closure           NaN           NaN            NaN            NaN       0.289       0.387
+                           warning           NaN           NaN            NaN            NaN       0.384       0.445
+quadtree_random   ACOLITE  closure         0.229         0.249            NaN            NaN         NaN         NaN
+                           warning         0.319         0.335            NaN            NaN         NaN         NaN
+                  Baseline closure           NaN           NaN          0.199          0.251         NaN         NaN
+                           warning           NaN           NaN          0.299          0.335         NaN         NaN
+                  C2RCC    closure           NaN           NaN            NaN            NaN       0.161       0.254
+                           warning           NaN           NaN            NaN            NaN       0.288       0.331
+
+Leakage ratio (spatial/random F1) by blocking scheme:
+blocking                        clustering   grid  quadtree_adaptive  quadtree_random
+ac       tier    track                                                               
+ACOLITE  closure ACOLITE_only        0.478  0.515              0.508            0.335
+                 ACOLITE_roms        0.546  0.594              0.592            0.373
+         warning ACOLITE_only        0.550  0.588              0.579            0.429
+                 ACOLITE_roms        0.578  0.619              0.604            0.445
+Baseline closure Baseline_only       0.423  0.446              0.452            0.296
+                 Baseline_roms       0.469  0.547              0.560            0.369
+         warning Baseline_only       0.519  0.555              0.562            0.413
+                 Baseline_roms       0.556  0.602              0.603            0.451
+C2RCC    closure C2RCC_only          0.403  0.467              0.462            0.260
+                 C2RCC_roms          0.478  0.593              0.599            0.392
+         warning C2RCC_only          0.540  0.572              0.566            0.423
+                 C2RCC_roms          0.579  0.626              0.620            0.456
+
+  ⚠ 48 (blocking, track, tier) combinations fell below the leakage gate (0.85) — spatial F1 dropped substantially relative to random-split F1. See global_comparison.csv -> leakage_ratio.
+
+DONE (RF) — run clf_plots.py to generate comparison figures (pass 'blocking' as an additional facet).

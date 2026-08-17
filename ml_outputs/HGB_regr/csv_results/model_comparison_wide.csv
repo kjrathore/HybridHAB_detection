@@ -1,0 +1,16 @@
+ac,species,ACOLITE_only,ACOLITE_roms,Baseline_only,Baseline_roms,C2RCC_only,C2RCC_roms
+ACOLITE,Alexandrium_catenella,0.39802,0.44118,,,,
+ACOLITE,Dinophysis_acuminata,0.53782,0.57111,,,,
+ACOLITE,Dinophysis_norvegica,0.33944,0.36749,,,,
+ACOLITE,Karenia,0.50455,0.58741,,,,
+ACOLITE,Pseudo-nitzschia,0.38076,0.4778,,,,
+Baseline,Alexandrium_catenella,,,0.3726,0.43538,,
+Baseline,Dinophysis_acuminata,,,0.51215,0.55616,,
+Baseline,Dinophysis_norvegica,,,0.35195,0.37715,,
+Baseline,Karenia,,,0.44883,0.56859,,
+Baseline,Pseudo-nitzschia,,,0.3199,0.48052,,
+C2RCC,Alexandrium_catenella,,,,,0.27094,0.38924
+C2RCC,Dinophysis_acuminata,,,,,0.41473,0.49738
+C2RCC,Dinophysis_norvegica,,,,,0.24108,0.31875
+C2RCC,Karenia,,,,,0.41278,0.5587
+C2RCC,Pseudo-nitzschia,,,,,0.25724,0.45245

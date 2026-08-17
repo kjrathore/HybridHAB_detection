@@ -1,0 +1,511 @@
+
+All available datasets (21 total):
+ id                                                                       properties.name properties.dashboardIdName
+ 17                                                                                  afsc                       afsc
+  2                                                                Bowdoin College (SCSC)                  harpswell
+  6                                                                              DFO AZMP                       azmp
+  9                                    East Coast Ocean Acidification cruise, August 2022                       ecoa
+  1                                                                         Fiddlers Cove                   fiddlers
+ 12                                                                              GSO Dock                    gsodock
+ 15                                                                         Gulf of Maine                        gom
+ 13                                                                             Jamestown                  jamestown
+ 22                                                                        Jeffreys Basin      radbot_jeffreys_basin
+ 20                                                                           Lombos Hole                     lombos
+ 23                                                                                  mara                hablab_mwra
+ 11                                                 Martha's Vineyard Coastal Observatory                       mvco
+ 10                                             Mount Desert Island Biological Laboratory                      mdibl
+  5                                                                    NESLTER broadscale         NESLTER_broadscale
+  7                                                                   Ocean Alliance dock              oceanalliance
+  3                                                                             Salt Pond                     nauset
+ 19                                                  SeaTrac deployment at Isle of Shoals                 radbot_ios
+ 18                                                            SeaTrac deployment at MVCO                radbot_mvco
+  8 Shipboard IFCB observations from Bering Strait, Chukchi Sea, and Beaufort Sea regions                     arctic
+ 21                                                                      USCGC Healy 2401                    hly2401
+ 14                                                               Ward Aquafarms Hatchery               wardhatchery
+
+Fetching bin metadata (all years) ...
+  afsc
+    metadata: 3,374 bins  |  depth: 0 / 3,374
+  harpswell
+    metadata: 111,412 bins  |  depth: 48 / 111,412
+  azmp
+    metadata: 10,126 bins  |  depth: 2,080 / 10,126
+  ecoa
+    metadata: 1,366 bins  |  depth: 0 / 1,366
+  fiddlers
+    metadata: 38,689 bins  |  depth: 38,689 / 38,689
+  gsodock
+    metadata: 53,566 bins  |  depth: 0 / 53,566
+  gom
+    metadata: 10,877 bins  |  depth: 0 / 10,877
+  jamestown
+    metadata: 2,815 bins  |  depth: 2,815 / 2,815
+  radbot_jeffreys_basin
+    metadata: 1,738 bins  |  depth: 0 / 1,738
+  lombos
+    metadata: 1,980 bins  |  depth: 1,603 / 1,980
+  hablab_mwra
+    HTTP 404 (attempt 1/3)
+    HTTP 404 (attempt 2/3)
+    HTTP 404 (attempt 3/3)
+  mvco
+    metadata: 120,488 bins  |  depth: 120,488 / 120,488
+  mdibl
+    metadata: 13,039 bins  |  depth: 13,039 / 13,039
+  NESLTER_broadscale
+    metadata: 21,874 bins  |  depth: 0 / 21,874
+  oceanalliance
+    metadata: 463 bins  |  depth: 0 / 463
+  nauset
+    metadata: 27,469 bins  |  depth: 526 / 27,469
+  radbot_ios
+    metadata: 1,297 bins  |  depth: 1,297 / 1,297
+  radbot_mvco
+    metadata: 116 bins  |  depth: 116 / 116
+  arctic
+    metadata: 22,012 bins  |  depth: 3,022 / 22,012
+  hly2401
+    metadata: 1,628 bins  |  depth: 0 / 1,628
+  wardhatchery
+    HTTP 404 (attempt 1/3)
+    HTTP 404 (attempt 2/3)
+    HTTP 404 (attempt 3/3)
+
+==================================================
+  Year 2017
+==================================================
+  [1/21] afsc
+    - no data
+  [2/21] Bowdoin College (SCSC)
+    - no data
+  [3/21] DFO AZMP
+    - no data
+  [4/21] East Coast Ocean Acidification cruise, August 2022
+    - no data
+  [5/21] Fiddlers Cove
+    2,504 bins  |  cell_concentration values: 17,528
+  [6/21] GSO Dock
+    2,731 bins  |  cell_concentration values: 19,117
+  [7/21] Gulf of Maine
+    518 bins  |  cell_concentration values: 5,180
+  [8/21] Jamestown
+    - no data
+  [9/21] Jeffreys Basin
+    - no data
+  [10/21] Lombos Hole
+    - no data
+  [11/21] mara
+    - no data
+  [12/21] Martha's Vineyard Coastal Observatory
+    22,115 bins  |  cell_concentration values: 154,805
+  [13/21] Mount Desert Island Biological Laboratory
+    - no data
+  [14/21] NESLTER broadscale
+    2,098 bins  |  cell_concentration values: 14,686
+  [15/21] Ocean Alliance dock
+    - no data
+  [16/21] Salt Pond
+    - no data
+  [17/21] SeaTrac deployment at Isle of Shoals
+    - no data
+  [18/21] SeaTrac deployment at MVCO
+    - no data
+  [19/21] Shipboard IFCB observations from Bering Strait, Chukchi Sea, and Beaufort Sea regions
+    - no data
+  [20/21] USCGC Healy 2401
+    - no data
+  [21/21] Ward Aquafarms Hatchery
+    - no data
+  Saved 29,966 bins -> datasets/GULF_OF_MAINE/raw_data/IFCB//2017.parquet
+
+==================================================
+  Year 2018
+==================================================
+  [1/21] afsc
+    - no data
+  [2/21] Bowdoin College (SCSC)
+    2,438 bins  |  cell_concentration values: 17,066
+  [3/21] DFO AZMP
+    - no data
+  [4/21] East Coast Ocean Acidification cruise, August 2022
+    - no data
+  [5/21] Fiddlers Cove
+    2,377 bins  |  cell_concentration values: 16,639
+  [6/21] GSO Dock
+    15,032 bins  |  cell_concentration values: 105,224
+  [7/21] Gulf of Maine
+    - no data
+  [8/21] Jamestown
+    - no data
+  [9/21] Jeffreys Basin
+    - no data
+  [10/21] Lombos Hole
+    - no data
+  [11/21] mara
+    - no data
+  [12/21] Martha's Vineyard Coastal Observatory
+    12,675 bins  |  cell_concentration values: 88,725
+  [13/21] Mount Desert Island Biological Laboratory
+    - no data
+  [14/21] NESLTER broadscale
+    1,912 bins  |  cell_concentration values: 13,384
+  [15/21] Ocean Alliance dock
+    - no data
+  [16/21] Salt Pond
+    3,645 bins  |  cell_concentration values: 25,515
+  [17/21] SeaTrac deployment at Isle of Shoals
+    - no data
+  [18/21] SeaTrac deployment at MVCO
+    - no data
+  [19/21] Shipboard IFCB observations from Bering Strait, Chukchi Sea, and Beaufort Sea regions
+    1,003 bins  |  cell_concentration values: 10,030
+  [20/21] USCGC Healy 2401
+    - no data
+  [21/21] Ward Aquafarms Hatchery
+    - no data
+  Saved 39,082 bins -> datasets/GULF_OF_MAINE/raw_data/IFCB//2018.parquet
+
+==================================================
+  Year 2019
+==================================================
+  [1/21] afsc
+    - no data
+  [2/21] Bowdoin College (SCSC)
+    1,499 bins  |  cell_concentration values: 10,493
+  [3/21] DFO AZMP
+    - no data
+  [4/21] East Coast Ocean Acidification cruise, August 2022
+    - no data
+  [5/21] Fiddlers Cove
+    - no data
+  [6/21] GSO Dock
+    12,788 bins  |  cell_concentration values: 89,516
+  [7/21] Gulf of Maine
+    - no data
+  [8/21] Jamestown
+    - no data
+  [9/21] Jeffreys Basin
+    - no data
+  [10/21] Lombos Hole
+    - no data
+  [11/21] mara
+    - no data
+  [12/21] Martha's Vineyard Coastal Observatory
+    6,447 bins  |  cell_concentration values: 45,129
+  [13/21] Mount Desert Island Biological Laboratory
+    - no data
+  [14/21] NESLTER broadscale
+    2,255 bins  |  cell_concentration values: 15,785
+  [15/21] Ocean Alliance dock
+    - no data
+  [16/21] Salt Pond
+    3,230 bins  |  cell_concentration values: 22,610
+  [17/21] SeaTrac deployment at Isle of Shoals
+    - no data
+  [18/21] SeaTrac deployment at MVCO
+    - no data
+  [19/21] Shipboard IFCB observations from Bering Strait, Chukchi Sea, and Beaufort Sea regions
+    - no data
+  [20/21] USCGC Healy 2401
+    - no data
+  [21/21] Ward Aquafarms Hatchery
+    - no data
+  Saved 26,219 bins -> datasets/GULF_OF_MAINE/raw_data/IFCB//2019.parquet
+
+==================================================
+  Year 2020
+==================================================
+  [1/21] afsc
+    - no data
+  [2/21] Bowdoin College (SCSC)
+    16,337 bins  |  cell_concentration values: 114,359
+  [3/21] DFO AZMP
+    - no data
+  [4/21] East Coast Ocean Acidification cruise, August 2022
+    - no data
+  [5/21] Fiddlers Cove
+    18,083 bins  |  cell_concentration values: 126,581
+  [6/21] GSO Dock
+    10,381 bins  |  cell_concentration values: 103,810
+  [7/21] Gulf of Maine
+    - no data
+  [8/21] Jamestown
+    - no data
+  [9/21] Jeffreys Basin
+    - no data
+  [10/21] Lombos Hole
+    - no data
+  [11/21] mara
+    - no data
+  [12/21] Martha's Vineyard Coastal Observatory
+    12,424 bins  |  cell_concentration values: 86,968
+  [13/21] Mount Desert Island Biological Laboratory
+    35 bins  |  cell_concentration values: 245
+  [14/21] NESLTER broadscale
+    - no data
+  [15/21] Ocean Alliance dock
+    - no data
+  [16/21] Salt Pond
+    2,688 bins  |  cell_concentration values: 18,816
+  [17/21] SeaTrac deployment at Isle of Shoals
+    - no data
+  [18/21] SeaTrac deployment at MVCO
+    - no data
+  [19/21] Shipboard IFCB observations from Bering Strait, Chukchi Sea, and Beaufort Sea regions
+    2,019 bins  |  cell_concentration values: 20,190
+  [20/21] USCGC Healy 2401
+    - no data
+  [21/21] Ward Aquafarms Hatchery
+    - no data
+  Saved 61,967 bins -> datasets/GULF_OF_MAINE/raw_data/IFCB//2020.parquet
+
+==================================================
+  Year 2021
+==================================================
+  [1/21] afsc
+    - no data
+  [2/21] Bowdoin College (SCSC)
+    - no data
+  [3/21] DFO AZMP
+    - no data
+  [4/21] East Coast Ocean Acidification cruise, August 2022
+    - no data
+  [5/21] Fiddlers Cove
+    9,700 bins  |  cell_concentration values: 97,000
+  [6/21] GSO Dock
+    10,968 bins  |  cell_concentration values: 109,680
+  [7/21] Gulf of Maine
+    - no data
+  [8/21] Jamestown
+    - no data
+  [9/21] Jeffreys Basin
+    - no data
+  [10/21] Lombos Hole
+    - no data
+  [11/21] mara
+    - no data
+  [12/21] Martha's Vineyard Coastal Observatory
+    5,324 bins  |  cell_concentration values: 53,240
+  [13/21] Mount Desert Island Biological Laboratory
+    3,159 bins  |  cell_concentration values: 31,590
+  [14/21] NESLTER broadscale
+    3,296 bins  |  cell_concentration values: 32,960
+  [15/21] Ocean Alliance dock
+    - no data
+  [16/21] Salt Pond
+    6,012 bins  |  cell_concentration values: 60,120
+  [17/21] SeaTrac deployment at Isle of Shoals
+    - no data
+  [18/21] SeaTrac deployment at MVCO
+    - no data
+  [19/21] Shipboard IFCB observations from Bering Strait, Chukchi Sea, and Beaufort Sea regions
+    - no data
+  [20/21] USCGC Healy 2401
+    - no data
+  [21/21] Ward Aquafarms Hatchery
+    - no data
+  Saved 38,459 bins -> datasets/GULF_OF_MAINE/raw_data/IFCB//2021.parquet
+
+==================================================
+  Year 2022
+==================================================
+  [1/21] afsc
+    3,247 bins  |  cell_concentration values: 32,470
+  [2/21] Bowdoin College (SCSC)
+    4,372 bins  |  cell_concentration values: 43,720
+  [3/21] DFO AZMP
+    2,080 bins  |  cell_concentration values: 20,800
+  [4/21] East Coast Ocean Acidification cruise, August 2022
+    1,206 bins  |  cell_concentration values: 12,060
+  [5/21] Fiddlers Cove
+    5,924 bins  |  cell_concentration values: 59,240
+  [6/21] GSO Dock
+    - no data
+  [7/21] Gulf of Maine
+    - no data
+  [8/21] Jamestown
+    - no data
+  [9/21] Jeffreys Basin
+    - no data
+  [10/21] Lombos Hole
+    - no data
+  [11/21] mara
+    - no data
+  [12/21] Martha's Vineyard Coastal Observatory
+    19,779 bins  |  cell_concentration values: 197,790
+  [13/21] Mount Desert Island Biological Laboratory
+    2,153 bins  |  cell_concentration values: 21,530
+  [14/21] NESLTER broadscale
+    614 bins  |  cell_concentration values: 6,140
+  [15/21] Ocean Alliance dock
+    463 bins  |  cell_concentration values: 4,630
+  [16/21] Salt Pond
+    - no data
+  [17/21] SeaTrac deployment at Isle of Shoals
+    - no data
+  [18/21] SeaTrac deployment at MVCO
+    - no data
+  [19/21] Shipboard IFCB observations from Bering Strait, Chukchi Sea, and Beaufort Sea regions
+    2,711 bins  |  cell_concentration values: 27,110
+  [20/21] USCGC Healy 2401
+    - no data
+  [21/21] Ward Aquafarms Hatchery
+    - no data
+  Saved 42,549 bins -> datasets/GULF_OF_MAINE/raw_data/IFCB//2022.parquet
+
+==================================================
+  Year 2023
+==================================================
+  [1/21] afsc
+    - no data
+  [2/21] Bowdoin College (SCSC)
+    5,064 bins  |  cell_concentration values: 50,640
+  [3/21] DFO AZMP
+    2,349 bins  |  cell_concentration values: 23,490
+  [4/21] East Coast Ocean Acidification cruise, August 2022
+    - no data
+  [5/21] Fiddlers Cove
+    - no data
+  [6/21] GSO Dock
+    - no data
+  [7/21] Gulf of Maine
+    62 bins  |  cell_concentration values: 620
+  [8/21] Jamestown
+    1,732 bins  |  cell_concentration values: 15,588
+  [9/21] Jeffreys Basin
+    - no data
+  [10/21] Lombos Hole
+    1,603 bins  |  cell_concentration values: 16,030
+  [11/21] mara
+    - no data
+  [12/21] Martha's Vineyard Coastal Observatory
+    16,173 bins  |  cell_concentration values: 161,730
+  [13/21] Mount Desert Island Biological Laboratory
+    903 bins  |  cell_concentration values: 9,030
+  [14/21] NESLTER broadscale
+    - no data
+  [15/21] Ocean Alliance dock
+    - no data
+  [16/21] Salt Pond
+    2,628 bins  |  cell_concentration values: 26,280
+  [17/21] SeaTrac deployment at Isle of Shoals
+    1,122 bins  |  cell_concentration values: 11,220
+  [18/21] SeaTrac deployment at MVCO
+    116 bins  |  cell_concentration values: 1,160
+  [19/21] Shipboard IFCB observations from Bering Strait, Chukchi Sea, and Beaufort Sea regions
+    4,817 bins  |  cell_concentration values: 48,170
+  [20/21] USCGC Healy 2401
+    - no data
+  [21/21] Ward Aquafarms Hatchery
+    - no data
+  Saved 36,569 bins -> datasets/GULF_OF_MAINE/raw_data/IFCB//2023.parquet
+
+==================================================
+  Year 2024
+==================================================
+  [1/21] afsc
+    - no data
+  [2/21] Bowdoin College (SCSC)
+    16,714 bins  |  cell_concentration values: 167,140
+  [3/21] DFO AZMP
+    2,144 bins  |  cell_concentration values: 21,440
+  [4/21] East Coast Ocean Acidification cruise, August 2022
+    - no data
+  [5/21] Fiddlers Cove
+    - no data
+  [6/21] GSO Dock
+    - no data
+  [7/21] Gulf of Maine
+    - no data
+  [8/21] Jamestown
+    - no data
+  [9/21] Jeffreys Basin
+    1,324 bins  |  cell_concentration values: 13,240
+  [10/21] Lombos Hole
+    - no data
+  [11/21] mara
+    - no data
+  [12/21] Martha's Vineyard Coastal Observatory
+    15,079 bins  |  cell_concentration values: 150,790
+  [13/21] Mount Desert Island Biological Laboratory
+    2,132 bins  |  cell_concentration values: 21,320
+  [14/21] NESLTER broadscale
+    - no data
+  [15/21] Ocean Alliance dock
+    - no data
+  [16/21] Salt Pond
+    3,653 bins  |  cell_concentration values: 36,530
+  [17/21] SeaTrac deployment at Isle of Shoals
+    - no data
+  [18/21] SeaTrac deployment at MVCO
+    - no data
+  [19/21] Shipboard IFCB observations from Bering Strait, Chukchi Sea, and Beaufort Sea regions
+    1,409 bins  |  cell_concentration values: 14,090
+  [20/21] USCGC Healy 2401
+    1,464 bins  |  cell_concentration values: 14,640
+  [21/21] Ward Aquafarms Hatchery
+    - no data
+  Saved 43,919 bins -> datasets/GULF_OF_MAINE/raw_data/IFCB//2024.parquet
+
+==================================================
+  Year 2025
+==================================================
+  [1/21] afsc
+    - no data
+  [2/21] Bowdoin College (SCSC)
+    14,326 bins  |  cell_concentration values: 143,260
+  [3/21] DFO AZMP
+    3,547 bins  |  cell_concentration values: 35,470
+  [4/21] East Coast Ocean Acidification cruise, August 2022
+    - no data
+  [5/21] Fiddlers Cove
+    - no data
+  [6/21] GSO Dock
+    - no data
+  [7/21] Gulf of Maine
+    3,123 bins  |  cell_concentration values: 31,230
+  [8/21] Jamestown
+    - no data
+  [9/21] Jeffreys Basin
+    - no data
+  [10/21] Lombos Hole
+    - no data
+  [11/21] mara
+    112 bins  |  cell_concentration values: 1,120
+  [12/21] Martha's Vineyard Coastal Observatory
+    8,798 bins  |  cell_concentration values: 87,980
+  [13/21] Mount Desert Island Biological Laboratory
+    2,163 bins  |  cell_concentration values: 21,630
+  [14/21] NESLTER broadscale
+    698 bins  |  cell_concentration values: 6,980
+  [15/21] Ocean Alliance dock
+    - no data
+  [16/21] Salt Pond
+    4,605 bins  |  cell_concentration values: 46,050
+  [17/21] SeaTrac deployment at Isle of Shoals
+    - no data
+  [18/21] SeaTrac deployment at MVCO
+    - no data
+  [19/21] Shipboard IFCB observations from Bering Strait, Chukchi Sea, and Beaufort Sea regions
+    1,412 bins  |  cell_concentration values: 14,120
+  [20/21] USCGC Healy 2401
+    - no data
+  [21/21] Ward Aquafarms Hatchery
+    - no data
+  Saved 38,784 bins -> datasets/GULF_OF_MAINE/raw_data/IFCB//2025.parquet
+
+Merging yearly files ...
+  357,514 total bins across 9 years
+  Bbox: 357,514 -> 332,261 (25,253 dropped)
+
+============================================================
+DONE
+============================================================
+  Bins (raw)   : 332,261
+  Daily obs    : 332,261  (after mean aggregation)
+  Locations    : 17,711 unique lat/lon points
+  Datasets     : 17
+  Species cols : 10  ->  ['Alexandrium_catenella', 'Dinophysis_acuminata', 'Dinophysis_norvegica', 'Karenia', 'Margalefidinium', 'Mesodinium', 'Pseudo-nitzschia', 'Tripos_furca', 'Tripos_fusus', 'Tripos_muelleri']
+  Date range   : 2017-01-01 00:10:57+00:00  ->  2025-12-30 23:42:37+00:00
+  Depth        : 173,982 / 332,261 daily obs
+  File size    : 5.77 MB  ->  datasets/GULF_OF_MAINE/raw_data/IFCB/habhub_IFCB_GOM.parquet

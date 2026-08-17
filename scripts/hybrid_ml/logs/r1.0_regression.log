@@ -1,0 +1,152 @@
+================================================================================
+HAB MULTI-OUTPUT REGRESSION — RF (BLOOM-ONLY, CV-ONLY)
+================================================================================
+
+Loading: /home/server/pi/homes/rathorek/projects/HHAB_ROMS/datasets/GULF_OF_MAINE/processed_data/sentinel_3_L2_past3days/composite_features/composite_features.parquet
+  Raw: 15,601 × 174
+  Common rows (all ACs): 9,283
+  Common rows with ROMS: 9,283
+  Applying median imputation...
+  Imputation complete.
+
+══════════════════════════════════════════════════════════════════════
+  AC: C2RCC  |  spectral: 30  |  ROMS: 12
+══════════════════════════════════════════════════════════════════════
+
+  ── Track: C2RCC_only  |  n_all=9,283
+    Bloom-union rows: 6,631
+      Alexandrium_catenella          n=1,706  log10=[2.01,4.61]  mean=2.79
+      Dinophysis_acuminata           n=3,897  log10=[2.31,5.45]  mean=2.80
+      Dinophysis_norvegica           n=1,276  log10=[2.30,3.31]  mean=2.56
+      Karenia                        n=2,518  log10=[3.00,4.96]  mean=3.64
+      Pseudo-nitzschia               n=2,132  log10=[3.30,5.61]  mean=3.76
+    Running 50-fold CV...
+      Alexandrium_catenella          R²=0.271±0.030  RMSE=1352 cells/L
+      Dinophysis_acuminata           R²=0.415±0.026  RMSE=4047 cells/L
+      Dinophysis_norvegica           R²=0.241±0.048  RMSE=207 cells/L
+      Karenia                        R²=0.413±0.023  RMSE=3866 cells/L
+      Pseudo-nitzschia               R²=0.257±0.032  RMSE=18498 cells/L
+    Macro R²=0.319  RMSE=5594 cells/L  MAE=1830 cells/L
+    ✓ Importance saved
+
+  ── Track: C2RCC_roms  |  n_all=9,283
+    Bloom-union rows: 6,631
+      Alexandrium_catenella          n=1,706  log10=[2.01,4.61]  mean=2.79
+      Dinophysis_acuminata           n=3,897  log10=[2.31,5.45]  mean=2.80
+      Dinophysis_norvegica           n=1,276  log10=[2.30,3.31]  mean=2.56
+      Karenia                        n=2,518  log10=[3.00,4.96]  mean=3.64
+      Pseudo-nitzschia               n=2,132  log10=[3.30,5.61]  mean=3.76
+    Running 50-fold CV...
+      Alexandrium_catenella          R²=0.389±0.040  RMSE=1273 cells/L
+      Dinophysis_acuminata           R²=0.497±0.027  RMSE=3972 cells/L
+      Dinophysis_norvegica           R²=0.319±0.044  RMSE=200 cells/L
+      Karenia                        R²=0.559±0.023  RMSE=3327 cells/L
+      Pseudo-nitzschia               R²=0.452±0.044  RMSE=13221 cells/L
+    Macro R²=0.443  RMSE=4399 cells/L  MAE=1573 cells/L
+    ✓ Importance saved
+
+  ✓ C2RCC complete
+
+══════════════════════════════════════════════════════════════════════
+  AC: ACOLITE  |  spectral: 29  |  ROMS: 12
+══════════════════════════════════════════════════════════════════════
+
+  ── Track: ACOLITE_only  |  n_all=9,283
+    Bloom-union rows: 6,631
+      Alexandrium_catenella          n=1,706  log10=[2.01,4.61]  mean=2.79
+      Dinophysis_acuminata           n=3,897  log10=[2.31,5.45]  mean=2.80
+      Dinophysis_norvegica           n=1,276  log10=[2.30,3.31]  mean=2.56
+      Karenia                        n=2,518  log10=[3.00,4.96]  mean=3.64
+      Pseudo-nitzschia               n=2,132  log10=[3.30,5.61]  mean=3.76
+    Running 50-fold CV...
+      Alexandrium_catenella          R²=0.398±0.038  RMSE=1199 cells/L
+      Dinophysis_acuminata           R²=0.538±0.027  RMSE=3918 cells/L
+      Dinophysis_norvegica           R²=0.339±0.048  RMSE=194 cells/L
+      Karenia                        R²=0.505±0.022  RMSE=3679 cells/L
+      Pseudo-nitzschia               R²=0.381±0.036  RMSE=17600 cells/L
+    Macro R²=0.432  RMSE=5318 cells/L  MAE=1687 cells/L
+    ✓ Importance saved
+
+  ── Track: ACOLITE_roms  |  n_all=9,283
+    Bloom-union rows: 6,631
+      Alexandrium_catenella          n=1,706  log10=[2.01,4.61]  mean=2.79
+      Dinophysis_acuminata           n=3,897  log10=[2.31,5.45]  mean=2.80
+      Dinophysis_norvegica           n=1,276  log10=[2.30,3.31]  mean=2.56
+      Karenia                        n=2,518  log10=[3.00,4.96]  mean=3.64
+      Pseudo-nitzschia               n=2,132  log10=[3.30,5.61]  mean=3.76
+    Running 50-fold CV...
+      Alexandrium_catenella          R²=0.441±0.036  RMSE=1206 cells/L
+      Dinophysis_acuminata           R²=0.571±0.025  RMSE=3900 cells/L
+      Dinophysis_norvegica           R²=0.367±0.044  RMSE=190 cells/L
+      Karenia                        R²=0.587±0.022  RMSE=3263 cells/L
+      Pseudo-nitzschia               R²=0.478±0.043  RMSE=12848 cells/L
+    Macro R²=0.489  RMSE=4281 cells/L  MAE=1506 cells/L
+    ✓ Importance saved
+
+  ✓ ACOLITE complete
+
+══════════════════════════════════════════════════════════════════════
+  AC: Baseline  |  spectral: 30  |  ROMS: 12
+══════════════════════════════════════════════════════════════════════
+
+  ── Track: Baseline_only  |  n_all=9,283
+    Bloom-union rows: 6,631
+      Alexandrium_catenella          n=1,706  log10=[2.01,4.61]  mean=2.79
+      Dinophysis_acuminata           n=3,897  log10=[2.31,5.45]  mean=2.80
+      Dinophysis_norvegica           n=1,276  log10=[2.30,3.31]  mean=2.56
+      Karenia                        n=2,518  log10=[3.00,4.96]  mean=3.64
+      Pseudo-nitzschia               n=2,132  log10=[3.30,5.61]  mean=3.76
+    Running 50-fold CV...
+      Alexandrium_catenella          R²=0.373±0.040  RMSE=1211 cells/L
+      Dinophysis_acuminata           R²=0.512±0.027  RMSE=3947 cells/L
+      Dinophysis_norvegica           R²=0.352±0.047  RMSE=192 cells/L
+      Karenia                        R²=0.449±0.025  RMSE=3814 cells/L
+      Pseudo-nitzschia               R²=0.320±0.033  RMSE=18365 cells/L
+    Macro R²=0.401  RMSE=5506 cells/L  MAE=1761 cells/L
+    ✓ Importance saved
+
+  ── Track: Baseline_roms  |  n_all=9,283
+    Bloom-union rows: 6,631
+      Alexandrium_catenella          n=1,706  log10=[2.01,4.61]  mean=2.79
+      Dinophysis_acuminata           n=3,897  log10=[2.31,5.45]  mean=2.80
+      Dinophysis_norvegica           n=1,276  log10=[2.30,3.31]  mean=2.56
+      Karenia                        n=2,518  log10=[3.00,4.96]  mean=3.64
+      Pseudo-nitzschia               n=2,132  log10=[3.30,5.61]  mean=3.76
+    Running 50-fold CV...
+      Alexandrium_catenella          R²=0.435±0.041  RMSE=1198 cells/L
+      Dinophysis_acuminata           R²=0.556±0.023  RMSE=3902 cells/L
+      Dinophysis_norvegica           R²=0.377±0.044  RMSE=189 cells/L
+      Karenia                        R²=0.569±0.024  RMSE=3292 cells/L
+      Pseudo-nitzschia               R²=0.481±0.041  RMSE=12058 cells/L
+    Macro R²=0.484  RMSE=4128 cells/L  MAE=1513 cells/L
+    ✓ Importance saved
+
+  ✓ Baseline complete
+
+================================================================================
+SAVING RESULTS
+================================================================================
+  global_comparison.csv  (6 rows)
+  species_comparison.csv (30 rows)
+  fold_level_results.csv (1500 rows)
+  model_comparison_wide.csv
+  roms_delta_summary.csv
+
+================================================================================
+MACRO CV R² SUMMARY
+================================================================================
+               macro_cv_r2_mean
+track                          
+ACOLITE_only              0.432
+ACOLITE_roms              0.489
+Baseline_only             0.401
+Baseline_roms             0.484
+C2RCC_only                0.319
+C2RCC_roms                0.443
+
+  ROMS delta R²:
+    C2RCC       ΔR²=+0.124
+    ACOLITE     ΔR²=+0.057
+    Baseline    ΔR²=+0.082
+
+DONE — run reg_plots.py to generate figures.

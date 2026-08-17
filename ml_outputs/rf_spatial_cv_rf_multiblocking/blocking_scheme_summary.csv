@@ -1,0 +1,5 @@
+blocking,n_blocks_all_rows,block_diag_median_m,n_blocks,block_diag_min_m,block_diag_max_m,obs_per_block_min,obs_per_block_median,obs_per_block_max
+grid,536,10000.0,,,,,,
+quadtree_adaptive,546,16982.48881121026,672.0,4245.62220280252,135859.9104896824,1.0,11.0,1565.0
+quadtree_random,83,4245.622202802565,466.0,4245.62220280252,271719.8209793643,1.0,1.0,4619.0
+clustering,501,20928.041363878714,520.0,0.0,49687.463297836315,2.0,13.0,1574.0

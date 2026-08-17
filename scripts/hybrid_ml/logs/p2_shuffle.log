@@ -1,0 +1,59 @@
+Generating classification figures...
+
+--- Fig 1: Mean PR curves per species ---
+  Fig 1 saved: fig1_ACOLITE_warning_pr_curves.png
+  Caption: Mean precision-recall curves per species for ACOLITE at the warning threshold, averaged across 50 cross-validation folds. Shaded bands indicate ± one standard deviation. Legend entries show mean average precision (AP ± SD). (A) Spectral features only; (B) spectral + ROMS oceanographic features.
+  Fig 1 saved: fig1_ACOLITE_closure_pr_curves.png
+  Caption: Mean precision-recall curves per species for ACOLITE at the closure threshold, averaged across 50 cross-validation folds. Shaded bands indicate ± one standard deviation. Legend entries show mean average precision (AP ± SD). (A) Spectral features only; (B) spectral + ROMS oceanographic features.
+  Fig 1 saved: fig1_C2RCC_warning_pr_curves.png
+  Caption: Mean precision-recall curves per species for C2RCC at the warning threshold, averaged across 50 cross-validation folds. Shaded bands indicate ± one standard deviation. Legend entries show mean average precision (AP ± SD). (A) Spectral features only; (B) spectral + ROMS oceanographic features.
+  Fig 1 saved: fig1_C2RCC_closure_pr_curves.png
+  Caption: Mean precision-recall curves per species for C2RCC at the closure threshold, averaged across 50 cross-validation folds. Shaded bands indicate ± one standard deviation. Legend entries show mean average precision (AP ± SD). (A) Spectral features only; (B) spectral + ROMS oceanographic features.
+  Fig 1 saved: fig1_OC-SAC_warning_pr_curves.png
+  Caption: Mean precision-recall curves per species for OC-SAC at the warning threshold, averaged across 50 cross-validation folds. Shaded bands indicate ± one standard deviation. Legend entries show mean average precision (AP ± SD). (A) Spectral features only; (B) spectral + ROMS oceanographic features.
+  Fig 1 saved: fig1_OC-SAC_closure_pr_curves.png
+  Caption: Mean precision-recall curves per species for OC-SAC at the closure threshold, averaged across 50 cross-validation folds. Shaded bands indicate ± one standard deviation. Legend entries show mean average precision (AP ± SD). (A) Spectral features only; (B) spectral + ROMS oceanographic features.
+
+--- Fig 2: F1 boxplot per AC × tier ---
+  Fig 2 saved: fig2_ACOLITE_warning_f1_boxplot.png
+  Caption: Distribution of F1 scores across 50 cross-validation folds per species for ACOLITE at the warning threshold. Dark boxes: spectral features only; light boxes: spectral + ROMS oceanographic features. Horizontal lines indicate median; whiskers extend to 1.5× IQR.
+  Fig 2 saved: fig2_ACOLITE_closure_f1_boxplot.png
+  Caption: Distribution of F1 scores across 50 cross-validation folds per species for ACOLITE at the closure threshold. Dark boxes: spectral features only; light boxes: spectral + ROMS oceanographic features. Horizontal lines indicate median; whiskers extend to 1.5× IQR.
+  Fig 2 saved: fig2_C2RCC_warning_f1_boxplot.png
+  Caption: Distribution of F1 scores across 50 cross-validation folds per species for C2RCC at the warning threshold. Dark boxes: spectral features only; light boxes: spectral + ROMS oceanographic features. Horizontal lines indicate median; whiskers extend to 1.5× IQR.
+  Fig 2 saved: fig2_C2RCC_closure_f1_boxplot.png
+  Caption: Distribution of F1 scores across 50 cross-validation folds per species for C2RCC at the closure threshold. Dark boxes: spectral features only; light boxes: spectral + ROMS oceanographic features. Horizontal lines indicate median; whiskers extend to 1.5× IQR.
+  Fig 2 saved: fig2_OC-SAC_warning_f1_boxplot.png
+  Caption: Distribution of F1 scores across 50 cross-validation folds per species for OC-SAC at the warning threshold. Dark boxes: spectral features only; light boxes: spectral + ROMS oceanographic features. Horizontal lines indicate median; whiskers extend to 1.5× IQR.
+  Fig 2 saved: fig2_OC-SAC_closure_f1_boxplot.png
+  Caption: Distribution of F1 scores across 50 cross-validation folds per species for OC-SAC at the closure threshold. Dark boxes: spectral features only; light boxes: spectral + ROMS oceanographic features. Horizontal lines indicate median; whiskers extend to 1.5× IQR.
+
+--- Fig 3: Cross-AC F1 comparison ---
+  Fig 3 saved: fig3_warning_only_ac_comparison.png
+  Caption: Cross-pipeline comparison of F1 score distributions (50-fold CV) per species at the warning threshold (Spectral only). Boxes show the interquartile range; outliers omitted for clarity.
+  Fig 3 saved: fig3_warning_roms_ac_comparison.png
+  Caption: Cross-pipeline comparison of F1 score distributions (50-fold CV) per species at the warning threshold (Spectral + ROMS). Boxes show the interquartile range; outliers omitted for clarity.
+  Fig 3 saved: fig3_closure_only_ac_comparison.png
+  Caption: Cross-pipeline comparison of F1 score distributions (50-fold CV) per species at the closure threshold (Spectral only). Boxes show the interquartile range; outliers omitted for clarity.
+  Fig 3 saved: fig3_closure_roms_ac_comparison.png
+  Caption: Cross-pipeline comparison of F1 score distributions (50-fold CV) per species at the closure threshold (Spectral + ROMS). Boxes show the interquartile range; outliers omitted for clarity.
+
+--- Fig 4: ΔF1 heatmap ---
+  Fig 4 saved: fig4_delta_f1_heatmap.png
+  Caption: Change in macro-averaged F1 score when ROMS oceanographic features are added to spectral-only models (ROMS − spectral only), by atmospheric correction pipeline and threshold tier. Positive values indicate improvement with ROMS; negative values indicate degradation.
+
+--- Fig 5: Permutation importance per species ---
+  Fig 5 saved: fig5_ACOLITE_warning_perm_importance.png
+  Caption: Top 10 permutation-important features per species for ACOLITE at the warning threshold, averaged across 50 cross-validation folds. Error bars indicate ± one standard deviation. (A) Ocean colour model; (B) Hybrid model (ocean colour + ROMS oceanographic features). Only features with positive mean importance are shown.
+  Fig 5 saved: fig5_ACOLITE_closure_perm_importance.png
+  Caption: Top 10 permutation-important features per species for ACOLITE at the closure threshold, averaged across 50 cross-validation folds. Error bars indicate ± one standard deviation. (A) Ocean colour model; (B) Hybrid model (ocean colour + ROMS oceanographic features). Only features with positive mean importance are shown.
+  Fig 5 saved: fig5_C2RCC_warning_perm_importance.png
+  Caption: Top 10 permutation-important features per species for C2RCC at the warning threshold, averaged across 50 cross-validation folds. Error bars indicate ± one standard deviation. (A) Ocean colour model; (B) Hybrid model (ocean colour + ROMS oceanographic features). Only features with positive mean importance are shown.
+  Fig 5 saved: fig5_C2RCC_closure_perm_importance.png
+  Caption: Top 10 permutation-important features per species for C2RCC at the closure threshold, averaged across 50 cross-validation folds. Error bars indicate ± one standard deviation. (A) Ocean colour model; (B) Hybrid model (ocean colour + ROMS oceanographic features). Only features with positive mean importance are shown.
+  Fig 5 saved: fig5_OC-SAC_warning_perm_importance.png
+  Caption: Top 10 permutation-important features per species for OC-SAC at the warning threshold, averaged across 50 cross-validation folds. Error bars indicate ± one standard deviation. (A) Ocean colour model; (B) Hybrid model (ocean colour + ROMS oceanographic features). Only features with positive mean importance are shown.
+  Fig 5 saved: fig5_OC-SAC_closure_perm_importance.png
+  Caption: Top 10 permutation-important features per species for OC-SAC at the closure threshold, averaged across 50 cross-validation folds. Error bars indicate ± one standard deviation. (A) Ocean colour model; (B) Hybrid model (ocean colour + ROMS oceanographic features). Only features with positive mean importance are shown.
+
+All figures saved to datasets/GULF_OF_MAINE/ml_outputs/rf_multispecies_clf/plots/

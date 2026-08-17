@@ -1,0 +1,344 @@
+nohup: ignoring input
+================================================================================
+HAB MULTI-LABEL CLF — BINARY RELEVANCE RF (CV-ONLY)
+================================================================================
+
+Loading: /home/server/pi/homes/rathorek/projects/HHAB_ROMS/datasets/GULF_OF_MAINE/processed_data/sentinel_3_L2_past3days/composite_features/composite_features.parquet
+  Raw shape: 15,601 × 174
+  After delta_days==0: 15,601 rows
+
+============================================================
+COMMON OBSERVATIONS
+============================================================
+  C2RCC     : 12,565 rows
+  ACOLITE   : 9,701 rows
+  Baseline  : 13,437 rows
+  Common rows (all ACs): 9,283
+  Common rows with ROMS: 9,283
+
+  Applying median imputation...
+    A_GBI                                    filled 1,479 NaNs
+    A_KBBI                                   filled 1,479 NaNs
+    roms_wind_dir                            filled 774 NaNs
+    roms_current_dir                         filled 774 NaNs
+    A_FLH_681                                filled 1,479 NaNs
+    roms_temp_sur                            filled 774 NaNs
+    A_rrs_682                                filled 1,479 NaNs
+    A_DINI                                   filled 1,479 NaNs
+    A_Fluorescence_Peak                      filled 1,479 NaNs
+    roms_v_sur                               filled 774 NaNs
+    roms_Pair                                filled 774 NaNs
+    roms_salt_sur                            filled 774 NaNs
+    roms_Uwind                               filled 774 NaNs
+    roms_Vwind                               filled 774 NaNs
+    roms_current_speed                       filled 774 NaNs
+    A_RBD                                    filled 1,479 NaNs
+    A_EBI                                    filled 1,479 NaNs
+    A_FLHmax                                 filled 1,479 NaNs
+    roms_u_sur                               filled 774 NaNs
+    roms_wind_speed                          filled 774 NaNs
+  Imputation complete.
+
+  Building feature audit CSV...
+  feature_audit.csv saved
+
+══════════════════════════════════════════════════════════════════════
+  AC: C2RCC  |  spectral: 32  |  ROMS: 12
+══════════════════════════════════════════════════════════════════════
+
+  ── Track: C2RCC_only  |  n=9,283  |  features=32
+
+    Tier: WARNING
+    Label statistics at 'warning' threshold:
+      Alexandrium_catenella          bloom: 1,706 / 9,283  (18.4%)
+      Dinophysis_acuminata           bloom: 3,897 / 9,283  (42.0%)
+      Dinophysis_norvegica           bloom: 1,276 / 9,283  (13.7%)
+      Karenia                        bloom: 2,518 / 9,283  (27.1%)
+      Pseudo-nitzschia               bloom: 2,132 / 9,283  (23.0%)
+      Rows ≥1 label: 6,631 (71.4%)  ≥2 labels: 3,077 (33.1%)
+    Running 50-fold CV...
+    Macro F1    : 0.657 ± 0.020  (median=0.658)
+    Macro PR-AUC: 0.742 ± 0.022  (median=0.745)
+    Hamming: 0.1315  Jaccard: 0.504  (folds: 50)
+      Alexandrium_catenella          F1=0.654±0.025  AP=0.761±0.029
+      Dinophysis_acuminata           F1=0.849±0.010  AP=0.927±0.009
+      Dinophysis_norvegica           F1=0.550±0.030  AP=0.622±0.032
+      Karenia                        F1=0.505±0.073  AP=0.585±0.077
+      Pseudo-nitzschia               F1=0.730±0.019  AP=0.815±0.021
+    ✓ Importance saved
+    ✓ PR curves saved
+
+    Tier: CLOSURE
+    Label statistics at 'closure' threshold:
+      Alexandrium_catenella          bloom: 1,310 / 9,283  (14.1%)
+      Dinophysis_acuminata           bloom: 2,095 / 9,283  (22.6%)
+      Dinophysis_norvegica           bloom:   255 / 9,283  (2.7%)
+      Karenia                        bloom: 1,212 / 9,283  (13.1%)
+      Pseudo-nitzschia               bloom:   381 / 9,283  (4.1%)
+      Rows ≥1 label: 4,118 (44.4%)  ≥2 labels: 939 (10.1%)
+    Running 50-fold CV...
+    Macro F1    : 0.476 ± 0.051  (median=0.465)
+    Macro PR-AUC: 0.548 ± 0.050  (median=0.537)
+    Hamming: 0.0670  Jaccard: 0.351  (folds: 50)
+      Alexandrium_catenella          F1=0.636±0.033  AP=0.755±0.034
+      Dinophysis_acuminata           F1=0.804±0.015  AP=0.877±0.015
+      Dinophysis_norvegica           F1=0.391±0.068  AP=0.447±0.066
+      Karenia                        F1=0.081±0.201  AP=0.125±0.185
+      Pseudo-nitzschia               F1=0.468±0.082  AP=0.515±0.075
+    ✓ Importance saved
+    ✓ PR curves saved
+
+  ── Track: C2RCC_roms  |  n=9,283  |  features=44
+
+    Tier: WARNING
+    Label statistics at 'warning' threshold:
+      Alexandrium_catenella          bloom: 1,706 / 9,283  (18.4%)
+      Dinophysis_acuminata           bloom: 3,897 / 9,283  (42.0%)
+      Dinophysis_norvegica           bloom: 1,276 / 9,283  (13.7%)
+      Karenia                        bloom: 2,518 / 9,283  (27.1%)
+      Pseudo-nitzschia               bloom: 2,132 / 9,283  (23.0%)
+      Rows ≥1 label: 6,631 (71.4%)  ≥2 labels: 3,077 (33.1%)
+    Running 50-fold CV...
+    Macro F1    : 0.664 ± 0.022  (median=0.663)
+    Macro PR-AUC: 0.774 ± 0.022  (median=0.776)
+    Hamming: 0.1208  Jaccard: 0.519  (folds: 50)
+      Alexandrium_catenella          F1=0.713±0.027  AP=0.805±0.028
+      Dinophysis_acuminata           F1=0.867±0.009  AP=0.940±0.010
+      Dinophysis_norvegica           F1=0.606±0.033  AP=0.670±0.036
+      Karenia                        F1=0.386±0.069  AP=0.636±0.072
+      Pseudo-nitzschia               F1=0.747±0.024  AP=0.817±0.025
+    ✓ Importance saved
+    ✓ PR curves saved
+
+    Tier: CLOSURE
+    Label statistics at 'closure' threshold:
+      Alexandrium_catenella          bloom: 1,310 / 9,283  (14.1%)
+      Dinophysis_acuminata           bloom: 2,095 / 9,283  (22.6%)
+      Dinophysis_norvegica           bloom:   255 / 9,283  (2.7%)
+      Karenia                        bloom: 1,212 / 9,283  (13.1%)
+      Pseudo-nitzschia               bloom:   381 / 9,283  (4.1%)
+      Rows ≥1 label: 4,118 (44.4%)  ≥2 labels: 939 (10.1%)
+    Running 50-fold CV...
+    Macro F1    : 0.447 ± 0.023  (median=0.444)
+    Macro PR-AUC: 0.592 ± 0.052  (median=0.582)
+    Hamming: 0.0600  Jaccard: 0.337  (folds: 50)
+      Alexandrium_catenella          F1=0.692±0.037  AP=0.809±0.037
+      Dinophysis_acuminata           F1=0.840±0.015  AP=0.893±0.016
+      Dinophysis_norvegica           F1=0.342±0.065  AP=0.484±0.076
+      Karenia                        F1=0.010±0.070  AP=0.191±0.217
+      Pseudo-nitzschia               F1=0.351±0.073  AP=0.562±0.078
+    ✓ Importance saved
+    ✓ PR curves saved
+
+  ✓ C2RCC complete
+
+══════════════════════════════════════════════════════════════════════
+  AC: ACOLITE  |  spectral: 31  |  ROMS: 12
+══════════════════════════════════════════════════════════════════════
+
+  ── Track: ACOLITE_only  |  n=9,283  |  features=31
+
+    Tier: WARNING
+    Label statistics at 'warning' threshold:
+      Alexandrium_catenella          bloom: 1,706 / 9,283  (18.4%)
+      Dinophysis_acuminata           bloom: 3,897 / 9,283  (42.0%)
+      Dinophysis_norvegica           bloom: 1,276 / 9,283  (13.7%)
+      Karenia                        bloom: 2,518 / 9,283  (27.1%)
+      Pseudo-nitzschia               bloom: 2,132 / 9,283  (23.0%)
+      Rows ≥1 label: 6,631 (71.4%)  ≥2 labels: 3,077 (33.1%)
+    Running 50-fold CV...
+    Macro F1    : 0.743 ± 0.016  (median=0.741)
+    Macro PR-AUC: 0.809 ± 0.016  (median=0.807)
+    Hamming: 0.1068  Jaccard: 0.599  (folds: 50)
+      Alexandrium_catenella          F1=0.755±0.021  AP=0.835±0.023
+      Dinophysis_acuminata           F1=0.871±0.011  AP=0.949±0.009
+      Dinophysis_norvegica           F1=0.680±0.024  AP=0.731±0.030
+      Karenia                        F1=0.618±0.045  AP=0.664±0.057
+      Pseudo-nitzschia               F1=0.791±0.015  AP=0.863±0.014
+    ✓ Importance saved
+    ✓ PR curves saved
+
+    Tier: CLOSURE
+    Label statistics at 'closure' threshold:
+      Alexandrium_catenella          bloom: 1,310 / 9,283  (14.1%)
+      Dinophysis_acuminata           bloom: 2,095 / 9,283  (22.6%)
+      Dinophysis_norvegica           bloom:   255 / 9,283  (2.7%)
+      Karenia                        bloom: 1,212 / 9,283  (13.1%)
+      Pseudo-nitzschia               bloom:   381 / 9,283  (4.1%)
+      Rows ≥1 label: 4,118 (44.4%)  ≥2 labels: 939 (10.1%)
+    Running 50-fold CV...
+    Macro F1    : 0.549 ± 0.044  (median=0.541)
+    Macro PR-AUC: 0.629 ± 0.056  (median=0.616)
+    Hamming: 0.0532  Jaccard: 0.427  (folds: 50)
+      Alexandrium_catenella          F1=0.756±0.027  AP=0.837±0.029
+      Dinophysis_acuminata           F1=0.862±0.012  AP=0.914±0.015
+      Dinophysis_norvegica           F1=0.505±0.059  AP=0.542±0.068
+      Karenia                        F1=0.074±0.183  AP=0.228±0.235
+      Pseudo-nitzschia               F1=0.547±0.079  AP=0.603±0.067
+    ✓ Importance saved
+    ✓ PR curves saved
+
+  ── Track: ACOLITE_roms  |  n=9,283  |  features=43
+
+    Tier: WARNING
+    Label statistics at 'warning' threshold:
+      Alexandrium_catenella          bloom: 1,706 / 9,283  (18.4%)
+      Dinophysis_acuminata           bloom: 3,897 / 9,283  (42.0%)
+      Dinophysis_norvegica           bloom: 1,276 / 9,283  (13.7%)
+      Karenia                        bloom: 2,518 / 9,283  (27.1%)
+      Pseudo-nitzschia               bloom: 2,132 / 9,283  (23.0%)
+      Rows ≥1 label: 6,631 (71.4%)  ≥2 labels: 3,077 (33.1%)
+    Running 50-fold CV...
+    Macro F1    : 0.732 ± 0.018  (median=0.731)
+    Macro PR-AUC: 0.811 ± 0.017  (median=0.812)
+    Hamming: 0.1062  Jaccard: 0.590  (folds: 50)
+      Alexandrium_catenella          F1=0.770±0.019  AP=0.838±0.021
+      Dinophysis_acuminata           F1=0.872±0.010  AP=0.946±0.009
+      Dinophysis_norvegica           F1=0.680±0.027  AP=0.724±0.033
+      Karenia                        F1=0.543±0.067  AP=0.693±0.062
+      Pseudo-nitzschia               F1=0.794±0.018  AP=0.855±0.019
+    ✓ Importance saved
+    ✓ PR curves saved
+
+    Tier: CLOSURE
+    Label statistics at 'closure' threshold:
+      Alexandrium_catenella          bloom: 1,310 / 9,283  (14.1%)
+      Dinophysis_acuminata           bloom: 2,095 / 9,283  (22.6%)
+      Dinophysis_norvegica           bloom:   255 / 9,283  (2.7%)
+      Karenia                        bloom: 1,212 / 9,283  (13.1%)
+      Pseudo-nitzschia               bloom:   381 / 9,283  (4.1%)
+      Rows ≥1 label: 4,118 (44.4%)  ≥2 labels: 939 (10.1%)
+    Running 50-fold CV...
+    Macro F1    : 0.491 ± 0.024  (median=0.491)
+    Macro PR-AUC: 0.634 ± 0.053  (median=0.613)
+    Hamming: 0.0533  Jaccard: 0.381  (folds: 50)
+      Alexandrium_catenella          F1=0.763±0.032  AP=0.847±0.032
+      Dinophysis_acuminata           F1=0.859±0.013  AP=0.910±0.014
+      Dinophysis_norvegica           F1=0.408±0.070  AP=0.531±0.070
+      Karenia                        F1=0.000±0.000  AP=0.226±0.198
+      Pseudo-nitzschia               F1=0.425±0.080  AP=0.637±0.077
+    ✓ Importance saved
+    ✓ PR curves saved
+
+  ✓ ACOLITE complete
+
+══════════════════════════════════════════════════════════════════════
+  AC: Baseline  |  spectral: 32  |  ROMS: 12
+══════════════════════════════════════════════════════════════════════
+
+  ── Track: Baseline_only  |  n=9,283  |  features=32
+
+    Tier: WARNING
+    Label statistics at 'warning' threshold:
+      Alexandrium_catenella          bloom: 1,706 / 9,283  (18.4%)
+      Dinophysis_acuminata           bloom: 3,897 / 9,283  (42.0%)
+      Dinophysis_norvegica           bloom: 1,276 / 9,283  (13.7%)
+      Karenia                        bloom: 2,518 / 9,283  (27.1%)
+      Pseudo-nitzschia               bloom: 2,132 / 9,283  (23.0%)
+      Rows ≥1 label: 6,631 (71.4%)  ≥2 labels: 3,077 (33.1%)
+    Running 50-fold CV...
+    Macro F1    : 0.730 ± 0.017  (median=0.731)
+    Macro PR-AUC: 0.806 ± 0.016  (median=0.807)
+    Hamming: 0.1113  Jaccard: 0.584  (folds: 50)
+      Alexandrium_catenella          F1=0.733±0.025  AP=0.830±0.022
+      Dinophysis_acuminata           F1=0.869±0.011  AP=0.943±0.010
+      Dinophysis_norvegica           F1=0.656±0.027  AP=0.725±0.030
+      Karenia                        F1=0.614±0.060  AP=0.680±0.059
+      Pseudo-nitzschia               F1=0.777±0.021  AP=0.849±0.021
+    ✓ Importance saved
+    ✓ PR curves saved
+
+    Tier: CLOSURE
+    Label statistics at 'closure' threshold:
+      Alexandrium_catenella          bloom: 1,310 / 9,283  (14.1%)
+      Dinophysis_acuminata           bloom: 2,095 / 9,283  (22.6%)
+      Dinophysis_norvegica           bloom:   255 / 9,283  (2.7%)
+      Karenia                        bloom: 1,212 / 9,283  (13.1%)
+      Pseudo-nitzschia               bloom:   381 / 9,283  (4.1%)
+      Rows ≥1 label: 4,118 (44.4%)  ≥2 labels: 939 (10.1%)
+    Running 50-fold CV...
+    Macro F1    : 0.574 ± 0.056  (median=0.561)
+    Macro PR-AUC: 0.649 ± 0.053  (median=0.634)
+    Hamming: 0.0536  Jaccard: 0.445  (folds: 50)
+      Alexandrium_catenella          F1=0.746±0.029  AP=0.835±0.027
+      Dinophysis_acuminata           F1=0.858±0.014  AP=0.913±0.013
+      Dinophysis_norvegica           F1=0.508±0.065  AP=0.537±0.070
+      Karenia                        F1=0.194±0.270  AP=0.318±0.229
+      Pseudo-nitzschia               F1=0.563±0.068  AP=0.625±0.072
+    ✓ Importance saved
+    ✓ PR curves saved
+
+  ── Track: Baseline_roms  |  n=9,283  |  features=44
+
+    Tier: WARNING
+    Label statistics at 'warning' threshold:
+      Alexandrium_catenella          bloom: 1,706 / 9,283  (18.4%)
+      Dinophysis_acuminata           bloom: 3,897 / 9,283  (42.0%)
+      Dinophysis_norvegica           bloom: 1,276 / 9,283  (13.7%)
+      Karenia                        bloom: 2,518 / 9,283  (27.1%)
+      Pseudo-nitzschia               bloom: 2,132 / 9,283  (23.0%)
+      Rows ≥1 label: 6,631 (71.4%)  ≥2 labels: 3,077 (33.1%)
+    Running 50-fold CV...
+    Macro F1    : 0.713 ± 0.020  (median=0.713)
+    Macro PR-AUC: 0.801 ± 0.016  (median=0.801)
+    Hamming: 0.1089  Jaccard: 0.571  (folds: 50)
+      Alexandrium_catenella          F1=0.755±0.022  AP=0.837±0.020
+      Dinophysis_acuminata           F1=0.870±0.012  AP=0.943±0.010
+      Dinophysis_norvegica           F1=0.664±0.026  AP=0.718±0.032
+      Karenia                        F1=0.488±0.074  AP=0.671±0.055
+      Pseudo-nitzschia               F1=0.789±0.018  AP=0.838±0.023
+    ✓ Importance saved
+    ✓ PR curves saved
+
+    Tier: CLOSURE
+    Label statistics at 'closure' threshold:
+      Alexandrium_catenella          bloom: 1,310 / 9,283  (14.1%)
+      Dinophysis_acuminata           bloom: 2,095 / 9,283  (22.6%)
+      Dinophysis_norvegica           bloom:   255 / 9,283  (2.7%)
+      Karenia                        bloom: 1,212 / 9,283  (13.1%)
+      Pseudo-nitzschia               bloom:   381 / 9,283  (4.1%)
+      Rows ≥1 label: 4,118 (44.4%)  ≥2 labels: 939 (10.1%)
+    Running 50-fold CV...
+    Macro F1    : 0.500 ± 0.026  (median=0.502)
+    Macro PR-AUC: 0.648 ± 0.047  (median=0.646)
+    Hamming: 0.0531  Jaccard: 0.387  (folds: 50)
+      Alexandrium_catenella          F1=0.757±0.028  AP=0.850±0.029
+      Dinophysis_acuminata           F1=0.858±0.015  AP=0.914±0.013
+      Dinophysis_norvegica           F1=0.415±0.073  AP=0.539±0.070
+      Karenia                        F1=0.000±0.000  AP=0.270±0.187
+      Pseudo-nitzschia               F1=0.469±0.077  AP=0.646±0.082
+    ✓ Importance saved
+    ✓ PR curves saved
+
+  ✓ Baseline complete
+
+================================================================================
+SAVING RESULTS
+================================================================================
+  global_comparison.csv  (12 rows)
+  species_comparison.csv (60 rows)
+  roms_delta_summary.csv
+  recall_gain_summary.csv
+  fold_level_results.csv (3000 rows)
+
+================================================================================
+MACRO CV F1 SUMMARY
+================================================================================
+track             ACOLITE_only  ACOLITE_roms  Baseline_only  Baseline_roms  C2RCC_only  C2RCC_roms
+ac       tier                                                                                     
+ACOLITE  closure         0.549         0.491            NaN            NaN         NaN         NaN
+         warning         0.743         0.732            NaN            NaN         NaN         NaN
+Baseline closure           NaN           NaN          0.574          0.500         NaN         NaN
+         warning           NaN           NaN          0.730          0.713         NaN         NaN
+C2RCC    closure           NaN           NaN            NaN            NaN       0.476       0.447
+         warning           NaN           NaN            NaN            NaN       0.658       0.664
+
+  ROMS delta:
+    C2RCC      warning  ΔF1=+0.006
+    ACOLITE    warning  ΔF1=-0.011
+    Baseline   warning  ΔF1=-0.017
+    C2RCC      closure  ΔF1=-0.029
+    ACOLITE    closure  ΔF1=-0.058
+    Baseline   closure  ΔF1=-0.074
+
+DONE — run clf_plots.py to generate figures.

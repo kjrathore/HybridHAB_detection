@@ -1,0 +1,82 @@
+======================================================================
+Loading feature sets
+======================================================================
+  [R] roms     76,972 rows × 41 cols
+  [C] c2rcc    15,651 rows × 62 cols
+  [A] acolite  15,651 rows × 58 cols
+  [B] bac      15,651 rows × 61 cols
+
+======================================================================
+ROMS pre-processing  (mode = 'exact')
+======================================================================
+  Kept delta_days == 0 : 15,601 / 76,972 rows
+  Base rows for merge: 15,601
+
+======================================================================
+Step 1 : [R] ROMS base  ⊕  [C] C2RCC
+======================================================================
+
+  Species check  [ROMS] vs [C2RCC]  –  14,285 overlapping rows
+    Alexandrium_catenella           max_diff=0.00e+00  ✓
+    Dinophysis_acuminata            max_diff=0.00e+00  ✓
+    Dinophysis_norvegica            max_diff=0.00e+00  ✓
+    Karenia                         max_diff=0.00e+00  ✓
+    Pseudo-nitzschia                max_diff=0.00e+00  ✓
+
+  [C] matched : 12,565 / 15,601 rows
+
+======================================================================
+Step 2 : + [A] ACOLITE
+======================================================================
+
+  Species check  [ROMS] vs [ACOLITE]  –  14,285 overlapping rows
+    Alexandrium_catenella           max_diff=0.00e+00  ✓
+    Dinophysis_acuminata            max_diff=0.00e+00  ✓
+    Dinophysis_norvegica            max_diff=0.00e+00  ✓
+    Karenia                         max_diff=0.00e+00  ✓
+    Pseudo-nitzschia                max_diff=0.00e+00  ✓
+
+  [A] matched : 9,701 / 15,601 rows
+
+======================================================================
+Step 3 : + [B] BAC
+======================================================================
+
+  Species check  [ROMS] vs [BAC]  –  14,285 overlapping rows
+    Alexandrium_catenella           max_diff=0.00e+00  ✓
+    Dinophysis_acuminata            max_diff=0.00e+00  ✓
+    Dinophysis_norvegica            max_diff=0.00e+00  ✓
+    Karenia                         max_diff=0.00e+00  ✓
+    Pseudo-nitzschia                max_diff=0.00e+00  ✓
+
+  [B] matched : 13,244 / 15,601 rows
+
+======================================================================
+COMPOSITE SUMMARY
+======================================================================
+  Shape            : (15601, 174)
+  Unique dates     : 2,308
+  Unique locations : 13
+
+  Data availability per source:
+    [R] ROMS ocean. data : 13,762  (88.2%)
+    [C] C2RCC sat. data  : 12,565  (80.5%)
+    [A] ACOLITE sat. data:  9,701  (62.2%)
+    [B] BAC L2 products  : 13,244  (84.9%)
+
+  Bloom presence (>0 cells/L) per species:
+    Alexandrium_catenella         : 2,776  (17.8% of 15,601 non-null)
+    Dinophysis_acuminata          : 6,529  (41.8% of 15,601 non-null)
+    Dinophysis_norvegica          : 2,293  (14.7% of 15,601 non-null)
+    Karenia                       : 9,119  (58.5% of 15,601 non-null)
+    Pseudo-nitzschia              : 10,973  (70.3% of 15,601 non-null)
+
+  Column groups by source prefix:
+    [A] acolite: 42 cols
+    [B] bac    : 40 cols
+    [C] c2rcc  : 46 cols
+    [R] roms   : 0 cols
+    [–] base/shared: 46 cols  (obs_date, latitude, longitude, delta_days, location_id, dataset_id...)
+
+✓ Saved → datasets/GULF_OF_MAINE/processed_data/sentinel_3_L2_past3days/composite_features/composite_features.parquet
+  Memory : 34.2 MB
